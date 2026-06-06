@@ -10,15 +10,13 @@ export default function PageIllustration({
 }) {
   return (
     <>
-      {/* Illustrazione Principale in alto 
-        Usa una pulsazione nativa di Tailwind (animate-pulse) ma molto rallentata (8s)
-      */}
+      {/* Illustrazione Principale in alto (Griglia/Luce) */}
       <div
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 animate-[pulse_8s_ease-in-out_infinite] will-change-[opacity]"
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 animate-[pulse_8s_ease-in-out_infinite]"
         aria-hidden="true"
       >
         <Image
-          className="max-w-none"
+          className="max-w-none opacity-80"
           src={Illustration}
           width={846}
           height={594}
@@ -28,35 +26,30 @@ export default function PageIllustration({
 
       {multiple && (
         <>
-          {/* Primo Blob (Grigio)
-            Animazione custom in linea: si sposta, ruota e pulsa in 14 secondi
-          */}
+          {/* Primo Blob (Grigio) - Ora più visibile e si muove su/giù */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[400px] -z-10 -mt-20 animate-[spin_40s_linear_infinite] opacity-40 will-change-transform"
+            className="pointer-events-none absolute left-1/4 top-[250px] -z-10 opacity-60 mix-blend-screen animate-[bounce_10s_infinite] will-change-transform"
             aria-hidden="true"
           >
             <Image
               className="max-w-none"
               src={BlurredShapeGray}
-              width={760}
-              height={668}
+              width={600}
+              height={600}
               alt="Blurred shape"
             />
           </div>
 
-          {/* Secondo Blob (Colorato)
-            Animazione custom in linea: gira al contrario rispetto al primo in 25 secondi 
-            per creare l'effetto fluido incrociato (Liquid Glow)
-          */}
+          {/* Secondo Blob (Colorato/Neon) - Spostato più al centro, pulsa vistosamente */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[440px] -z-10 animate-[spin_25s_linear_infinite_reverse] opacity-60 will-change-transform"
+            className="pointer-events-none absolute right-1/4 top-[350px] -z-10 opacity-75 mix-blend-screen animate-[pulse_6s_infinite] scale-110 will-change-transform"
             aria-hidden="true"
           >
             <Image
               className="max-w-none"
               src={BlurredShape}
-              width={760}
-              height={668}
+              width={600}
+              height={600}
               alt="Blurred shape"
             />
           </div>
