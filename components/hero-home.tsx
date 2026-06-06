@@ -7,7 +7,6 @@ export default function HeroHome() {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Array di configurazione per gestire in modo pulito la sequenza temporale
     const sequence = [
       { targetStep: 2, delay: 2000 },   // Marco msg 1
       { targetStep: 3, delay: 4500 },   // IA typing 1
@@ -30,24 +29,20 @@ export default function HeroHome() {
 
     const timers: NodeJS.Timeout[] = [];
 
-    // Avvia tutti i timer della sequenza globale
     sequence.forEach((item) => {
       timers.push(setTimeout(() => setStep(item.targetStep), item.delay));
     });
 
-    // Transizione cinematica Marco -> Sara
     timers.push(setTimeout(() => setIsExiting(true), 22000));
     timers.push(setTimeout(() => {
       setStep(9);
       setIsExiting(false);
     }, 22600));
 
-    // Avvia sequenza Sara
     saraSequence.forEach((item) => {
       timers.push(setTimeout(() => setStep(item.targetStep), item.delay));
     });
 
-    // Reset finale e restart del ciclo continuo
     timers.push(setTimeout(() => setIsExiting(true), 47000));
     timers.push(setTimeout(() => {
       setStep(1);
@@ -57,96 +52,90 @@ export default function HeroHome() {
     return () => {
       timers.forEach(clearTimeout);
     };
-  }, []); // Eseguito una sola volta al montaggio del componente per evitare glitch su mobile
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
-      {/* ================= SUPER ANIMAZIONI DI SFONDO & CHAT INTERATTIVA ================= */}
+      {/* ================= ANIMAZIONI ULTRA-OTTIMIZZATE (GPU ACCELERATED) ================= */}
       <style jsx global>{`
-        /* Movimento fluido dei grandi bagliori (Aurora) - Ottimizzato */
-        @keyframes auroraMotion {
-          0%, 100% { transform: translate3d(0px, 0px, 0) scale(1); }
-          50% { transform: translate3d(20px, -30px, 0) scale(1.05); }
+        /* Movimento cosmico delle luci di sfondo: usa solo scale e translate3d (Zero Lag) */
+        @keyframes cosmicNebula {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          33% { transform: translate3d(4% , 6%, 0) scale(1.15); }
+          66% { transform: translate3d(-3%, -4%, 0) scale(0.9); }
         }
 
-        /* Linee laser diagonali veloci */
-        @keyframes laserBeam {
-          0% { transform: translate3d(-100%, -100%, 0) rotate(-40deg); opacity: 0; }
-          5% { opacity: 0.6; }
-          25% { transform: translate3d(120%, 120%, 0) rotate(-40deg); opacity: 0; }
-          100% { transform: translate3d(120%, 120%, 0) rotate(-40deg); opacity: 0; }
+        /* Movimento lento del reticolo cyber per dare profondità 3D */
+        @keyframes gridPan {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(0, 40px, 0); }
         }
 
-        /* Pulsazione magnetica di sfondo costante */
-        @keyframes chatPulse {
-          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(1); opacity: 0.2; }
-          50% { transform: translate3d(-50%, -50%, 0) scale(1.06); opacity: 0.3; }
+        /* Caduta strisce di codice/luce verticali */
+        @keyframes dataStream {
+          0% { transform: translate3d(0, -100%, 0); opacity: 0; }
+          10% { opacity: 0.7; }
+          90% { opacity: 0.7; }
+          100% { transform: translate3d(0, 100vh, 0); opacity: 0; }
         }
 
-        /* Immissione messaggi fluida */
+        /* Pulsazione magnetica centrale attorno alla chat */
+        @keyframes centralPulse {
+          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(0.95); opacity: 0.15; }
+          50% { transform: translate3d(-50%, -50%, 0) scale(1.1); opacity: 0.25; }
+        }
+
         @keyframes msgPopIn {
-          0% { opacity: 0; transform: translate3d(0, 10px, 0); filter: blur(2px); }
-          100% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+          0% { opacity: 0; transform: translate3d(0, 12px, 0); }
+          100% { opacity: 1; transform: translate3d(0, 0, 0); }
         }
 
-        /* Micro animazione pallini di digitazione */
         @keyframes pulseDots {
           0%, 100% { opacity: 0.3; transform: scale(0.8); }
           50% { opacity: 1; transform: scale(1.1); }
         }
 
-        /* Flusso particelle verticali (Abilitato solo su Desktop per risparmiare CPU) */
-        @keyframes floatUp {
-          0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
-          15%, 85% { opacity: 0.4; }
-          100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-        }
-
-        .animate-aurora-1 { animation: auroraMotion 20s ease-in-out infinite; will-change: transform; }
-        .animate-aurora-2 { animation: auroraMotion 16s ease-in-out infinite reverse; will-change: transform; }
-        .laser-1 { animation: laserBeam 14s cubic-bezier(0.4, 0, 0.2, 1) infinite; will-change: transform; }
-        .laser-2 { animation: laserBeam 18s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 4s; will-change: transform; }
+        /* Classi di attivazione con hardware-acceleration forzata tramite will-change */
+        .animate-nebula-1 { animation: cosmicNebula 25s ease-in-out infinite; will-change: transform; }
+        .animate-nebula-2 { animation: cosmicNebula 18s ease-in-out infinite reverse; will-change: transform; }
+        .animate-grid { animation: gridPan 8s linear infinite; will-change: transform; }
+        .animate-stream { animation: dataStream 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; will-change: transform; }
         
         .msg-pop { 
-          animation: msgPopIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+          animation: msgPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; 
           will-change: transform, opacity;
         }
 
-        .custom-dot {
-          animation: pulseDots 0.8s ease-in-out infinite;
-          will-change: opacity, transform;
-        }
+        .custom-dot { animation: pulseDots 0.8s ease-in-out infinite; will-change: opacity, transform; }
 
-        /* Disattiva elementi pesanti su Mobile */
+        /* Ottimizzazione drastica per Mobile: rimuove i flussi verticali extra per preservare la batteria */
         @media (max-width: 767px) {
-          .particella-desktop { display: none !important; }
-          .laser-1, .laser-2 { display: none !important; }
-        }
-        @media (min-width: 768px) {
-          .particella-desktop { animation: floatUp infinite linear; pointer-events: none; will-change: transform; }
+          .data-streamer { display: none !important; }
+          .animate-nebula-1, .animate-nebula-2 { animation-duration: 40s; } /* Rallentato su mobile per alleggerire i ridisegni */
         }
       `}</style>
 
-      {/* --- STRATO 1: EFFETTO AURORA CHROMATIC COSTANTE --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="animate-aurora-1 absolute top-[-10%] left-[5%] w-[350px] md:w-[800px] h-[350px] md:h-[800px] rounded-full bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent blur-[80px] md:blur-[110px]" />
-        <div className="absolute top-[20%] left-[25%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-indigo-600/5 md:bg-indigo-600/10 blur-[90px] md:blur-[140px]" />
-        <div className="animate-aurora-2 absolute bottom-[-5%] right-[0%] w-[300px] md:w-[700px] h-[300px] md:h-[700px] rounded-full bg-gradient-to-tr from-purple-500/15 via-blue-500/10 to-transparent blur-[80px] md:blur-[100px] opacity-40" />
+      {/* --- STRATO 1: RETICOLO CYBER TECNOLOGICO DI SCONDO --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.07] overflow-hidden">
+        <div 
+          className="animate-grid absolute inset-[-40px] bg-[linear-gradient(to_right,#312e81_1px,transparent_1px),linear-gradient(to_bottom,#312e81_1px,transparent_1px)] bg-[size:40px_40px]" 
+        />
       </div>
 
-      {/* --- STRATO 2: LINEE LASER RETE DATI --- */}
+      {/* --- STRATO 2: NEBULA CHROMATIC LIGHTS (Sfocature fisse, mosse solo in Transform) --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="laser-1 absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent" />
-        <div className="laser-2 absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/20 to-transparent" />
+        {/* Cerchio Indigo Sinistro */}
+        <div className="animate-nebula-1 absolute top-[-20%] left-[-10%] w-[500px] md:w-[900px] h-[500px] md:h-[900px] rounded-full bg-indigo-600/10 blur-[120px]" />
+        {/* Cerchio Viola/Fucsia Destro */}
+        <div className="animate-nebula-2 absolute bottom-[-10%] right-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] rounded-full bg-purple-600/10 blur-[130px]" />
       </div>
 
-      {/* --- STRATO 3: SATELLITI DIGITALI FLUTTUANTI (SOLO DESKTOP) --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-60">
-        <div className="particella-desktop absolute bg-indigo-400/70 w-1.5 h-1.5 rounded-xs left-[8%]" style={{ animationDuration: "13s" }}></div>
-        <div className="particella-desktop absolute bg-purple-400/70 w-2 h-2 rounded-xs left-[22%]" style={{ animationDuration: "20s", animationDelay: "4s" }}></div>
-        <div className="particella-desktop absolute bg-blue-400/70 w-1 h-1 rounded-xs left-[48%]" style={{ animationDuration: "12s", animationDelay: "1.5s" }}></div>
-        <div className="particella-desktop absolute bg-indigo-300/60 w-2 h-2 rounded-xs left-[73%]" style={{ animationDuration: "24s", animationDelay: "6s" }}></div>
+      {/* --- STRATO 3: DATA STREAMERS (Linee di luce verticali ad alta performance) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40 data-streamer">
+        <div className="animate-stream absolute left-[15%] top-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-indigo-500/50 to-transparent" style={{ animationDuration: "7s", animationDelay: "0s" }} />
+        <div className="animate-stream absolute left-[45%] top-0 w-[1px] h-24 bg-gradient-to-b from-transparent via-purple-500/40 to-transparent" style={{ animationDuration: "5s", animationDelay: "2s" }} />
+        <div className="animate-stream absolute left-[80%] top-0 w-[1px] h-40 bg-gradient-to-b from-transparent via-blue-500/40 to-transparent" style={{ animationDuration: "9s", animationDelay: "4s" }} />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
@@ -179,10 +168,10 @@ export default function HeroHome() {
             {/* Bagliore magnetico della chat lineare e costante */}
             <div 
               className="absolute w-72 h-72 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[60px]" 
-              style={{ animation: "chatPulse 5s ease-in-out infinite", willChange: "transform" }} 
+              style={{ animation: "centralPulse 6s ease-in-out infinite", willChange: "transform" }} 
             />
             
-            {/* Scocca del terminale di Chat - Ottimizzata per l'altezza mobile */}
+            {/* Scocca del terminale di Chat */}
             <div className="relative w-full max-w-[420px] min-h-[380px] md:aspect-[10/11] z-10 border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex flex-col justify-end shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden pt-10 [contain:paint]">
               
               {/* Contenitore interno con effetto di uscita della scena globale */}
