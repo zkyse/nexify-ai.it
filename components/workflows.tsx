@@ -163,3 +163,10 @@ export default function Workflows() {
                 </div>
               </div>
             </a>
+
+          </Spotlight>
+        </div>
+      </div>
+    </section>
+  );
+}
