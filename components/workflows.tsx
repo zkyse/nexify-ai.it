@@ -23,6 +23,7 @@ export default function Workflows() {
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
+    if (window.innerWidth < 1024) return;
     if (card.classList.contains("card-1")) card.style.animation = "floatCard1 6s ease-in-out infinite";
     if (card.classList.contains("card-2")) card.style.animation = "floatCard2 6.5s ease-in-out infinite";
     if (card.classList.contains("card-3")) card.style.animation = "floatCard3 7s ease-in-out infinite";
@@ -36,14 +37,15 @@ export default function Workflows() {
           if (entry.isIntersecting) {
             const cards = entry.target.querySelectorAll(".mobile-reveal-card");
             cards.forEach((card, index) => {
-              (card as HTMLElement).style.setProperty("--delay", `${index * 0.2}s`);
+              (card as HTMLElement).style.setProperty("--delay", `${index * 0.15}s`);
               card.classList.add("active");
             });
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.01, rootMargin: "0px" }
+      // rootMargin leggermente ridotto per attivare l'effetto non appena la sezione entra nello schermo dello smartphone
+      { threshold: 0.01, rootMargin: "0px 0px -1% 0px" }
     );
 
     const currentSection = sectionRef.current;
@@ -59,7 +61,7 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
       
-      {/* Iniezione sicura dei Keyframes nel foglio di stile globale tramite stringa pura */}
+      {/* Iniezione sicurezza dei Keyframes nel foglio di stile globale tramite stringa pura */}
       <style>{`
         @keyframes floatCard1 { 0%, 100% { transform: translateY(0px) translateZ(0); } 50% { transform: translateY(-22px) translateZ(0); } }
         @keyframes floatCard2 { 0%, 100% { transform: translateY(-12px) translateZ(0); } 50% { transform: translateY(10px) translateZ(0); } }
@@ -74,11 +76,26 @@ export default function Workflows() {
         @keyframes pulseGlow { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.25); } }
         @keyframes dataFlow { to { stroke-dashoffset: -20; } }
         
-        .mobile-reveal-card { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--delay, 0s); }
-        .mobile-reveal-card.active { opacity: 1; transform: translateY(0); }
-        .mobile-reveal-card.active.card-1 { animation: floatCard1 6s ease-in-out infinite; }
-        .mobile-reveal-card.active.card-2 { animation: floatCard2 6.5s ease-in-out infinite; }
-        .mobile-reveal-card.active.card-3 { animation: floatCard3 7s ease-in-out infinite; }
+        /* Stato iniziale invisibile per TUTTI i dispositivi */
+        .mobile-reveal-card { 
+          opacity: 0; 
+          transform: translateY(30px); 
+          transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
+          transition-delay: var(--delay, 0s); 
+        }
+        
+        /* Quando l'observer intercetta lo scroll, attiva la transizione */
+        .mobile-reveal-card.active { 
+          opacity: 1; 
+          transform: translateY(0); 
+        }
+        
+        /* Solo su Desktop (Lg) attiviamo anche il floating ondulatorio infinito dopo la comparsa */
+        @media (min-width: 1024px) {
+          .mobile-reveal-card.active.card-1 { animation: floatCard1 6s ease-in-out infinite; }
+          .mobile-reveal-card.active.card-2 { animation: floatCard2 6.5s ease-in-out infinite; }
+          .mobile-reveal-card.active.card-3 { animation: floatCard3 7s ease-in-out infinite; }
+        }
       `}</style>
       
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
