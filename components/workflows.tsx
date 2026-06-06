@@ -57,7 +57,7 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
       
-      {/* CSS custom per fluttuazioni ed effetti interni */}
+      {/* CSS custom per fluttuazioni ed effetti interni ad ciclo continuo */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes floatCard1 {
           0%, 100% { transform: translate3d(0, 0, 0); }
@@ -65,7 +65,7 @@ export default function Workflows() {
         }
         @keyframes floatCard2 {
           0%, 100% { transform: translate3d(0, -6px, 0); }
-          50% { transform: translate3d(0, 4px, 0); }
+          50% { transform: translate3d(0, 6px, 0); }
         }
         @keyframes floatCard3 {
           0%, 100% { transform: translate3d(0, 2px, 0); }
@@ -78,6 +78,24 @@ export default function Workflows() {
         @keyframes dataFlow {
           to { stroke-dashoffset: -20; }
         }
+        
+        /* Nuove animazioni per i micro-elementi interni */
+        @keyframes microMoveInput {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        @keyframes microScaleBrain {
+          0%, 100% { transform: scale(1) rotate(0deg); }
+          50% { transform: scale(1.15) rotate(5deg); }
+        }
+        @keyframes microRotateLightning {
+          0%, 100% { transform: scale(1) rotate(0deg); }
+          50% { transform: scale(1.2) rotate(12deg); }
+        }
+        @keyframes appScatter {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(-1px, -2px); }
+        }
 
         .animate-float-1 { animation: floatCard1 8s ease-in-out infinite; transform: translateZ(0); }
         .animate-float-2 { animation: floatCard2 9s ease-in-out infinite; transform: translateZ(0); }
@@ -87,6 +105,12 @@ export default function Workflows() {
           stroke-dasharray: 6 4;
           animation: dataFlow 1.5s linear infinite;
         }
+
+        /* Classi di animazione interna continua */
+        .animate-internal-input { animation: microMoveInput 4s ease-in-out infinite; }
+        .animate-internal-brain { animation: microScaleBrain 3.5s ease-in-out infinite; }
+        .animate-internal-lightning { animation: microRotateLightning 3s ease-in-out infinite; }
+        .animate-internal-apps { animation: appScatter 5s ease-in-out infinite; }
       `}} />
       
       {/* --- STRATO 1: RETE GEOMETRICA DI LOGICA --- */}
@@ -127,9 +151,9 @@ export default function Workflows() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
                     
-                    {/* Elemento Input Interno Animato */}
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-indigo-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
-                      <span className="text-sm group-hover/card:scale-110 transition-transform duration-300">📥</span>
+                    {/* Elemento Input Interno Animato Continuo */}
+                    <div className="animate-internal-input w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-indigo-500/40 transition-all duration-300">
+                      <span className="text-sm transition-transform duration-300">📥</span>
                       <div className="space-y-1">
                         <div className="w-full h-1 bg-gray-800 group-hover/card:bg-indigo-950 rounded-xs transition-colors" />
                         <div className="w-2/3 h-1 bg-gray-800 group-hover/card:bg-indigo-900 rounded-xs transition-colors" />
@@ -182,9 +206,9 @@ export default function Workflows() {
               </div>
             </a>
 
-            {/* CARD 2 */}
+            {/* CARD 2 - Ora fluttua ed esegue micro-movimenti interni continui */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out lg:translate-y-4"
+              className="mobile-reveal-card animate-float-2 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out"
               style={{ transformStyle: "preserve-3d" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -196,9 +220,9 @@ export default function Workflows() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
                     
-                    {/* Elemento Prompt Animato */}
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-purple-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
-                      <span className="text-sm group-hover/card:animate-bounce">👤</span>
+                    {/* Elemento Prompt Animato Continuo */}
+                    <div className="animate-internal-input w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-purple-500/40 transition-all duration-300">
+                      <span className="text-sm">👤</span>
                       <div className="space-y-1">
                         <div className="w-full h-1 bg-gray-800 group-hover/card:bg-purple-950 rounded-xs transition-colors" />
                         <div className="w-4/5 h-1 bg-gray-800 group-hover/card:bg-purple-900 rounded-xs transition-colors" />
@@ -216,14 +240,14 @@ export default function Workflows() {
                       </svg>
                     </div>
 
-                    {/* Agent Box con Brain Thinking Icon */}
+                    {/* Agent Box con Brain Thinking Icon Continuo */}
                     <div className="w-20 h-24 rounded-xl border border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.2)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-purple-400">AGENT-IA</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-purple-400" style={{ animation: "pulseGlow 1.5s infinite" }} />
                       </div>
-                      <div className="text-center text-base py-0.5 group-hover/card:scale-120 group-hover/card:rotate-12 transition-transform">🤖</div>
+                      <div className="animate-internal-brain text-center text-base py-0.5">🤖</div>
                       <span className="text-[7px] font-mono text-purple-400 bg-purple-950/60 px-1 py-0.5 rounded border border-purple-900/40 text-center tracking-tighter uppercase group-hover/card:bg-purple-500 group-hover/card:text-white transition-colors">THINKING</span>
                     </div>
 
@@ -258,11 +282,11 @@ export default function Workflows() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
                     
-                    {/* Elemento Apps Multi-icona con Hover ad incrocio */}
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-1.5 flex flex-col justify-between shadow-xl relative group-hover/card:border-blue-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
+                    {/* Elemento Apps Multi-icona Animato Continuo */}
+                    <div className="animate-internal-apps w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-1.5 flex flex-col justify-between shadow-xl relative group-hover/card:border-blue-500/40 transition-all duration-300">
                       <div className="flex justify-between items-center">
-                        <span className="text-xs group-hover/card:-translate-x-0.5 group-hover/card:-translate-y-0.5 transition-transform">📧</span>
-                        <span className="text-xs group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 transition-transform">💬</span>
+                        <span className="text-xs">📧</span>
+                        <span className="text-xs">💬</span>
                       </div>
                       <div className="space-y-1">
                         <div className="w-full h-1 bg-gray-800 group-hover/card:bg-blue-950 rounded-xs transition-colors" />
@@ -281,7 +305,7 @@ export default function Workflows() {
                       </svg>
                     </div>
 
-                    {/* Hub API Box con Lightning rotate */}
+                    {/* Hub API Box con Lightning continuo */}
                     <div className="w-20 h-24 rounded-xl border border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/60 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.2)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
@@ -289,7 +313,7 @@ export default function Workflows() {
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-400" style={{ animation: "pulseGlow 1.8s infinite" }} />
                       </div>
                       <div className="relative flex justify-center py-1">
-                        <span className="text-blue-400 text-sm font-black relative z-10 group-hover/card:scale-130 group-hover/card:rotate-12 transition-transform">⚡</span>
+                        <span className="animate-internal-lightning text-blue-400 text-sm font-black relative z-10 block">⚡</span>
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-blue-400/60 uppercase tracking-widest whitespace-nowrap">SYNC-ON</div>
                     </div>
@@ -299,10 +323,8 @@ export default function Workflows() {
                 <div className="p-6">
                   <div className="mb-3.5">
                     <span className="btn-sm inline-flex rounded-full bg-gray-900 border border-gray-800/80 px-3 py-0.5 text-xs font-normal shadow-inner">
-                      <span className="btn-sm inline-flex rounded-full bg-gray-900 border border-gray-800/80 px-3 py-0.5 text-xs font-normal shadow-inner">
-                        <span className="bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent font-medium">
-                          Zero Attriti API
-                        </span>
+                      <span className="bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent font-medium">
+                        Zero Attriti API
                       </span>
                     </span>
                   </div>
