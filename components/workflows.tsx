@@ -322,3 +322,4 @@ export default function Workflows() {
     </section>
   );
 }
+fai si che l'animazione di fade in o quello che è funzioni anche su mobile, NON TOCCARE ALTRO
