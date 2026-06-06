@@ -57,14 +57,12 @@ export default function HeroHome() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
-      {/* INIEZIONE DIRETTA DEI KEYFRAMES AGGIORNATI */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes cosmicNebulaMobile {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           50% { transform: translate3d(5%, 8%, 0) rotate(180deg); }
           100% { transform: translate3d(0, 0, 0) rotate(360deg); }
         }
-        /* MODIFICATO: Spostamento X e Y coordinato a 40px (dimensione esatta della cella) per un loop perfetto senza scatti */
         @keyframes gridPanPerfect {
           0% { transform: translate3d(0, 0, 0); }
           100% { transform: translate3d(-40px, -40px, 0); }
@@ -95,7 +93,7 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Risolto lo scatto del loop) --- */}
+      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO --- */}
       <div 
         className="absolute inset-0 pointer-events-none z-0 opacity-[0.35] overflow-hidden"
         style={{
@@ -103,7 +101,6 @@ export default function HeroHome() {
           maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)"
         }}
       >
-        {/* MODIFICATO: bg-size fissa a 40px ovunque e nuova animazione gridPanPerfect */}
         <div 
           className="absolute inset-[-80px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:40px_40px]" 
           style={{ animation: "gridPanPerfect 12s linear infinite", willChange: "transform" }}
@@ -143,8 +140,8 @@ export default function HeroHome() {
           
           {/* COLONNA TESTO (SINISTRA) */}
           <div className="text-left space-y-5 md:space-y-6 text-center lg:text-left">
-            {/* MODIFICATO: Aumentata significativamente la dimensione del font (text-4xl -> text-5xl, md:text-5xl -> md:text-6xl) */}
-            <h1 className="bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-1 font-nacelle text-5xl sm:text-5xl font-bold text-transparent md:text-6xl tracking-tight leading-[1.1]">
+            {/* MODIFICATO: Ridotte le dimensioni del font (text-3xl sm:text-4xl md:text-5xl) */}
+            <h1 className="bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-1 font-nacelle text-3xl sm:text-4xl font-bold text-transparent md:text-5xl tracking-tight leading-[1.1]">
               Automatizza il presente. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
                 Progetta il futuro.
@@ -157,7 +154,13 @@ export default function HeroHome() {
               <a className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-5 text-sm font-medium transition-all transform active:scale-95" href="#contatti">
                 Automatizza Ora <span className="ml-1 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
               </a>
-              <a className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-colors hover:bg-gray-800" href="#consulenza">
+              
+              <a 
+                className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-colors hover:bg-gray-800" 
+                href="https://wa.me/message/Y7G7NANQK6ACA1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Fissa una Chiamata
               </a>
             </div>
