@@ -121,7 +121,6 @@ export default function HeroHome() {
           50% { opacity: 1; transform: scale(1.1); }
         }
         
-        /* Animazione ottimizzata per la pioggia di codice tech ad alta luminosità */
         @keyframes techRainLuminous {
           0% { transform: translateY(-100%); opacity: 0; }
           5% { opacity: 1; }
@@ -136,7 +135,6 @@ export default function HeroHome() {
           animation: pulseDots 0.8s ease-in-out infinite; 
         }
         
-        /* Regola potenziata per i flussi di pioggia digitale ad alta definizione */
         .rain-stream {
           position: absolute;
           top: 0;
@@ -153,7 +151,7 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* STRATO PIOGGIA TECH IPER-LUMINOSA (Neon Matrix-style) */}
+      {/* STRATO PIOGGIA TECH IPER-LUMINOSA */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.65]">
         <div className="rain-stream left-[5%] text-[#818cf8]" style={{ animationDuration: '7s', animationDelay: '0s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>1010011011001</div>
         <div className="rain-stream left-[12%] text-[#c084fc]" style={{ animationDuration: '9s', animationDelay: '2s', fontSize: '14px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>0110101</div>
@@ -204,7 +202,8 @@ export default function HeroHome() {
 
           {/* CHAT MOCKUP COLUMN */}
           <div className="relative flex justify-center w-full mt-4 lg:mt-0">
-            <div className="absolute w-64 h-64 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" style={{ animation: "centralPulse 5s ease-in-out infinite", willChange: "transform" }} />
+            {/* CORRETTO: w-64 -> w-80 per uniformità con md:w-80 */}
+            <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" style={{ animation: "centralPulse 5s ease-in-out infinite", willChange: "transform" }} />
             
             <div className="relative w-full max-w-[420px] min-h-[380px] md:aspect-[10/11] z-10 border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex flex-col justify-end shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden pt-10 [contain:paint]">
               <div className={`space-y-3 w-full transition-all duration-400 ${isExiting ? "opacity-0 translate-y-[-4px] blur-sm" : "opacity-100 translate-y-0"}`}>
@@ -214,7 +213,8 @@ export default function HeroHome() {
                   return (
                     <div key={msg.id} className={`flex items-start space-x-2 msg-pop ${isUser ? "justify-end space-x-reverse" : ""}`}>
                       {!isUser && (
-                        <div className="w-6.5 h-6.5 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-sm">
+                        /* CORRETTO: w-6.5 h-6.5 -> w-7 h-7 */
+                        <div className="w-7 h-7 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-sm">
                           <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
                             <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
                           </svg>
@@ -238,7 +238,8 @@ export default function HeroHome() {
                       </div>
 
                       {isUser && (
-                        <div className={`w-6.5 h-6.5 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black bg-gradient-to-br ${msg.sender === "Sara" ? "from-purple-500 to-pink-500" : "from-indigo-500 to-purple-500"}`}>
+                        /* CORRETTO: w-6.5 h-6.5 -> w-7 h-7 */
+                        <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black bg-gradient-to-br ${msg.sender === "Sara" ? "from-purple-500 to-pink-500" : "from-indigo-500 to-purple-500"}`}>
                           {msg.avatar}
                         </div>
                       )}
