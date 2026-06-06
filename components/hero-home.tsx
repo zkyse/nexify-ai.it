@@ -57,7 +57,7 @@ export default function HeroHome() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
-      {/* INIEZIONE DIRETTA DEI KEYFRAMES (Infallibile, Fluida e Ottimizzata Mobile) */}
+      {/* INIEZIONE DIRETTA DEI KEYFRAMES */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes cosmicNebulaMobile {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
@@ -66,13 +66,13 @@ export default function HeroHome() {
         }
         @keyframes gridPanMobile {
           0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(0, 20px, 0); }
+          100% { transform: translate3d(0, 40px, 0); }
         }
         @keyframes dataStreamMobile {
-          0% { transform: translate3d(0, -150px, 0); opacity: 0; }
-          15% { opacity: 0.6; }
-          85% { opacity: 0.6; }
-          100% { transform: translate3d(0, 100vh, 0); opacity: 0; }
+          0% { transform: translate3d(0, -200px, 0); opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { transform: translate3d(0, 110vh, 0); opacity: 0; }
         }
         @keyframes centralPulse {
           0%, 100% { transform: translate3d(-50%, -50%, 0) scale(0.92); opacity: 0.12; }
@@ -94,15 +94,21 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Funziona ovunque) --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.07] overflow-hidden">
+      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Più visibile e sfumato ai bordi) --- */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-[0.15] overflow-hidden"
+        style={{
+          WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 90%)",
+          maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)"
+        }}
+      >
         <div 
-          className="absolute inset-[-20px] bg-[linear-gradient(to_right,#312e81_1px,transparent_1px),linear-gradient(to_bottom,#312e81_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
-          style={{ animation: "gridPanMobile 6s linear infinite", willChange: "transform" }}
+          className="absolute inset-[-40px] bg-[linear-gradient(to_right,#4338ca_1px,transparent_1px),linear-gradient(to_bottom,#4338ca_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
+          style={{ animation: "gridPanMobile 8s linear infinite", willChange: "transform" }}
         />
       </div>
 
-      {/* --- STRATO 2: CHROMATIC NEBULA AMBIENT (Movimento rotatorio 3D super leggero) --- */}
+      {/* --- STRATO 2: CHROMATIC NEBULA AMBIENT --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Sfera Indigo Top-Left */}
         <div 
@@ -116,19 +122,31 @@ export default function HeroHome() {
         />
       </div>
 
-      {/* --- STRATO 3: DATA STREAMERS (Attivi anche su mobile, bilanciati per performance) --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 md:opacity-40">
-        {/* Streamer 1: Visibile solo su mobile e tablet in posizione strategica */}
-        <div className="absolute left-[8%] lg:left-[15%] top-0 w-[1px] h-24 md:h-32 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
-             style={{ animation: "dataStreamMobile 5s cubic-bezier(0.4, 0, 0.2, 1) infinite", willChange: "transform" }} />
+      {/* --- STRATO 3: DATA STREAMERS (Pioggia aumentata a 6 flussi indipendenti) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40 md:opacity-50">
+        {/* Streamer 1 */}
+        <div className="absolute left-[6%] top-0 w-[1px] h-28 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 4.5s linear infinite", willChange: "transform" }} />
         
-        {/* Streamer 2: Centrale */}
-        <div className="absolute left-[50%] lg:left-[45%] top-0 w-[1px] h-20 md:h-24 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
-             style={{ animation: "dataStreamMobile 4s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "1.5s", willChange: "transform" }} />
+        {/* Streamer 2 */}
+        <div className="absolute left-[22%] top-0 w-[1px] h-20 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 5.5s linear infinite", animationDelay: "1.8s", willChange: "transform" }} />
         
-        {/* Streamer 3: Destro (Nascosto su schermi piccolissimi per pulizia visiva) */}
-        <div className="hidden sm:block absolute left-[88%] lg:left-[80%] top-0 w-[1px] h-28 md:h-40 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
-             style={{ animation: "dataStreamMobile 6s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "3s", willChange: "transform" }} />
+        {/* Streamer 3 */}
+        <div className="absolute left-[44%] top-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 4s linear infinite", animationDelay: "0.8s", willChange: "transform" }} />
+        
+        {/* Streamer 4 */}
+        <div className="absolute left-[62%] top-0 w-[1px] h-24 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 6s linear infinite", animationDelay: "3.2s", willChange: "transform" }} />
+        
+        {/* Streamer 5 */}
+        <div className="absolute left-[78%] top-0 w-[1px] h-36 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 5s linear infinite", animationDelay: "2.3s", willChange: "transform" }} />
+             
+        {/* Streamer 6 */}
+        <div className="absolute left-[92%] top-0 w-[1px] h-20 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 4.2s linear infinite", animationDelay: "1.2s", willChange: "transform" }} />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
