@@ -125,9 +125,8 @@ export default function HeroHome() {
           100% { transform: translate3d(0, 110vh, 0); }
         }
 
-        /* Animazioni automatiche in loop per i bottoni dell'Hero */
+        /* Animazione automatica in loop per il bottone dell'Hero */
         @keyframes pulseButtonHero { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 4px 20px rgba(99,102,241,0.4); } }
-        @keyframes floatButtonSecHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
         .msg-pop { 
           animation: msgPopIn 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
@@ -137,7 +136,6 @@ export default function HeroHome() {
         }
         
         .animate-auto-hero-primary { animation: pulseButtonHero 3s ease-in-out infinite; }
-        .animate-auto-hero-secondary { animation: floatButtonSecHero 3.5s ease-in-out infinite; }
         
         .rain-stream {
           position: absolute;
@@ -205,14 +203,14 @@ export default function HeroHome() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 pt-1">
               
-              {/* Pulsante Primario Animato in automatico */}
-              <a className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-5 text-sm font-medium transition-all transform animate-auto-hero-primary active:scale-95" href="#contatti">
-                Automatizza Ora <span className="ml-1 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
-              </a>
-              
-              {/* Pulsante Secondario Animato in automatico */}
-              <a className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-all transform animate-auto-hero-secondary hover:bg-gray-800 active:scale-95" href="https://wa.me/message/Y7G7NANQK6ACA1" target="_blank" rel="noopener noreferrer">
-                Fissa una Chiamata
+              {/* Pulsante Unico - Prenota una Call */}
+              <a 
+                className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-6 text-sm font-medium transition-all transform animate-auto-hero-primary active:scale-95 inline-flex items-center justify-center sm:w-auto" 
+                href="https://wa.me/message/Y7G7NANQK6ACA1" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Prenota una Call <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
               </a>
 
             </div>
