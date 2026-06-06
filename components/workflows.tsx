@@ -91,12 +91,14 @@ export default function Workflows() {
           50% { transform: translateY(-6px) rotate(1.5deg); }
         }
 
+        /* Modificato: l'animazione ora gestisce solo l'opacità e il blur in entrata su mobile, 
+           lasciando il posizionamento verticale (Y) delegato alla proprietà di floating per non generare scatti */
         @keyframes cardRevealMobile {
-          0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(4px); }
-          100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+          0% { opacity: 0; filter: blur(4px); }
+          100% { opacity: 1; filter: blur(0); }
         }
 
-        /* Animazioni di float asincrone per evitare rigidità di blocco */
+        /* Animazioni di float asincrone abilitate globalmente (sia mobile che desktop) */
         @keyframes floatingCard1 {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-8px) rotate(-0.5deg); }
@@ -110,23 +112,25 @@ export default function Workflows() {
           50% { transform: translateY(-7px) rotate(-0.3deg); }
         }
 
-        /* Classi operative */
+        /* Classi operative di base */
         .animate-liquid-1 { animation: liquidNebula 26s ease-in-out infinite; }
         .animate-liquid-2 { animation: liquidNebula 20s ease-in-out infinite reverse; }
         .cyber-flow { animation: cyberStream 8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         .float-icon { animation: floatCardElement 4.5s ease-in-out infinite; }
 
-        /* Applicazione del floating continuo su desktop */
-        @media (min-width: 1024px) {
-          .desktop-float-1 { animation: floatingCard1 7s ease-in-out infinite; }
-          .desktop-float-2 { animation: floatingCard2 8s ease-in-out infinite; animation-delay: 0.5s; }
-          .desktop-float-3 { animation: floatingCard3 7.5s ease-in-out infinite; animation-delay: 1s; }
-        }
+        /* Applicazione del floating continuo nativo su TUTTI i dispositivi */
+        .desktop-float-1 { animation: floatingCard1 7s ease-in-out infinite; }
+        .desktop-float-2 { animation: floatingCard2 8s ease-in-out infinite; animation-delay: 0.5s; }
+        .desktop-float-3 { animation: floatingCard3 7.5s ease-in-out infinite; animation-delay: 1s; }
 
+        /* Gestione stato iniziale e reveal su dispositivi mobile senza bloccare il floating */
         @media (max-width: 1023px) {
-          .mobile-reveal-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+          .mobile-reveal-card { 
+            opacity: 0; 
+            filter: blur(4px);
+            transition: opacity 0.6s ease, filter 0.6s ease; 
+          }
           .mobile-reveal-card.active {
-            /* Mantiene l'effetto di entrata all'intersezione dello scroll */
             animation: cardRevealMobile 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: var(--delay);
           }
@@ -167,7 +171,7 @@ export default function Workflows() {
             </p>
           </div>
 
-          {/* GRIGLIA CARD CON EFFETTI UNIFORMATI (ATTIVI ANCHE SU MOBILE) */}
+          {/* GRIGLIA CARD CON EFFETTI UNIFORMATI */}
           <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             
             {/* CARD 1: MODELLATO SULLE TUE ESIGENZE */}
@@ -202,7 +206,6 @@ export default function Workflows() {
                         <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
                         <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
-                      {/* Animazione dell'impulso sempre attiva su mobile, nativa su desktop in hover */}
                       <div className="absolute w-2 h-2 bg-indigo-400 rounded-full left-0 animate-[cyberStream_2s_linear_infinite]" style={{ boxShadow: "0 0 8px #6366f1" }} />
                     </div>
                     
