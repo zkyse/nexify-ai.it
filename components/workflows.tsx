@@ -3,97 +3,6 @@
 import { useEffect, useRef } from "react";
 import Spotlight from "@/components/spotlight";
 
-// Definiamo gli stili CSS all'esterno del componente per evitare conflitti di parsing nel JSX
-const customStyles = `
-  /* Animazioni di Reveal all'entrata nel viewport */
-  .mobile-reveal-card {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: var(--delay, 0s);
-  }
-  .mobile-reveal-card.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Effetti di fluttuazione globale delle card */
-  @keyframes floatCard1 {
-    0%, 100% { transform: translateY(0px) translateZ(0); }
-    50% { transform: translateY(-22px) translateZ(0); }
-  }
-  @keyframes floatCard2 {
-    0%, 100% { transform: translateY(-12px) translateZ(0); }
-    50% { transform: translateY(10px) translateZ(0); }
-  }
-  @keyframes floatCard3 {
-    0%, 100% { transform: translateY(6px) translateZ(0); }
-    50% { transform: translateY(-16px) translateZ(0); }
-  }
-  
-  .mobile-reveal-card.active.card-1 { animation: floatCard1 6s ease-in-out infinite; }
-  .mobile-reveal-card.active.card-2 { animation: floatCard2 6.5s ease-in-out infinite; }
-  .mobile-reveal-card.active.card-3 { animation: floatCard3 7s ease-in-out infinite; }
-
-  /* Animazioni per i cores / hub interni */
-  @keyframes floatInternalCore {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-6px) scale(1.02); }
-  }
-  @keyframes floatInternalAgent {
-    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
-    33% { transform: translate(2px, -4px) rotate(1deg); }
-    66% { transform: translate(-2px, -2px) rotate(-1deg); }
-  }
-  @keyframes floatInternalHub {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(5px) scale(0.98); }
-  }
-
-  .animate-box-core { animation: floatInternalCore 4s ease-in-out infinite; }
-  .animate-box-agent { animation: floatInternalAgent 4.5s ease-in-out infinite; }
-  .animate-box-hub { animation: floatInternalHub 3.8s ease-in-out infinite; }
-
-  /* Micro-animazioni interne continue ed accentuate */
-  @keyframes microMoveInput {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-8px) scale(1.04); }
-  }
-  @keyframes microScaleBrain {
-    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(168,85,247,0.2)); }
-    50% { transform: scale(1.22) rotate(8deg); filter: drop-shadow(0 0 12px rgba(168,85,247,0.6)); }
-  }
-  @keyframes microRotateLightning {
-    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(59,130,246,0.2)); }
-    50% { transform: scale(1.3) rotate(-15deg); filter: drop-shadow(0 0 14px rgba(59,130,246,0.7)); }
-  }
-  @keyframes appScatter {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-3px, -4px) scale(1.06); }
-  }
-  @keyframes pulseGlow {
-    0%, 100% { opacity: 0.4; transform: scale(0.95); }
-    50% { opacity: 1; transform: scale(1.25); }
-  }
-  @keyframes dataFlow {
-    to { stroke-dashoffset: -20; }
-  }
-
-  .animated-svg-path {
-    stroke-dasharray: 6 4;
-    animation: dataFlow 1.2s linear infinite;
-  }
-  .animated-svg-path-fast {
-    stroke-dasharray: 5 3;
-    animation: dataFlow 0.8s linear infinite;
-  }
-
-  .animate-internal-input { animation: microMoveInput 3.5s ease-in-out infinite; }
-  .animate-internal-brain { animation: microScaleBrain 2.8s ease-in-out infinite; display: inline-block; }
-  .animate-internal-lightning { animation: microRotateLightning 2.2s ease-in-out infinite; display: inline-block; }
-  .animate-internal-apps { animation: appScatter 4s ease-in-out infinite; }
-`;
-
 export default function Workflows() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -146,8 +55,36 @@ export default function Workflows() {
 
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
-      {/* Iniezione sicura degli stili estratti */}
-      <style dangerouslySetInnerHTML={{ __html: customStyles }} />
+      
+      {/* CSS iniettato in modo sicuro per Next.js/SWC compilato via array di stringhe standard */}
+      <style dangerouslySetInnerHTML={{ __html: [
+        ".mobile-reveal-card { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--delay, 0s); }",
+        ".mobile-reveal-card.active { opacity: 1; transform: translateY(0); }",
+        "@keyframes floatCard1 { 0%, 100% { transform: translateY(0px) translateZ(0); } 50% { transform: translateY(-22px) translateZ(0); } }",
+        "@keyframes floatCard2 { 0%, 100% { transform: translateY(-12px) translateZ(0); } 50% { transform: translateY(10px) translateZ(0); } }",
+        "@keyframes floatCard3 { 0%, 100% { transform: translateY(6px) translateZ(0); } 50% { transform: translateY(-16px) translateZ(0); } }",
+        ".mobile-reveal-card.active.card-1 { animation: floatCard1 6s ease-in-out infinite; }",
+        ".mobile-reveal-card.active.card-2 { animation: floatCard2 6.5s ease-in-out infinite; }",
+        ".mobile-reveal-card.active.card-3 { animation: floatCard3 7s ease-in-out infinite; }",
+        "@keyframes floatInternalCore { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-6px) scale(1.02); } }",
+        "@keyframes floatInternalAgent { 0%, 100% { transform: translate(0px, 0px) rotate(0deg); } 33% { transform: translate(2px, -4px) rotate(1deg); } 66% { transform: translate(-2px, -2px) rotate(-1deg); } }",
+        "@keyframes floatInternalHub { 0%, 100% { transform: translateY(0px) scale(1); } 50% { transform: translateY(5px) scale(0.98); } }",
+        ".animate-box-core { animation: floatInternalCore 4s ease-in-out infinite; }",
+        ".animate-box-agent { animation: floatInternalAgent 4.5s ease-in-out infinite; }",
+        ".animate-box-hub { animation: floatInternalHub 3.8s ease-in-out infinite; }",
+        "@keyframes microMoveInput { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.04); } }",
+        "@keyframes microScaleBrain { 0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(168,85,247,0.2)); } 50% { transform: scale(1.22) rotate(8deg); filter: drop-shadow(0 0 12px rgba(168,85,247,0.6)); } }",
+        "@keyframes microRotateLightning { 0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px rgba(59,130,246,0.2)); } 50% { transform: scale(1.3) rotate(-15deg); filter: drop-shadow(0 0 14px rgba(59,130,246,0.7)); } }",
+        "@keyframes appScatter { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-3px, -4px) scale(1.06); } }",
+        "@keyframes pulseGlow { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.25); } }",
+        "@keyframes dataFlow { to { stroke-dashoffset: -20; } }",
+        ".animated-svg-path { stroke-dasharray: 6 4; animation: dataFlow 1.2s linear infinite; }",
+        ".animated-svg-path-fast { stroke-dasharray: 5 3; animation: dataFlow 0.8s linear infinite; }",
+        ".animate-internal-input { animation: microMoveInput 3.5s ease-in-out infinite; }",
+        ".animate-internal-brain { animation: microScaleBrain 2.8s ease-in-out infinite; display: inline-block; }",
+        ".animate-internal-lightning { animation: microRotateLightning 2.2s ease-in-out infinite; display: inline-block; }",
+        ".animate-internal-apps { animation: appScatter 4s ease-in-out infinite; }"
+      ].join(' ') }} />
       
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
 
