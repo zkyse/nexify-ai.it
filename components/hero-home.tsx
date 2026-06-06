@@ -1,16 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-// Sostituisci questo import con il percorso del tuo logo 200x200 o dell'immagine tech che preferisci
 import TechGraphic from "@/public/images/hero-image-01.jpg"; 
 
 export default function HeroHome() {
+  // Stato per gestire la comparsa dei messaggi e dei pallini di digitazione
+  const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    // Dopo 1.5 secondi appare l'Agente IA che sta scrivendo (i tre pallini)
+    const timer1 = setTimeout(() => setStep(2), 1500); 
+    // Dopo 3.5 secondi i pallini spariscono e appare la risposta testuale definitiva
+    const timer2 = setTimeout(() => setStep(3), 3500); 
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
-    /* 1. Ridotto pt-24 a pt-8 per avvicinare la sezione all'header superiore */
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full">
-        
-        {/* 2. Ridotto il padding top (py-12 md:py-20 -> pt-2 pb-12 md:pt-4 md:pb-20) per stringere lo spazio in mezzo */}
         <div className="pt-2 pb-12 md:pt-4 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
           {/* COLONNA SINISTRA: Testi e Pulsanti di Azione */}
@@ -52,27 +64,61 @@ export default function HeroHome() {
             </div>
           </div>
 
-          {/* COLONNA DESTRA: Box Grafico con Effetto Glow (Stile Indigo.ai) */}
+          {/* COLONNA DESTRA: Mockup Chat interattiva */}
           <div className="relative flex justify-center w-full" data-aos="fade-left" data-aos-delay={200}>
             {/* Alone luminoso soffuso viola/indaco sullo sfondo */}
             <div className="absolute w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
             
-            {/* Contenitore della grafica o del logo */}
-            <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col items-center justify-center shadow-2xl">
-              <div className="animate-pulse flex flex-col items-center space-y-4">
-                {/* Cerchio centrale animato con l'iniziale o il logo */}
-                <div className="w-28 h-28 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-5xl shadow-[0_0_40px_rgba(99,102,241,0.25)]">
-                  N
+            {/* Box contenitore stile "interfaccia" */}
+            <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col justify-center space-y-4 shadow-2xl">
+              
+              {/* 1. Messaggio inviato dall'utente (Marco) */}
+              <div className="flex items-start justify-end space-x-3">
+                <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3.5 max-w-[80%] border border-gray-700/50 shadow-sm">
+                  <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
+                  <p className="text-sm leading-relaxed">
+                    Vorrei spostare il mio appuntamento alla prossima settimana.
+                  </p>
                 </div>
-                <div className="text-center space-y-1">
-                  <span className="block text-xs tracking-[0.2em] text-indigo-400 font-mono font-bold">
-                    AI AGENT ACTIVE
-                  </span>
-                  <span className="block text-2xl font-bold text-white tracking-wide">
-                    Nexify
-                  </span>
+                {/* Avatar Utente */}
+                <div className="w-8 h-8 rounded-full bg-gradient-to-b from-amber-400 to-orange-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-md">
+                  M
                 </div>
               </div>
+
+              {/* 2. Messaggio di risposta dell'Agente IA */}
+              {step >= 2 && (
+                <div className="flex items-start space-x-3 transition-all duration-300">
+                  {/* Icona viola dell'Agente */}
+                  <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
+                    {/* Icona Sparkles (Stelle/AI) */}
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
+                    </svg>
+                  </div>
+
+                  <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px] shadow-sm">
+                    <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
+                    
+                    {step === 2 && (
+                      /* Animazione di tre puntini che saltano mentre l'IA "pensa" */
+                      <div className="flex items-center space-x-1 py-2">
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                      </div>
+                    )}
+
+                    {step === 3 && (
+                      /* Risposta testuale finale */
+                      <p className="text-sm leading-relaxed animate-[fadeIn_0.3s_ease-out]">
+                        Certamente! Ho verificato le disponibilità. Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
             </div>
           </div>
 
