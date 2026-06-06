@@ -70,8 +70,8 @@ export default function HeroHome() {
         }
         @keyframes dataStreamMobile {
           0% { transform: translate3d(0, -200px, 0); opacity: 0; }
-          10% { opacity: 0.8; }
-          90% { opacity: 0.8; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
           100% { transform: translate3d(0, 110vh, 0); opacity: 0; }
         }
         @keyframes centralPulse {
@@ -94,16 +94,16 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Più visibile e sfumato ai bordi) --- */}
+      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Aumentata opacità e schiarito il gradiente) --- */}
       <div 
-        className="absolute inset-0 pointer-events-none z-0 opacity-[0.15] overflow-hidden"
+        className="absolute inset-0 pointer-events-none z-0 opacity-[0.35] overflow-hidden"
         style={{
           WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 90%)",
           maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)"
         }}
       >
         <div 
-          className="absolute inset-[-40px] bg-[linear-gradient(to_right,#4338ca_1px,transparent_1px),linear-gradient(to_bottom,#4338ca_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
+          className="absolute inset-[-40px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
           style={{ animation: "gridPanMobile 8s linear infinite", willChange: "transform" }}
         />
       </div>
@@ -122,30 +122,30 @@ export default function HeroHome() {
         />
       </div>
 
-      {/* --- STRATO 3: DATA STREAMERS (Pioggia aumentata a 6 flussi indipendenti) --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40 md:opacity-50">
+      {/* --- STRATO 3: DATA STREAMERS (Aumentata opacità generale e resi i colori dei flussi più accesi) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-75 md:opacity-90">
         {/* Streamer 1 */}
-        <div className="absolute left-[6%] top-0 w-[1px] h-28 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
+        <div className="absolute left-[6%] top-0 w-[1.5px] h-28 bg-gradient-to-b from-transparent via-indigo-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4.5s linear infinite", willChange: "transform" }} />
         
         {/* Streamer 2 */}
-        <div className="absolute left-[22%] top-0 w-[1px] h-20 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
+        <div className="absolute left-[22%] top-0 w-[1.5px] h-20 bg-gradient-to-b from-transparent via-purple-300 to-transparent" 
              style={{ animation: "dataStreamMobile 5.5s linear infinite", animationDelay: "1.8s", willChange: "transform" }} />
         
         {/* Streamer 3 */}
-        <div className="absolute left-[44%] top-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
+        <div className="absolute left-[44%] top-0 w-[1.5px] h-32 bg-gradient-to-b from-transparent via-cyan-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4s linear infinite", animationDelay: "0.8s", willChange: "transform" }} />
         
         {/* Streamer 4 */}
-        <div className="absolute left-[62%] top-0 w-[1px] h-24 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
+        <div className="absolute left-[62%] top-0 w-[1.5px] h-24 bg-gradient-to-b from-transparent via-indigo-300 to-transparent" 
              style={{ animation: "dataStreamMobile 6s linear infinite", animationDelay: "3.2s", willChange: "transform" }} />
         
         {/* Streamer 5 */}
-        <div className="absolute left-[78%] top-0 w-[1px] h-36 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
+        <div className="absolute left-[78%] top-0 w-[1.5px] h-36 bg-gradient-to-b from-transparent via-purple-300 to-transparent" 
              style={{ animation: "dataStreamMobile 5s linear infinite", animationDelay: "2.3s", willChange: "transform" }} />
              
         {/* Streamer 6 */}
-        <div className="absolute left-[92%] top-0 w-[1px] h-20 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
+        <div className="absolute left-[92%] top-0 w-[1.5px] h-20 bg-gradient-to-b from-transparent via-cyan-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4.2s linear infinite", animationDelay: "1.2s", willChange: "transform" }} />
       </div>
 
