@@ -7,207 +7,216 @@ export default function HeroHome() {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // ================= FLUSSO MARCO (Step 1-8) =================
-    const t1 = setTimeout(() => setStep(2), 2000);   // Marco msg 1
-    const t2 = setTimeout(() => setStep(3), 4500);   // IA typing 1
-    const t3 = setTimeout(() => setStep(4), 7500);   // IA msg 1
-    const t4 = setTimeout(() => setStep(5), 10500);  // Marco typing 2
-    const t5 = setTimeout(() => setStep(6), 12500);  // Marco msg 2
-    const t6 = setTimeout(() => setStep(7), 15000);  // IA typing 2
-    const t7 = setTimeout(() => setStep(8), 17500);  // IA msg 2 (Conferma)
+    // Array di configurazione per gestire in modo pulito la sequenza temporale
+    const sequence = [
+      { targetStep: 2, delay: 2000 },   // Marco msg 1
+      { targetStep: 3, delay: 4500 },   // IA typing 1
+      { targetStep: 4, delay: 7500 },   // IA msg 1
+      { targetStep: 5, delay: 10500 },  // Marco typing 2
+      { targetStep: 6, delay: 12500 },  // Marco msg 2
+      { targetStep: 7, delay: 15000 },  // IA typing 2
+      { targetStep: 8, delay: 17500 },  // IA msg 2 (Conferma)
+    ];
 
-    // Transizione Marco -> Sara con effetto cinematic
-    const t8 = setTimeout(() => setIsExiting(true), 22000);
-    const t9 = setTimeout(() => {
+    const saraSequence = [
+      { targetStep: 10, delay: 24500 }, // Sara msg 1
+      { targetStep: 11, delay: 27000 }, // IA typing 3
+      { targetStep: 12, delay: 30000 }, // IA msg 3 (Che business?)
+      { targetStep: 13, delay: 33500 }, // Sara typing 2
+      { targetStep: 14, delay: 35500 }, // Sara msg 2 (Spiega business)
+      { targetStep: 15, delay: 38500 }, // IA typing 4
+      { targetStep: 16, delay: 41500 }, // IA msg 4 (Propone Call)
+    ];
+
+    const timers: NodeJS.Timeout[] = [];
+
+    // Avvia tutti i timer della sequenza globale
+    sequence.forEach((item) => {
+      timers.push(setTimeout(() => setStep(item.targetStep), item.delay));
+    });
+
+    // Transizione cinematica Marco -> Sara
+    timers.push(setTimeout(() => setIsExiting(true), 22000));
+    timers.push(setTimeout(() => {
       setStep(9);
       setIsExiting(false);
-    }, 22600);
+    }, 22600));
 
-    // ================= FLUSSO SARA (Step 9-16) =================
-    const t10 = setTimeout(() => setStep(10), 24500); // Sara msg 1
-    const t11 = setTimeout(() => setStep(11), 27000); // IA typing 3
-    const t12 = setTimeout(() => setStep(12), 30000); // IA msg 3 (Che business?)
-    const t13 = setTimeout(() => setStep(13), 33500); // Sara typing 2
-    const t14 = setTimeout(() => setStep(14), 35500); // Sara msg 2 (Spiega business)
-    const t15 = setTimeout(() => setStep(15), 38500); // IA typing 4
-    const t16 = setTimeout(() => setStep(16), 41500); // IA msg 4 (Propone Call)
+    // Avvia sequenza Sara
+    saraSequence.forEach((item) => {
+      timers.push(setTimeout(() => setStep(item.targetStep), item.delay));
+    });
 
-    // Fine ciclo: Fade out e Reset Loop
-    const t17 = setTimeout(() => setIsExiting(true), 47000);
-    const loop = setTimeout(() => {
+    // Reset finale e restart del ciclo continuo
+    timers.push(setTimeout(() => setIsExiting(true), 47000));
+    timers.push(setTimeout(() => {
       setStep(1);
       setIsExiting(false);
-    }, 47600); 
+    }, 47600));
 
     return () => {
-      [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, loop].forEach(clearTimeout);
+      timers.forEach(clearTimeout);
     };
-  }, [step === 1]);
+  }, []); // Eseguito una sola volta al montaggio del componente per evitare glitch su mobile
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12 bg-[#02040a]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
       {/* ================= SUPER ANIMAZIONI DI SFONDO & CHAT INTERATTIVA ================= */}
       <style jsx global>{`
-        /* 1. Flusso particelle tech di sfondo */
-        @keyframes floatUp {
-          0% { transform: translateY(100vh) scale(0.4) rotate(0deg); opacity: 0; }
-          15% { opacity: 0.5; }
-          85% { opacity: 0.5; }
-          100% { transform: translateY(-10vh) scale(1) rotate(360deg); opacity: 0; }
-        }
-
-        /* 2. Movimento fluido dei grandi bagliori (Aurora) */
+        /* Movimento fluido dei grandi bagliori (Aurora) - Ottimizzato */
         @keyframes auroraMotion {
-          0%, 100% { transform: translate3d(0px, 0px, 0) scale(1); filter: hue-rotate(0deg); }
-          33% { transform: translate3d(40px, -60px, 0) scale(1.1); filter: hue-rotate(30deg); }
-          66% { transform: translate3d(-30px, 30px, 0) scale(0.95); filter: hue-rotate(-20deg); }
+          0%, 100% { transform: translate3d(0px, 0px, 0) scale(1); }
+          50% { transform: translate3d(20px, -30px, 0) scale(1.05); }
         }
 
-        /* 3. Linee laser diagonali veloci */
+        /* Linee laser diagonali veloci */
         @keyframes laserBeam {
           0% { transform: translate3d(-100%, -100%, 0) rotate(-40deg); opacity: 0; }
-          5% { opacity: 0.8; }
+          5% { opacity: 0.6; }
           25% { transform: translate3d(120%, 120%, 0) rotate(-40deg); opacity: 0; }
           100% { transform: translate3d(120%, 120%, 0) rotate(-40deg); opacity: 0; }
         }
 
-        /* 4. Pulsazione magnetica di sfondo costante */
+        /* Pulsazione magnetica di sfondo costante */
         @keyframes chatPulse {
-          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(1); opacity: 0.25; filter: blur(65px); }
-          50% { transform: translate3d(-50%, -50%, 0) scale(1.1); opacity: 0.35; filter: blur(75px); }
+          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(1); opacity: 0.2; }
+          50% { transform: translate3d(-50%, -50%, 0) scale(1.06); opacity: 0.3; }
         }
 
-        /* 5. IMMISSIONE MESSAGGI (Ottimizzata GPU con hardware acceleration) */
+        /* Immissione messaggi fluida */
         @keyframes msgPopIn {
-          0% { opacity: 0; transform: translate3d(0, 15px, 0) scale(0.96); filter: blur(2px); }
-          100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); filter: blur(0); }
+          0% { opacity: 0; transform: translate3d(0, 10px, 0); filter: blur(2px); }
+          100% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
         }
 
-        /* 5.1 Alternativa super leggera a bounce per i tre pallini su mobile */
+        /* Micro animazione pallini di digitazione */
         @keyframes pulseDots {
           0%, 100% { opacity: 0.3; transform: scale(0.8); }
           50% { opacity: 1; transform: scale(1.1); }
         }
 
-        /* 6. Animazione di transizione di scena (Slide + Blur) */
-        .scene-exit-active {
-          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-          opacity: 0;
-          transform: translate3d(0, -8px, 0) scale(0.98);
-          filter: blur(4px);
+        /* Flusso particelle verticali (Abilitato solo su Desktop per risparmiare CPU) */
+        @keyframes floatUp {
+          0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
+          15%, 85% { opacity: 0.4; }
+          100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* Classi di utilità ottimizzate */
-        .animate-aurora-1 { animation: auroraMotion 18s ease-in-out infinite; will-change: transform; }
-        .animate-aurora-2 { animation: auroraMotion 14s ease-in-out infinite reverse; will-change: transform; }
-        .particella { animation: floatUp infinite linear; pointer-events: none; will-change: transform; }
-        .laser-1 { animation: laserBeam 12s cubic-bezier(0.4, 0, 0.2, 1) infinite; will-change: transform; }
-        .laser-2 { animation: laserBeam 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 4s; will-change: transform; }
+        .animate-aurora-1 { animation: auroraMotion 20s ease-in-out infinite; will-change: transform; }
+        .animate-aurora-2 { animation: auroraMotion 16s ease-in-out infinite reverse; will-change: transform; }
+        .laser-1 { animation: laserBeam 14s cubic-bezier(0.4, 0, 0.2, 1) infinite; will-change: transform; }
+        .laser-2 { animation: laserBeam 18s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 4s; will-change: transform; }
         
         .msg-pop { 
-          animation: msgPopIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+          animation: msgPopIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
           will-change: transform, opacity;
-          contain: content;
         }
 
         .custom-dot {
           animation: pulseDots 0.8s ease-in-out infinite;
           will-change: opacity, transform;
         }
+
+        /* Disattiva elementi pesanti su Mobile */
+        @media (max-width: 767px) {
+          .particella-desktop { display: none !important; }
+          .laser-1, .laser-2 { display: none !important; }
+        }
+        @media (min-width: 768px) {
+          .particella-desktop { animation: floatUp infinite linear; pointer-events: none; will-change: transform; }
+        }
       `}</style>
 
       {/* --- STRATO 1: EFFETTO AURORA CHROMATIC COSTANTE --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="animate-aurora-1 absolute top-[-10%] left-[5%] w-[800px] h-[800px] rounded-full bg-gradient-to-br from-indigo-500/30 via-purple-500/15 to-transparent blur-[110px]" />
-        <div className="absolute top-[20%] left-[35%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[140px]" />
-        <div className="animate-aurora-2 absolute bottom-[-5%] right-[0%] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-purple-500/20 via-blue-500/15 to-transparent blur-[100px] opacity-40" />
+        <div className="animate-aurora-1 absolute top-[-10%] left-[5%] w-[350px] md:w-[800px] h-[350px] md:h-[800px] rounded-full bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent blur-[80px] md:blur-[110px]" />
+        <div className="absolute top-[20%] left-[25%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-indigo-600/5 md:bg-indigo-600/10 blur-[90px] md:blur-[140px]" />
+        <div className="animate-aurora-2 absolute bottom-[-5%] right-[0%] w-[300px] md:w-[700px] h-[300px] md:h-[700px] rounded-full bg-gradient-to-tr from-purple-500/15 via-blue-500/10 to-transparent blur-[80px] md:blur-[100px] opacity-40" />
       </div>
 
       {/* --- STRATO 2: LINEE LASER RETE DATI --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="laser-1 absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
-        <div className="laser-2 absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/30 to-transparent shadow-[0_0_12px_rgba(168,85,247,0.4)]" />
+        <div className="laser-1 absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent" />
+        <div className="laser-2 absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/20 to-transparent" />
       </div>
 
-      {/* --- STRATO 3: SATELLITI DIGITALI FLUTTUANTI --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-80">
-        <div className="particella absolute bg-indigo-400/70 w-1.5 h-1.5 rounded-xs left-[8%]" style={{ animationDuration: "13s", animationDelay: "0s" }}></div>
-        <div className="particella absolute bg-purple-400/70 w-2 h-2 rounded-xs left-[22%]" style={{ animationDuration: "20s", animationDelay: "4s" }}></div>
-        <div className="particella absolute bg-blue-400/70 w-1 h-1 rounded-xs left-[48%]" style={{ animationDuration: "12s", animationDelay: "1.5s" }}></div>
-        <div className="particella absolute bg-indigo-300/60 w-2 h-2 rounded-xs left-[73%]" style={{ animationDuration: "24s", animationDelay: "6s" }}></div>
-        <div className="particella absolute bg-purple-500/70 w-1.5 h-1.5 rounded-xs left-[90%]" style={{ animationDuration: "15s", animationDelay: "2.5s" }}></div>
+      {/* --- STRATO 3: SATELLITI DIGITALI FLUTTUANTI (SOLO DESKTOP) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-60">
+        <div className="particella-desktop absolute bg-indigo-400/70 w-1.5 h-1.5 rounded-xs left-[8%]" style={{ animationDuration: "13s" }}></div>
+        <div className="particella-desktop absolute bg-purple-400/70 w-2 h-2 rounded-xs left-[22%]" style={{ animationDuration: "20s", animationDelay: "4s" }}></div>
+        <div className="particella-desktop absolute bg-blue-400/70 w-1 h-1 rounded-xs left-[48%]" style={{ animationDuration: "12s", animationDelay: "1.5s" }}></div>
+        <div className="particella-desktop absolute bg-indigo-300/60 w-2 h-2 rounded-xs left-[73%]" style={{ animationDuration: "24s", animationDelay: "6s" }}></div>
       </div>
 
-      {/* --- CONTENUTO INCENTRATO SULLA UI --- */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
-        <div className="pt-2 pb-12 md:pt-4 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="pt-4 pb-4 md:pt-4 md:pb-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* COLONNA TESTO (SINISTRA) */}
-          <div className="text-left space-y-6">
-            <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-2 font-nacelle text-4xl font-semibold text-transparent md:text-5xl leading-tight">
+          <div className="text-left space-y-5 md:space-y-6 text-center lg:text-left">
+            <h1 className="bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-1 font-nacelle text-3.5xl sm:text-4xl font-semibold text-transparent md:text-5xl leading-tight">
               Automatizza il presente. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
                 Progetta il futuro.
               </span>
             </h1>
-            <p className="text-lg text-indigo-200/65 max-w-xl">
+            <p className="text-base md:text-lg text-indigo-200/65 max-w-xl mx-auto lg:mx-0">
               Soluzioni IA personalizzate per PMI e professionisti. Automatizziamo la tua operatività quotidiana per eliminare i tempi morti e aumentare la produttività.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <a className="btn group bg-linear-to-t from-indigo-600 to-indigo-500 text-white shadow-md hover:scale-104 active:scale-98 transition-all" href="#contatti">
-                Automatizza Ora <span className="ml-1 group-hover:translate-x-1 transition-transform">-&gt;</span>
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 pt-1">
+              <a className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-5 text-sm font-medium transition-all transform active:scale-95" href="#contatti">
+                Automatizza Ora <span className="ml-1 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
               </a>
-              <a className="btn relative bg-gray-900/80 text-gray-300 border border-gray-800 hover:bg-gray-800 transition-colors" href="#consulenza">
+              <a className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-colors hover:bg-gray-800" href="#consulenza">
                 Fissa una Chiamata
               </a>
             </div>
           </div>
 
           {/* COLONNA GRAFICA MOCKUP (DESTRA) */}
-          <div className="relative flex justify-center w-full">
+          <div className="relative flex justify-center w-full mt-4 lg:mt-0">
             
             {/* Bagliore magnetico della chat lineare e costante */}
             <div 
-              className="absolute w-85 h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/15 scale-100" 
-              style={{ animation: "chatPulse 4s ease-in-out infinite", willChange: "transform, opacity" }} 
+              className="absolute w-72 h-72 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[60px]" 
+              style={{ animation: "chatPulse 5s ease-in-out infinite", willChange: "transform" }} 
             />
             
-            {/* Scocca del terminale di Chat - Ottimizzata con contain-paint */}
-            <div className="relative w-full max-w-[440px] aspect-[10/11] z-10 border border-gray-800/80 bg-gray-950/40 backdrop-blur-2xl rounded-2xl p-5 flex flex-col justify-end shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden pt-8 [contain:paint]">
+            {/* Scocca del terminale di Chat - Ottimizzata per l'altezza mobile */}
+            <div className="relative w-full max-w-[420px] min-h-[380px] md:aspect-[10/11] z-10 border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex flex-col justify-end shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden pt-10 [contain:paint]">
               
               {/* Contenitore interno con effetto di uscita della scena globale */}
-              <div className={`space-y-3.5 w-full transition-all duration-500 ease-in-out ${isExiting ? "scene-exit-active" : "opacity-100 scale-100"}`}>
+              <div className={`space-y-3 w-full transition-all duration-400 ${isExiting ? "opacity-0 translate-y-[-4px] blur-sm" : "opacity-100 translate-y-0"}`}>
                 
                 {/* ================= SCENARIO CHAT 1: MARCO ================= */}
                 {step <= 8 && (
-                  <div className="space-y-3.5 flex flex-col justify-end h-full">
+                  <div className="space-y-3 flex flex-col justify-end h-full">
                     
                     {/* Messaggio 1 di Marco */}
                     {step >= 1 && (
-                      <div className="flex items-start justify-end space-x-2.5 msg-pop">
-                        <div className="bg-gray-900/90 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2.5 border border-gray-800 shadow-md max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-gray-500 mb-1 uppercase">Marco</span>
+                      <div className="flex items-start justify-end space-x-2 msg-pop">
+                        <div className="bg-gray-900/90 border border-gray-800/70 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-gray-500 mb-0.5 uppercase">Marco</span>
                           {step === 1 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-200">Vorrei spostare l'appuntamento a settimana prossima.</p>
+                            <p className="text-xs text-gray-200 leading-normal">Vorrei spostare l'appuntamento a settimana prossima.</p>
                           )}
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-linear-to-br from-indigo-500 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">M</div>
+                        <div className="w-6.5 h-6.5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black">M</div>
                       </div>
                     )}
 
                     {/* Risposta 1 di Agente IA */}
                     {step >= 3 && (
-                      <div className="flex items-start space-x-2.5 msg-pop">
-                        <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className="text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border border-gray-800 bg-gray-900/50 max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
+                      <div className="flex items-start space-x-2 msg-pop">
+                        <div className="w-6.5 h-6.5 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-sm"><svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
+                        <div className="text-gray-200 border border-gray-800/70 bg-gray-900/40 rounded-2xl rounded-tl-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-indigo-400 mb-0.5 uppercase">Agente IA</span>
                           {step === 3 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-300">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì?</p>
+                            <p className="text-xs text-gray-300 leading-normal">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì?</p>
                           )}
                         </div>
                       </div>
@@ -215,29 +224,29 @@ export default function HeroHome() {
 
                     {/* Messaggio 2 di Marco */}
                     {step >= 5 && (
-                      <div className="flex items-start justify-end space-x-2.5 msg-pop">
-                        <div className="bg-gray-900/90 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2.5 border border-gray-800 shadow-md max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-gray-500 mb-1 uppercase">Marco</span>
+                      <div className="flex items-start justify-end space-x-2 msg-pop">
+                        <div className="bg-gray-900/90 border border-gray-800/70 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-gray-500 mb-0.5 uppercase">Marco</span>
                           {step === 5 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-200">Vada per Martedì alle 15:00. Grazie!</p>
+                            <p className="text-xs text-gray-200 leading-normal">Vada per Martedì alle 15:00. Grazie!</p>
                           )}
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-linear-to-br from-indigo-500 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">M</div>
+                        <div className="w-6.5 h-6.5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black">M</div>
                       </div>
                     )}
 
                     {/* Risposta finale di Agente IA */}
                     {step >= 7 && (
-                      <div className="flex items-start space-x-2.5 msg-pop">
-                        <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className="text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border border-gray-800 bg-gray-900/50 shadow-[0_0_20px_rgba(99,102,241,0.08)] max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
+                      <div className="flex items-start space-x-2 msg-pop">
+                        <div className="w-6.5 h-6.5 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white"><svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
+                        <div className="text-gray-200 border border-gray-800/70 bg-gray-900/40 rounded-2xl rounded-tl-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-indigo-400 mb-0.5 uppercase">Agente IA</span>
                           {step === 7 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-300">Perfetto Marco, cambio registrato nel CRM. Ti ho appena inviato il nuovo invito email!</p>
+                            <p className="text-xs text-gray-300 leading-normal">Perfetto Marco, cambio registrato nel CRM. Ti ho inviato l'invito email!</p>
                           )}
                         </div>
                       </div>
@@ -247,31 +256,31 @@ export default function HeroHome() {
 
                 {/* ================= SCENARIO CHAT 2: SARA ================= */}
                 {step >= 9 && (
-                  <div className="space-y-3.5 flex flex-col justify-end h-full">
+                  <div className="space-y-3 flex flex-col justify-end h-full">
                     
                     {/* Messaggio 1 di Sara */}
-                    <div className="flex items-start justify-end space-x-2.5 msg-pop">
-                      <div className="bg-gray-900/90 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2.5 border border-gray-800 shadow-md max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                        <span className="block text-[9px] font-bold tracking-wider text-gray-500 mb-1 uppercase">Sara</span>
+                    <div className="flex items-start justify-end space-x-2 msg-pop">
+                      <div className="bg-gray-900/90 border border-gray-800/70 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                        <span className="block text-[8px] font-bold tracking-wider text-gray-500 mb-0.5 uppercase">Sara</span>
                         {step === 9 ? (
-                          <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                          <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                         ) : (
-                          <p className="text-xs leading-relaxed text-gray-200">Ciao! Vorrei saperne di più sulle vostre automazioni.</p>
+                          <p className="text-xs text-gray-200 leading-normal">Ciao! Vorrei saperne di più sulle vostre automazioni.</p>
                         )}
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">S</div>
+                      <div className="w-6.5 h-6.5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black">S</div>
                     </div>
 
                     {/* Risposta 1 dell'Agente IA */}
                     {step >= 11 && (
-                      <div className="flex items-start space-x-2.5 msg-pop">
-                        <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className="text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border border-gray-800 bg-gray-900/50 max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
+                      <div className="flex items-start space-x-2 msg-pop">
+                        <div className="w-6.5 h-6.5 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white"><svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
+                        <div className="text-gray-200 border border-gray-800/70 bg-gray-900/40 rounded-2xl rounded-tl-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-indigo-400 mb-0.5 uppercase">Agente IA</span>
                           {step === 11 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-300">Ciao Sara! Automatizziamo flussi e compiti ripetitivi. Di cosa si occupa il tuo business?</p>
+                            <p className="text-xs text-gray-300 leading-normal">Ciao Sara! Automatizziamo flussi ripetitivi. Di cosa si occupa il tuo business?</p>
                           )}
                         </div>
                       </div>
@@ -279,29 +288,29 @@ export default function HeroHome() {
 
                     {/* Messaggio 2 di Sara */}
                     {step >= 13 && (
-                      <div className="flex items-start justify-end space-x-2.5 msg-pop">
-                        <div className="bg-gray-900/90 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2.5 border border-gray-800 shadow-md max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-gray-500 mb-1 uppercase">Sara</span>
+                      <div className="flex items-start justify-end space-x-2 msg-pop">
+                        <div className="bg-gray-900/90 border border-gray-800/70 text-gray-200 rounded-2xl rounded-tr-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-gray-500 mb-0.5 uppercase">Sara</span>
                           {step === 13 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-200">Gestisco un'agenzia e vorrei generare e inviare report settimanali in automatico.</p>
+                            <p className="text-xs text-gray-200 leading-normal">Gestisco un'agenzia e vorrei inviare report settimanali in automatico.</p>
                           )}
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">S</div>
+                        <div className="w-6.5 h-6.5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black">S</div>
                       </div>
                     )}
 
                     {/* Risposta finale Call dell'Agente IA */}
                     {step >= 15 && (
-                      <div className="flex items-start space-x-2.5 msg-pop">
-                        <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className="text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border border-gray-800 bg-gray-900/50 shadow-[0_0_20px_rgba(168,85,247,0.08)] max-w-[85%] min-h-[64px] flex flex-col justify-center">
-                          <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
+                      <div className="flex items-start space-x-2 msg-pop">
+                        <div className="w-6.5 h-6.5 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white"><svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
+                        <div className="text-gray-200 border border-gray-800/70 bg-gray-900/40 rounded-2xl rounded-tl-none px-3.5 py-2 md:py-2.5 max-w-[85%] flex flex-col justify-center">
+                          <span className="block text-[8px] font-bold tracking-wider text-indigo-400 mb-0.5 uppercase">Agente IA</span>
                           {step === 15 ? (
-                            <div className="flex space-x-1 py-1.5 px-1 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
+                            <div className="flex space-x-1 py-1 px-0.5 items-center"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full custom-dot [animation-delay:0.3s]"></div></div>
                           ) : (
-                            <p className="text-xs leading-relaxed text-gray-300">Sincronizzando Database ed Email possiamo farlo! Ti va di parlarne in una breve chiamata strategica?</p>
+                            <p className="text-xs text-gray-300 leading-normal">Sincronizzando Database ed Email possiamo farlo! Ti va una breve chiamata strategica?</p>
                           )}
                         </div>
                       </div>
