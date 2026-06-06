@@ -7,12 +7,21 @@ export default function Cta() {
   return (
     <section className="relative overflow-hidden bg-[#02040a] py-12 md:py-20">
       
-      {/* CSS Animazioni Custom per la CTA - Isolato in stringa nativa per evitare errori di compilazione */}
+      {/* CSS Animazioni Custom per la CTA - Con animazioni automatiche per i bottoni */}
       <style>{`
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes floatShape { 0%, 100% { transform: translate(-50%, 0) scale(1); opacity: 0.5; } 50% { transform: translate(-45%, -15px) scale(1.05); opacity: 0.8; } }
+        
+        /* Nuove animazioni automatiche per i bottoni (attive senza interazione) */
+        @keyframes pulseButton { 0%, 100% { transform: scale(1); shadow: [0_4px_20px_rgba(99,102,241,0.25)]; } 50% { transform: scale(1.02); box-shadow: 0 4px 25px rgba(99,102,241,0.5); } }
+        @keyframes floatButtonSec { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
         .animate-gradient-text { background-size: 200% auto; animation: gradientFlow 6s linear infinite; }
         .animate-float-shape { animation: floatShape 8s ease-in-out infinite; }
+        
+        /* Classi helper per l'esecuzione loop dell'animazione */
+        .animate-auto-btn-primary { animation: pulseButton 3s ease-in-out infinite; }
+        .animate-auto-btn-secondary { animation: floatButtonSec 3.5s ease-in-out infinite; }
       `}</style>
 
       {/* STRATO SFONDO: Forma Sfumata Animata */}
@@ -62,10 +71,10 @@ export default function Cta() {
             {/* Pulsanti di Azione Alternati */}
             <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center items-center gap-4">
               
-              {/* Pulsante Primario */}
+              {/* Pulsante Primario Animato Automaticamente */}
               <div data-aos="fade-up" data-aos-delay={300} className="w-full sm:w-auto">
                 <a
-                  className="btn group mb-4 sm:mb-0 w-full inline-flex justify-center items-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-medium rounded-xl px-6 py-3 shadow-[0_4px_20px_rgba(99,102,241,0.25)] active:scale-95 lg:hover:shadow-[0_4px_30px_rgba(99,102,241,0.4)] transition-all duration-300 scale-100 lg:hover:scale-[1.02]"
+                  className="btn group mb-4 sm:mb-0 w-full inline-flex justify-center items-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-medium rounded-xl px-6 py-3 transition-all duration-300 animate-auto-btn-primary active:scale-95"
                   href="#contatti"
                 >
                   <span className="relative inline-flex items-center">
@@ -77,10 +86,10 @@ export default function Cta() {
                 </a>
               </div>
 
-              {/* Pulsante Secondario - Collegato a WhatsApp */}
+              {/* Pulsante Secondario Animato Automaticamente */}
               <div data-aos="fade-up" data-aos-delay={400} className="w-full sm:w-auto">
                 <a
-                  className="btn relative w-full inline-flex justify-center items-center bg-gray-950/80 active:bg-gray-900 lg:hover:bg-gray-900 border border-gray-800 lg:hover:border-gray-700 text-gray-300 font-medium rounded-xl px-6 py-3 transition-all duration-300 shadow-inner group active:scale-95 lg:hover:scale-[1.02]"
+                  className="btn relative w-full inline-flex justify-center items-center bg-gray-950/80 active:bg-gray-900 border border-gray-800 text-gray-300 font-medium rounded-xl px-6 py-3 transition-all duration-300 animate-auto-btn-secondary shadow-inner group active:scale-95"
                   href="https://wa.me/message/Y7G7NANQK6ACA1"
                   target="_blank"
                   rel="noopener noreferrer"
