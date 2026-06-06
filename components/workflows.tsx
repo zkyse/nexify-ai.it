@@ -17,12 +17,17 @@ export default function Workflows() {
     const rotateX = -(y / (box.height / 2)) * 8;
     const rotateY = (x / (box.width / 2)) * 8;
     
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    // Sovrascrive temporaneamente l'animazione di float per permettere il tilt perfetto
+    card.style.animation = "none";
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+    // Ripristina l'animazione nativa della card quando il mouse esce
+    const cardIndex = card.getAttribute("data-card-index") || "1";
+    card.style.transform = "";
+    card.style.animation = `floatingCard${cardIndex} 7s ease-in-out infinite`;
   };
 
   useEffect(() => {
@@ -93,11 +98,32 @@ export default function Workflows() {
           100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
+        /* ================= TRE ANIMAZIONI DI FLOAT ASINCRONE PER LE CARD ================= */
+        @keyframes floatingCard1 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(-0.5deg); }
+        }
+        @keyframes floatingCard2 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-12px) rotate(0.5deg); }
+        }
+        @keyframes floatingCard3 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-7px) rotate(-0.3deg); }
+        }
+
         /* Classi operative */
         .animate-liquid-1 { animation: liquidNebula 26s ease-in-out infinite; }
         .animate-liquid-2 { animation: liquidNebula 20s ease-in-out infinite reverse; }
         .cyber-flow { animation: cyberStream 8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         .float-icon { animation: floatCardElement 4.5s ease-in-out infinite; }
+
+        /* Applicazione del floating continuo su desktop */
+        @media (min-width: 1024px) {
+          .desktop-float-1 { animation: floatingCard1 7s ease-in-out infinite; }
+          .desktop-float-2 { animation: floatingCard2 8s ease-in-out infinite; animation-delay: 0.5s; }
+          .desktop-float-3 { animation: floatingCard3 7.5s ease-in-out infinite; animation-delay: 1s; }
+        }
 
         @media (max-width: 1023px) {
           .mobile-reveal-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
@@ -138,7 +164,7 @@ export default function Workflows() {
               Automazioni e Agenti IA su Misura
             </h2>
             <p className="text-lg text-indigo-200/60 max-w-2xl mx-auto">
-              Abbandona i sistemi rigidi e precostituiti. Analizziamo i colli di bottiglia dei tuoi flussi di lavoro per creare ecosistemi intelligenti cuciti sulle tue reali necessità operative.
+              Abbandona i sistemi rigidi e precostituiti. Analizziamo i colli di bottiglia dei tuoi flussi di lavoro per creare ecosistemi intelligenti cuciti sulle deine reali necessità operative.
             </p>
           </div>
 
@@ -147,8 +173,9 @@ export default function Workflows() {
             
             {/* CARD 1: MODELLATO SULLE TUE ESIGENZE */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card desktop-float-1 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
               style={{ transformStyle: "preserve-3d" }}
+              data-card-index="1"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               href="#contatti"
@@ -214,12 +241,13 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a >
+            </a>
 
             {/* CARD 2: AGENTI AUTONOMI 24/7 */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card desktop-float-2 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
               style={{ transformStyle: "preserve-3d" }}
+              data-card-index="2"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               href="#contatti"
@@ -263,12 +291,13 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a >
+            </a>
 
             {/* CARD 3: CONNESSIONE ECOSISTEMA */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card desktop-float-3 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
               style={{ transformStyle: "preserve-3d" }}
+              data-card-index="3"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               href="#contatti"
