@@ -46,17 +46,19 @@ export default function Workflows() {
       { threshold: 0.05, rootMargin: "0px 0px -5% 0px" }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentSection = sectionRef.current;
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
       
-      {/* CSS iniettato in modo sicuro per Next.js/SWC compilato via array di stringhe standard */}
       <style dangerouslySetInnerHTML={{ __html: [
         ".mobile-reveal-card { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: var(--delay, 0s); }",
         ".mobile-reveal-card.active { opacity: 1; transform: translateY(0); }",
