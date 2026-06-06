@@ -16,7 +16,7 @@ const statsData = [
     value: "24/7",
     label: "Supporto e Gestione Lead",
     desc: "Niente più clienti persi fuori orario. Risposte istantanee via WhatsApp o Web Chat collegate direttamente al tuo CRM.",
-    categories: [1, 2, 4], // Presente in: Tutti, Automazione, Professionisti
+    categories: [1, 2, 4, 5], // Presente in: Tutti, Automazione, Professionisti, Gestione Lead
   },
   {
     id: 3,
@@ -24,6 +24,13 @@ const statsData = [
     label: "Errori di Trascrizione Umana",
     desc: "L'IA sincronizza gestionali, fogli di calcolo e piattaforme email senza perdere una singola riga di informazione.",
     categories: [1, 2, 4], 
+  },
+  {
+    id: 7, // NUOVA CARD: Lead Qualification & Appuntamenti
+    value: "+70%",
+    label: "Lead Qualificati e Prenotati",
+    desc: "L'IA dialoga con i potenziali clienti, valuta il loro budget/esigenze e fissa l'appuntamento sul tuo Google Calendar o Cal.com in automatico.",
+    categories: [1, 2, 4, 5], // Presente in: Tutti, Automazione, Professionisti, Gestione Lead
   },
   {
     id: 4,
@@ -37,14 +44,14 @@ const statsData = [
     value: "< 2 min",
     label: "Tempo di risposta medio",
     desc: "Sincronizza le automazioni per inviare preventivi o cataloghi appena un utente mostra interesse, alzando i tassi di conversione.",
-    categories: [1, 3], 
+    categories: [1, 3, 5], // Presente in: Tutti, E-commerce, Gestione Lead
   },
   {
     id: 6,
     value: "10x",
     label: "Scalabilità del Business",
     desc: "Gestisci un volume di richieste dieci volte superiore senza dover assumere o sovraccaricare il tuo team attuale.",
-    categories: [1, 2, 3], 
+    categories: [1, 2, 3, 5], 
   },
 ];
 
@@ -81,9 +88,9 @@ export default function Testimonials() {
         </div>
 
         <div>
-          {/* Menu Filtri ottimizzato in Italiano */}
+          {/* Menu Filtri ottimizzato in Italiano con nuova categoria Gestione Lead */}
           <div className="flex justify-center pb-12 md:pb-16">
-            <div className="relative inline-flex flex-wrap justify-center rounded-[1.25rem] bg-gray-800/40 p-1 backdrop-blur-xs">
+            <div className="relative inline-flex flex-wrap justify-center rounded-[1.25rem] bg-gray-800/40 p-1 backdrop-blur-xs gap-y-1">
               
               {/* Bottone 1 */}
               <button
@@ -117,13 +124,21 @@ export default function Testimonials() {
                 <span>Professionisti</span>
               </button>
 
+              {/* NUOVO Bottone 5: Gestione Lead & Qualificazione */}
+              <button
+                className={`flex h-8 items-center gap-2.5 whitespace-nowrap rounded-full px-4 text-sm font-medium transition-all duration-300 ${category === 5 ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20" : "text-gray-400 hover:text-gray-200"}`}
+                onClick={() => setCategory(5)}
+              >
+                <span>Gestione Lead</span>
+              </button>
+
             </div>
           </div>
 
           {/* Griglia delle Card Statistiche con Effetti Avanzati */}
           <div className="mx-auto grid max-w-sm items-start gap-6 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
             {statsData.map((stat, index) => {
-              // Assegniamo un'animazione di fluttuazione diversa ad ogni card per spezzare la monotonia
+              // L'indice matematico `% 3` continua a funzionare perfettamente per ripartire le 3 animazioni fluide custom
               const floatClasses = ["animate-float-1", "animate-float-2", "animate-float-3"];
               const currentFloat = floatClasses[index % 3];
               const isVisible = stat.categories.includes(category);
