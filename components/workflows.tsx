@@ -7,24 +7,23 @@ export default function Workflows() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Si attiva solo sotto i 1024px (Mobile e Tablet)
+    // Si attiva solo su Mobile e Tablet (sotto i 1024px)
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const cards = entry.target.querySelectorAll(".mobile-glow-card");
-              cards.forEach((card, index) => {
-                // Effetto cascata (onda) nello sblocco dell'animazione
-                (card as HTMLElement).style.animationDelay = `${index * 0.3}s`;
-                card.classList.add("animate-mobile-glow");
-              });
+              const bgGlow = entry.target.querySelector(".mobile-bg-glow");
+              if (bgGlow) {
+                // Attiva l'animazione del grande faro sullo sfondo
+                bgGlow.classList.add("animate-bg-glow");
+              }
             }
           });
         },
         { 
-          threshold: 0.15, // Si attiva non appena la sezione spunta sul display
-          rootMargin: "0px 0px -5% 0px" 
+          threshold: 0.1, // Si attiva non appena la sezione spunta sul display
+          rootMargin: "0px 0px -10% 0px"
         }
       );
 
@@ -39,56 +38,39 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-black overflow-hidden">
       
-      {/* Iniezione CSS per gestire l'animazione immersiva del gradiente solo su Mobile */}
+      {/* Iniezione CSS per l'animazione del super-gradiente di sfondo su Mobile */}
       <style jsx global>{`
-        @keyframes mobileSpotlight {
-          0% {
-            border-color: rgba(31, 41, 55, 0.5);
-          }
-          20% {
-            border-color: rgba(99, 102, 241, 0.4);
-          }
-          80% {
-            border-color: rgba(99, 102, 241, 0.4);
-          }
-          100% {
-            border-color: rgba(31, 41, 55, 0.5);
-          }
-        }
-
-        @keyframes mobileRadialPulse {
+        @keyframes mobileMegaGlow {
           0% {
             opacity: 0;
-            transform: scale(0.8) translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.6);
           }
-          30% {
-            opacity: 0.35;
-            transform: scale(1.1) translate(-45%, -45%);
+          40% {
+            opacity: 0.25; /* Intensità massima del bagliore di sfondo */
+            transform: translate(-50%, -45%) scale(1.1);
           }
           70% {
-            opacity: 0.35;
-            transform: scale(1.1) translate(-45%, -45%);
+            opacity: 0.25;
+            transform: translate(-50%, -45%) scale(1.1);
           }
           100% {
             opacity: 0;
-            transform: scale(0.8) translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.7);
           }
         }
 
         @media (max-width: 1023px) {
-          /* Applica l'animazione al bordo della card */
-          .mobile-glow-card.animate-mobile-glow {
-            animation: mobileSpotlight 3s ease-in-out forwards;
-          }
-          /* Attiva il bagliore radiale interno nascosto (simulando il mouse) */
-          .mobile-glow-card.animate-mobile-glow .mobile-radial-glow {
-            animation: mobileRadialPulse 3s ease-in-out forwards;
-            animation-delay: inherit;
+          .mobile-bg-glow.animate-bg-glow {
+            animation: mobileMegaGlow 4s ease-in-out forwards;
           }
         }
       `}</style>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      {/* GRANDE FARO DI LUCE SULLO SFONDO (Solo per Mobile/Tablet) */}
+      {/* Posizionato esattamente al centro della sezione, dietro tutto il contenuto */}
+      <div className="mobile-bg-glow absolute pointer-events-none opacity-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-radial from-indigo-500/50 via-purple-500/20 to-transparent blur-3xl lg:hidden z-0"></div>
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
         <div className="pb-12 md:pb-20">
           
           {/* TESTATA DELLA SEZIONE */}
@@ -102,7 +84,7 @@ export default function Workflows() {
               Automazioni e Agenti IA su misura
             </h2>
             <p className="text-lg text-indigo-200/65">
-              Non crediamo nelle soluzioni copia-incolla. Analizziamo i tuoi processi quotidiani per cucirti addosso l'infrastruttura IA perfetta per le tue reali necessità.
+              Non crediamo nelle soluzioni copia-incolla. Analizziamo i tuoi processi quotidiani per cucirti addosso l'infrastruttura IA perfetta per her le tue reali necessità.
             </p>
           </div>
 
@@ -111,14 +93,11 @@ export default function Workflows() {
             
             {/* CARD 1: Modellato sulle tue Esigenze */}
             <a
-              className="mobile-glow-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
+              className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* BAGLIORE RADIALE DEDICATO PER MOBILE (Simula il mouse fisso al centro) */}
-                <div className="mobile-radial-glow absolute pointer-events-none opacity-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-indigo-500/40 blur-3xl lg:hidden z-10"></div>
-
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 to-transparent pointer-events-none"></div>
                   
@@ -169,7 +148,7 @@ export default function Workflows() {
                   </div>
                 </div>
 
-                <div className="p-6 relative z-20">
+                <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800 group-hover/card:border-indigo-500/30 transition-colors duration-300">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
@@ -186,14 +165,11 @@ export default function Workflows() {
 
             {/* CARD 2: Agenti Autonomi 24/7 */}
             <a
-              className="mobile-glow-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
+              className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* BAGLIORE RADIALE DEDICATO PER MOBILE */}
-                <div className="mobile-radial-glow absolute pointer-events-none opacity-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-indigo-500/40 blur-3xl lg:hidden z-10"></div>
-
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
                   
@@ -214,7 +190,7 @@ export default function Workflows() {
                   </div>
                 </div>
 
-                <div className="p-6 relative z-20">
+                <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800 group-hover/card:border-indigo-500/30 transition-colors duration-300">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
@@ -231,14 +207,11 @@ export default function Workflows() {
 
             {/* CARD 3: Connessione Ecosistema */}
             <a
-              className="mobile-glow-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
+              className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* BAGLIORE RADIALE DEDICATO PER MOBILE */}
-                <div className="mobile-radial-glow absolute pointer-events-none opacity-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-indigo-500/40 blur-3xl lg:hidden z-10"></div>
-
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover/card:scale-105">
                     
@@ -261,7 +234,7 @@ export default function Workflows() {
                   </div>
                 </div>
 
-                <div className="p-6 relative z-20">
+                <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800 group-hover/card:border-indigo-500/30 transition-colors duration-300">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
