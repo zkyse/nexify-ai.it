@@ -74,7 +74,7 @@ export default function Workflows() {
           transform: translateY(0);
         }
 
-        /* Effetti di fluttuazione globale potenziati (Abitilitati ovunque, anche mobile) */
+        /* Effetti di fluttuazione globale delle card */
         @keyframes floatCard1 {
           0%, 100% { transform: translateY(0px) translateZ(0); }
           50% { transform: translateY(-22px) translateZ(0); }
@@ -91,6 +91,25 @@ export default function Workflows() {
         .mobile-reveal-card.active.card-1 { animation: floatCard1 6s ease-in-out infinite; }
         .mobile-reveal-card.active.card-2 { animation: floatCard2 6.5s ease-in-out infinite; }
         .mobile-reveal-card.active.card-3 { animation: floatCard3 7s ease-in-out infinite; }
+
+        /* NUOVE ANIMAZIONI PER I CORES / HUB INTERNI */
+        @keyframes floatInternalCore {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-6px) scale(1.02); }
+        }
+        @keyframes floatInternalAgent {
+          0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+          33% { transform: translate(2px, -4px) rotate(1deg); }
+          66% { transform: translate(-2px, -2px) rotate(-1deg); }
+        }
+        @keyframes floatInternalHub {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(5px) scale(0.98); }
+        }
+
+        .animate-box-core { animation: floatInternalCore 4s ease-in-out infinite; }
+        .animate-box-agent { animation: floatInternalAgent 4.5s ease-in-out infinite; }
+        .animate-box-hub { animation: floatInternalHub 3.8s ease-in-out infinite; }
 
         /* Micro-animazioni interne continue ed accentuate */
         @keyframes microMoveInput {
@@ -190,8 +209,8 @@ export default function Workflows() {
                       </svg>
                     </div>
 
-                    {/* Core Box */}
-                    <div className="w-20 h-24 rounded-xl border border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/60 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.25)] group-hover/card:scale-105 transition-all duration-500">
+                    {/* Core Box Animato */}
+                    <div className="animate-box-core w-20 h-24 rounded-xl border border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/60 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.25)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-indigo-400">CORE-A1</span>
@@ -223,7 +242,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
             {/* CARD 2 */}
             <a
@@ -259,8 +278,8 @@ export default function Workflows() {
                       </svg>
                     </div>
 
-                    {/* Agent Box con Brain Animato */}
-                    <div className="w-20 h-24 rounded-xl border border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.25)] group-hover/card:scale-105 transition-all duration-500">
+                    {/* Agent Box Animato con Brain */}
+                    <div className="animate-box-agent w-20 h-24 rounded-xl border border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.25)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-purple-400">AGENT-IA</span>
@@ -287,7 +306,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
             {/* CARD 3 */}
             <a
@@ -326,8 +345,8 @@ export default function Workflows() {
                       </svg>
                     </div>
 
-                    {/* Hub API con Fulmine Animato */}
-                    <div className="w-20 h-24 rounded-xl border border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/60 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.25)] group-hover/card:scale-105 transition-all duration-500">
+                    {/* Hub API Animato con Fulmine */}
+                    <div className="animate-box-hub w-20 h-24 rounded-xl border border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/60 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.25)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-blue-400">HUB-API</span>
@@ -354,7 +373,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
           </Spotlight>
         </div>
