@@ -125,12 +125,19 @@ export default function HeroHome() {
           100% { transform: translate3d(0, 110vh, 0); }
         }
 
+        /* Animazioni automatiche in loop per i bottoni dell'Hero */
+        @keyframes pulseButtonHero { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 4px 20px rgba(99,102,241,0.4); } }
+        @keyframes floatButtonSecHero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
         .msg-pop { 
           animation: msgPopIn 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
         }
         .custom-dot { 
           animation: pulseDots 0.8s ease-in-out infinite; 
         }
+        
+        .animate-auto-hero-primary { animation: pulseButtonHero 3s ease-in-out infinite; }
+        .animate-auto-hero-secondary { animation: floatButtonSecHero 3.5s ease-in-out infinite; }
         
         .rain-stream {
           position: absolute;
@@ -150,20 +157,20 @@ export default function HeroHome() {
 
       {/* STRATO PIOGGIA CONCEPTUALE (AUTOMATION & AI) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        {/* Sfondo Profondo (Piccolo, lento, opaco, concetti core) */}
+        {/* Sfondo Profondo */}
         <div className="rain-stream left-[4%] text-[#818cf8]/15 text-[8px] blur-[1px]" style={{ animationDuration: '18s', animationDelay: '0s' }}>AI_AGENT_DEPLOY</div>
         <div className="rain-stream left-[25%] text-[#a855f7]/10 text-[9px] blur-[1px]" style={{ animationDuration: '22s', animationDelay: '4s' }}>DATABASE_SYNC</div>
         <div className="rain-stream left-[55%] text-[#6366f1]/15 text-[8px]" style={{ animationDuration: '19s', animationDelay: '1s' }}>LLM_PROCESSING</div>
         <div className="rain-stream left-[70%] text-[#22d3ee]/10 text-[9px] blur-[2px]" style={{ animationDuration: '25s', animationDelay: '7s' }}>WORKFLOW_FLOW</div>
         <div className="rain-stream left-[88%] text-[#c084fc]/15 text-[8px]" style={{ animationDuration: '20s', animationDelay: '2s' }}>API_CONNECTED</div>
 
-        {/* Livello Intermedio (Standard, parole chiave visibili) */}
+        {/* Livello Intermedio */}
         <div className="rain-stream left-[14%] text-[#c084fc]/35 text-[11px]" style={{ animationDuration: '12s', animationDelay: '2s', textShadow: '0 0 4px rgba(192,132,252,0.2)' }}>AUTOMATE_NOW</div>
         <div className="rain-stream left-[38%] text-[#38bdf8]/30 text-[10px]" style={{ animationDuration: '14s', animationDelay: '0.8s', textShadow: '0 0 4px rgba(56,189,248,0.2)' }}>INTEGRATION</div>
         <div className="rain-stream left-[62%] text-[#818cf8]/30 text-[11px]" style={{ animationDuration: '13s', animationDelay: '3s', textShadow: '0 0 4px rgba(129,140,248,0.2)' }}>EFFICIENCY_UP</div>
         <div className="rain-stream left-[80%] text-[#22d3ee]/35 text-[10px]" style={{ animationDuration: '11s', animationDelay: '5s', textShadow: '0 0 4px rgba(34,211,238,0.2)' }}>ZERO_ERRORS</div>
 
-        {/* Primo piano (Grande, veloce, impatto visivo immediato) */}
+        {/* Primo piano */}
         <div className="rain-stream left-[8%] text-[#818cf8]/60 text-[13px]" style={{ animationDuration: '7s', animationDelay: '0.3s', textShadow: '0 0 8px rgba(129,140,248,0.4)' }}>AI_WORKFLOW</div>
         <div className="rain-stream left-[20%] text-[#22d3ee]/55 text-[12px]" style={{ animationDuration: '6.5s', animationDelay: '1.5s', textShadow: '0 0 8px rgba(34,211,238,0.4)' }}>SMART_AGENTS</div>
         <div className="rain-stream left-[48%] text-[#6366f1]/65 text-[14px]" style={{ animationDuration: '8s', animationDelay: '2.5s', textShadow: '0 0 10px rgba(99,102,241,0.5)' }}>NO_CODE_OPS</div>
@@ -176,7 +183,7 @@ export default function HeroHome() {
         <div className="absolute inset-[-80px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:40px_40px]" style={{ animation: "gridPanPerfect 20s linear infinite", transform: "translateZ(0)" }} />
       </div>
 
-      {/* STRATO NEBULOSE / NEON BLOB (Rallentate per salvare performance GPU) */}
+      {/* STRATO NEBULOSE / NEON BLOB */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-20%] w-[320px] sm:w-[600px] md:w-[900px] h-[320px] sm:h-[600px] md:h-[900px] rounded-full bg-indigo-600/10 blur-[100px]" style={{ animation: "cosmicNebulaPerfect 40s linear infinite", transform: "translateZ(0)" }} />
         <div className="absolute bottom-[-10%] right-[-20%] w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] rounded-full bg-purple-600/6 blur-[110px]" style={{ animation: "cosmicNebulaPerfect 35s linear infinite reverse", transform: "translateZ(0)" }} />
@@ -197,12 +204,17 @@ export default function HeroHome() {
               Soluzioni IA personalizzate per PMI e professionisti. Automatizziamo la tua operatività quotidiana per eliminare i tempi morti e aumentare la produttività.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 pt-1">
-              <a className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-5 text-sm font-medium transition-all transform active:scale-95" href="#contatti">
+              
+              {/* Pulsante Primario Animato in automatico */}
+              <a className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-5 text-sm font-medium transition-all transform animate-auto-hero-primary active:scale-95" href="#contatti">
                 Automatizza Ora <span className="ml-1 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
               </a>
-              <a className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-colors hover:bg-gray-800" href="https://wa.me/message/Y7G7NANQK6ACA1" target="_blank" rel="noopener noreferrer">
+              
+              {/* Pulsante Secondario Animato in automatico */}
+              <a className="btn bg-gray-900/80 text-gray-300 border border-gray-800/80 rounded-xl py-3 px-5 text-sm font-medium transition-all transform animate-auto-hero-secondary hover:bg-gray-800 active:scale-95" href="https://wa.me/message/Y7G7NANQK6ACA1" target="_blank" rel="noopener noreferrer">
                 Fissa una Chiamata
               </a>
+
             </div>
           </div>
 
