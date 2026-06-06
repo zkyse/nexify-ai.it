@@ -16,11 +16,14 @@ export default function Workflows() {
     const rotateX = -(y / (box.height / 2)) * 8;
     const rotateY = (x / (box.width / 2)) * 8;
     
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    // Inibisce l'animazione di fluttuazione CSS durante il tilt manuale
+    card.style.animationPlayState = "paused";
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, -8px, 0)`;
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
+    card.style.animationPlayState = "running";
     card.style.transform = "";
   };
 
@@ -54,7 +57,39 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
       
-      {/* --- STRATO 1: RETE GEOMETRICA DI LOGICA (GRID FIX) --- */}
+      {/* CSS custom per fluttuazioni ed effetti interni */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes floatCard1 {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -10px, 0); }
+        }
+        @keyframes floatCard2 {
+          0%, 100% { transform: translate3d(0, -6px, 0); }
+          50% { transform: translate3d(0, 4px, 0); }
+        }
+        @keyframes floatCard3 {
+          0%, 100% { transform: translate3d(0, 2px, 0); }
+          50% { transform: translate3d(0, -8px, 0); }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.6; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
+        @keyframes dataFlow {
+          to { stroke-dashoffset: -20; }
+        }
+
+        .animate-float-1 { animation: floatCard1 8s ease-in-out infinite; transform: translateZ(0); }
+        .animate-float-2 { animation: floatCard2 9s ease-in-out infinite; transform: translateZ(0); }
+        .animate-float-3 { animation: floatCard3 10s ease-in-out infinite; transform: translateZ(0); }
+        
+        .animated-svg-path {
+          stroke-dasharray: 6 4;
+          animation: dataFlow 1.5s linear infinite;
+        }
+      `}} />
+      
+      {/* --- STRATO 1: RETE GEOMETRICA DI LOGICA --- */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
@@ -76,11 +111,11 @@ export default function Workflows() {
           </div>
 
           {/* GRIGLIA CARD */}
-          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
+          <Spotlight className="group mx-auto grid max-w-sm items-start gap-8 lg:max-w-none lg:grid-cols-3 pt-4">
             
             {/* CARD 1 */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card animate-float-1 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out"
               style={{ transformStyle: "preserve-3d" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -91,38 +126,45 @@ export default function Workflows() {
                 <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
-                      <span className="text-sm">📥</span>
+                    
+                    {/* Elemento Input Interno Animato */}
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-indigo-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
+                      <span className="text-sm group-hover/card:scale-110 transition-transform duration-300">📥</span>
                       <div className="space-y-1">
-                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
-                        <div className="w-2/3 h-1 bg-gray-800 rounded-xs" />
+                        <div className="w-full h-1 bg-gray-800 group-hover/card:bg-indigo-950 rounded-xs transition-colors" />
+                        <div className="w-2/3 h-1 bg-gray-800 group-hover/card:bg-indigo-900 rounded-xs transition-colors" />
                       </div>
-                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest">INPUT</div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest group-hover/card:text-indigo-400 transition-colors">INPUT</div>
                     </div>
+
+                    {/* Connessione Logica SVG Attiva */}
                     <div className="flex-1 px-3 relative flex items-center justify-center">
-                      <svg className="w-full h-8 text-indigo-500/40 md:text-gray-800/80 md:group-hover/card:text-indigo-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                      <svg className="w-full h-8 text-gray-800 group-hover/card:text-indigo-500/50 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path className="animated-svg-path" d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path className="animated-svg-path" d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
-                    <div className="w-20 h-24 rounded-xl border border-indigo-500/30 md:border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/50 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.12)] transition-all duration-500">
+
+                    {/* Core Box con effetto Pulse */}
+                    <div className="w-20 h-24 rounded-xl border border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/60 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.2)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-indigo-400">CORE-A1</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" style={{ animation: "pulseGlow 2s infinite" }} />
                       </div>
                       <div className="space-y-1.5 relative z-10">
                         <div className="w-full h-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xs flex items-center px-1">
-                          <div className="w-full h-1 bg-indigo-400/80 rounded-2xs" />
+                          <div className="w-full h-1 bg-indigo-400/80 rounded-2xs group-hover/card:w-4/5 transition-all duration-500" />
                         </div>
                         <div className="w-full h-3 bg-purple-500/10 border border-purple-500/20 rounded-xs flex items-center px-1">
-                          <div className="w-4/5 h-1 bg-purple-400/80 rounded-2xs" />
+                          <div className="w-4/5 h-1 bg-purple-400/80 rounded-2xs group-hover/card:w-full transition-all duration-500" />
                         </div>
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-indigo-400/60 uppercase tracking-widest whitespace-nowrap">CUSTOM</div>
                     </div>
+
                   </div>
                 </div>
                 <div className="p-6">
@@ -142,7 +184,7 @@ export default function Workflows() {
 
             {/* CARD 2 */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out lg:translate-y-4"
               style={{ transformStyle: "preserve-3d" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -153,31 +195,38 @@ export default function Workflows() {
                 <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
-                      <span className="text-sm">👤</span>
+                    
+                    {/* Elemento Prompt Animato */}
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-purple-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
+                      <span className="text-sm group-hover/card:animate-bounce">👤</span>
                       <div className="space-y-1">
-                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
-                        <div className="w-4/5 h-1 bg-gray-800 rounded-xs" />
+                        <div className="w-full h-1 bg-gray-800 group-hover/card:bg-purple-950 rounded-xs transition-colors" />
+                        <div className="w-4/5 h-1 bg-gray-800 group-hover/card:bg-purple-900 rounded-xs transition-colors" />
                       </div>
-                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest">PROMPT</div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest group-hover/card:text-purple-400 transition-colors">PROMPT</div>
                     </div>
+
+                    {/* Canale Dati SVG */}
                     <div className="flex-1 px-3 relative flex items-center justify-center">
-                      <svg className="w-full h-8 text-purple-500/40 md:text-gray-800/80 md:group-hover/card:text-purple-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                      <svg className="w-full h-8 text-gray-800 group-hover/card:text-purple-500/50 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path className="animated-svg-path" d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path className="animated-svg-path" d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
-                    <div className="w-20 h-24 rounded-xl border border-purple-500/30 md:border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/50 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.12)] transition-all duration-500">
+
+                    {/* Agent Box con Brain Thinking Icon */}
+                    <div className="w-20 h-24 rounded-xl border border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.2)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-purple-400">AGENT-IA</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400" style={{ animation: "pulseGlow 1.5s infinite" }} />
                       </div>
-                      <div className="text-center text-base py-0.5">🤖</div>
-                      <span className="text-[7px] font-mono text-purple-400 bg-purple-950/60 px-1 py-0.5 rounded border border-purple-900/40 text-center tracking-tighter uppercase">THINKING</span>
+                      <div className="text-center text-base py-0.5 group-hover/card:scale-120 group-hover/card:rotate-12 transition-transform">🤖</div>
+                      <span className="text-[7px] font-mono text-purple-400 bg-purple-950/60 px-1 py-0.5 rounded border border-purple-900/40 text-center tracking-tighter uppercase group-hover/card:bg-purple-500 group-hover/card:text-white transition-colors">THINKING</span>
                     </div>
+
                   </div>
                 </div>
                 <div className="p-6">
@@ -197,7 +246,7 @@ export default function Workflows() {
 
             {/* CARD 3 */}
             <a
-              className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out will-change-transform"
+              className="mobile-reveal-card animate-float-3 group/card relative h-full overflow-hidden rounded-2xl bg-gray-900/60 border border-gray-800/80 p-px transition-all duration-500 ease-out"
               style={{ transformStyle: "preserve-3d" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -208,43 +257,52 @@ export default function Workflows() {
                 <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)] pointer-events-none" />
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-1.5 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
+                    
+                    {/* Elemento Apps Multi-icona con Hover ad incrocio */}
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-1.5 flex flex-col justify-between shadow-xl relative group-hover/card:border-blue-500/40 group-hover/card:-translate-y-1 transition-all duration-300">
                       <div className="flex justify-between items-center">
-                        <span className="text-xs">📧</span>
-                        <span className="text-xs">💬</span>
+                        <span className="text-xs group-hover/card:-translate-x-0.5 group-hover/card:-translate-y-0.5 transition-transform">📧</span>
+                        <span className="text-xs group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5 transition-transform">💬</span>
                       </div>
                       <div className="space-y-1">
-                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
-                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
+                        <div className="w-full h-1 bg-gray-800 group-hover/card:bg-blue-950 rounded-xs transition-colors" />
+                        <div className="w-full h-1 bg-gray-800 group-hover/card:bg-blue-900 rounded-xs transition-colors" />
                       </div>
-                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest">APPS</div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest group-hover/card:text-blue-400 transition-colors">APPS</div>
                     </div>
+
+                    {/* Canale Dati centrale */}
                     <div className="flex-1 px-3 relative flex items-center justify-center">
-                      <svg className="w-full h-8 text-blue-500/40 md:text-gray-800/80 md:group-hover/card:text-blue-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                      <svg className="w-full h-8 text-gray-800 group-hover/card:text-blue-500/50 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path className="animated-svg-path" d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path className="animated-svg-path" d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
-                    <div className="w-20 h-24 rounded-xl border border-blue-500/30 md:border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/50 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.12)] transition-all duration-500">
+
+                    {/* Hub API Box con Lightning rotate */}
+                    <div className="w-20 h-24 rounded-xl border border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/60 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.2)] group-hover/card:scale-105 transition-all duration-500">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-blue-400">HUB-API</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400" style={{ animation: "pulseGlow 1.8s infinite" }} />
                       </div>
                       <div className="relative flex justify-center py-1">
-                        <span className="text-blue-400 text-sm font-black relative z-10">⚡</span>
+                        <span className="text-blue-400 text-sm font-black relative z-10 group-hover/card:scale-130 group-hover/card:rotate-12 transition-transform">⚡</span>
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-blue-400/60 uppercase tracking-widest whitespace-nowrap">SYNC-ON</div>
                     </div>
+
                   </div>
                 </div>
                 <div className="p-6">
                   <div className="mb-3.5">
                     <span className="btn-sm inline-flex rounded-full bg-gray-900 border border-gray-800/80 px-3 py-0.5 text-xs font-normal shadow-inner">
-                      <span className="bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent font-medium">
-                        Zero Attriti API
+                      <span className="btn-sm inline-flex rounded-full bg-gray-900 border border-gray-800/80 px-3 py-0.5 text-xs font-normal shadow-inner">
+                        <span className="bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent font-medium">
+                          Zero Attriti API
+                        </span>
                       </span>
                     </span>
                   </div>
