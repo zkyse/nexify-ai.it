@@ -121,11 +121,11 @@ export default function HeroHome() {
           50% { opacity: 1; transform: scale(1.1); }
         }
         
-        /* Animazione per la pioggia di codice tech */
-        @keyframes techRain {
+        /* Animazione ottimizzata per la pioggia di codice tech ad alta luminosità */
+        @keyframes techRainLuminous {
           0% { transform: translateY(-100%); opacity: 0; }
-          10% { opacity: 0.6; }
-          90% { opacity: 0.4; }
+          5% { opacity: 1; }
+          90% { opacity: 0.8; }
           100% { transform: translateY(100vh); opacity: 0; }
         }
 
@@ -136,34 +136,35 @@ export default function HeroHome() {
           animation: pulseDots 0.8s ease-in-out infinite; 
         }
         
-        /* Regola per i flussi di pioggia digitale */
+        /* Regola potenziata per i flussi di pioggia digitale ad alta definizione */
         .rain-stream {
           position: absolute;
           top: 0;
-          color: #6366f1;
           font-family: monospace;
-          font-size: 11px;
+          font-size: 12px;
+          font-weight: 700;
           writing-mode: vertical-rl;
           text-orientation: uppercase;
           white-space: nowrap;
           user-select: none;
-          animation: techRain linear infinite;
+          animation: techRainLuminous linear infinite;
           opacity: 0;
+          letter-spacing: 0.15em;
         }
       `}} />
 
-      {/* STRATO PIOGGIA TECH (Matrix-style indaco/viola) */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.25]">
-        <div className="rain-stream left-[5%]" style={{ animationDuration: '7s', animationDelay: '0s' }}>1010011011001</div>
-        <div className="rain-stream left-[12%] text-purple-400" style={{ animationDuration: '9s', animationDelay: '2s', fontSize: '13px' }}>0110101</div>
-        <div className="rain-stream left-[22%]" style={{ animationDuration: '6s', animationDelay: '0.5s' }}>0011001110</div>
-        <div className="rain-stream left-[35%] text-purple-500" style={{ animationDuration: '11s', animationDelay: '4s' }}>1101001011</div>
-        <div className="rain-stream left-[48%]" style={{ animationDuration: '8s', animationDelay: '1s', fontSize: '10px' }}>01011100</div>
-        <div className="rain-stream left-[58%] text-indigo-400" style={{ animationDuration: '7s', animationDelay: '3s' }}>100101101</div>
-        <div className="rain-stream left-[68%]" style={{ animationDuration: '10s', animationDelay: '0.2s' }}>11100101</div>
-        <div className="rain-stream left-[78%] text-purple-400" style={{ animationDuration: '6s', animationDelay: '2.5s', fontSize: '12px' }}>001011011</div>
-        <div className="rain-stream left-[88%]" style={{ animationDuration: '9s', animationDelay: '1.5s' }}>110010101</div>
-        <div className="rain-stream left-[95%] text-indigo-300" style={{ animationDuration: '12s', animationDelay: '5s' }}>011010</div>
+      {/* STRATO PIOGGIA TECH IPER-LUMINOSA (Neon Matrix-style) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.65]">
+        <div className="rain-stream left-[5%] text-[#818cf8]" style={{ animationDuration: '7s', animationDelay: '0s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>1010011011001</div>
+        <div className="rain-stream left-[12%] text-[#c084fc]" style={{ animationDuration: '9s', animationDelay: '2s', fontSize: '14px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>0110101</div>
+        <div className="rain-stream left-[22%] text-[#22d3ee]" style={{ animationDuration: '6s', animationDelay: '0.5s', textShadow: '0 0 8px rgba(34,211,238,0.6)' }}>0011001110</div>
+        <div className="rain-stream left-[35%] text-[#a855f7]" style={{ animationDuration: '11s', animationDelay: '4s', textShadow: '0 0 8px rgba(168,85,247,0.6)' }}>1101001011</div>
+        <div className="rain-stream left-[48%] text-[#6366f1]" style={{ animationDuration: '8s', animationDelay: '1s', fontSize: '11px', textShadow: '0 0 8px rgba(99,102,241,0.6)' }}>01011100</div>
+        <div className="rain-stream left-[58%] text-[#38bdf8]" style={{ animationDuration: '7s', animationDelay: '3s', textShadow: '0 0 8px rgba(56,189,248,0.6)' }}>100101101</div>
+        <div className="rain-stream left-[68%] text-[#818cf8]" style={{ animationDuration: '10s', animationDelay: '0.2s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>11100101</div>
+        <div className="rain-stream left-[78%] text-[#c084fc]" style={{ animationDuration: '6s', animationDelay: '2.5s', fontSize: '13px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>001011011</div>
+        <div className="rain-stream left-[88%] text-[#22d3ee]" style={{ animationDuration: '9s', animationDelay: '1.5s', textShadow: '0 0 8px rgba(34,211,238,0.6)' }}>110010101</div>
+        <div className="rain-stream left-[95%] text-[#6366f1]" style={{ animationDuration: '12s', animationDelay: '5s', textShadow: '0 0 8px rgba(99,102,241,0.6)' }}>011010</div>
       </div>
 
       {/* STRATO GRIGLIA PROSPETTICA */}
