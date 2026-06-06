@@ -57,16 +57,17 @@ export default function HeroHome() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
-      {/* INIEZIONE DIRETTA DEI KEYFRAMES */}
+      {/* INIEZIONE DIRETTA DEI KEYFRAMES AGGIORNATI */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes cosmicNebulaMobile {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           50% { transform: translate3d(5%, 8%, 0) rotate(180deg); }
           100% { transform: translate3d(0, 0, 0) rotate(360deg); }
         }
-        @keyframes gridPanMobile {
+        /* MODIFICATO: Spostamento X e Y coordinato a 40px (dimensione esatta della cella) per un loop perfetto senza scatti */
+        @keyframes gridPanPerfect {
           0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(0, 40px, 0); }
+          100% { transform: translate3d(-40px, -40px, 0); }
         }
         @keyframes dataStreamMobile {
           0% { transform: translate3d(0, -200px, 0); opacity: 0; }
@@ -94,7 +95,7 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Aumentata opacità e schiarito il gradiente) --- */}
+      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Risolto lo scatto del loop) --- */}
       <div 
         className="absolute inset-0 pointer-events-none z-0 opacity-[0.35] overflow-hidden"
         style={{
@@ -102,49 +103,37 @@ export default function HeroHome() {
           maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)"
         }}
       >
+        {/* MODIFICATO: bg-size fissa a 40px ovunque e nuova animazione gridPanPerfect */}
         <div 
-          className="absolute inset-[-40px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
-          style={{ animation: "gridPanMobile 8s linear infinite", willChange: "transform" }}
+          className="absolute inset-[-80px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:40px_40px]" 
+          style={{ animation: "gridPanPerfect 12s linear infinite", willChange: "transform" }}
         />
       </div>
 
       {/* --- STRATO 2: CHROMATIC NEBULA AMBIENT --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Sfera Indigo Top-Left */}
         <div 
           className="absolute top-[-10%] left-[-20%] w-[320px] sm:w-[600px] md:w-[900px] h-[320px] sm:h-[600px] md:h-[900px] rounded-full bg-indigo-600/10 md:bg-indigo-600/15 blur-[80px] sm:blur-[120px]" 
           style={{ animation: "cosmicNebulaMobile 20s linear infinite", willChange: "transform" }}
         />
-        {/* Sfera Purple Bottom-Right */}
         <div 
           className="absolute bottom-[-10%] right-[-20%] w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] rounded-full bg-purple-600/10 blur-[90px] sm:blur-[130px]" 
           style={{ animation: "cosmicNebulaMobile 16s linear infinite reverse", willChange: "transform" }}
         />
       </div>
 
-      {/* --- STRATO 3: DATA STREAMERS (Aumentata opacità generale e resi i colori dei flussi più accesi) --- */}
+      {/* --- STRATO 3: DATA STREAMERS --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-75 md:opacity-90">
-        {/* Streamer 1 */}
         <div className="absolute left-[6%] top-0 w-[1.5px] h-28 bg-gradient-to-b from-transparent via-indigo-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4.5s linear infinite", willChange: "transform" }} />
-        
-        {/* Streamer 2 */}
         <div className="absolute left-[22%] top-0 w-[1.5px] h-20 bg-gradient-to-b from-transparent via-purple-300 to-transparent" 
              style={{ animation: "dataStreamMobile 5.5s linear infinite", animationDelay: "1.8s", willChange: "transform" }} />
-        
-        {/* Streamer 3 */}
         <div className="absolute left-[44%] top-0 w-[1.5px] h-32 bg-gradient-to-b from-transparent via-cyan-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4s linear infinite", animationDelay: "0.8s", willChange: "transform" }} />
-        
-        {/* Streamer 4 */}
         <div className="absolute left-[62%] top-0 w-[1.5px] h-24 bg-gradient-to-b from-transparent via-indigo-300 to-transparent" 
              style={{ animation: "dataStreamMobile 6s linear infinite", animationDelay: "3.2s", willChange: "transform" }} />
-        
-        {/* Streamer 5 */}
         <div className="absolute left-[78%] top-0 w-[1.5px] h-36 bg-gradient-to-b from-transparent via-purple-300 to-transparent" 
              style={{ animation: "dataStreamMobile 5s linear infinite", animationDelay: "2.3s", willChange: "transform" }} />
-             
-        {/* Streamer 6 */}
         <div className="absolute left-[92%] top-0 w-[1.5px] h-20 bg-gradient-to-b from-transparent via-cyan-300 to-transparent" 
              style={{ animation: "dataStreamMobile 4.2s linear infinite", animationDelay: "1.2s", willChange: "transform" }} />
       </div>
@@ -154,7 +143,8 @@ export default function HeroHome() {
           
           {/* COLONNA TESTO (SINISTRA) */}
           <div className="text-left space-y-5 md:space-y-6 text-center lg:text-left">
-            <h1 className="bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-1 font-nacelle text-3.5xl sm:text-4xl font-semibold text-transparent md:text-5xl leading-tight">
+            {/* MODIFICATO: Aumentata significativamente la dimensione del font (text-4xl -> text-5xl, md:text-5xl -> md:text-6xl) */}
+            <h1 className="bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-1 font-nacelle text-5xl sm:text-5xl font-bold text-transparent md:text-6xl tracking-tight leading-[1.1]">
               Automatizza il presente. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
                 Progetta il futuro.
@@ -175,20 +165,15 @@ export default function HeroHome() {
 
           {/* COLONNA GRAFICA MOCKUP (DESTRA) */}
           <div className="relative flex justify-center w-full mt-4 lg:mt-0">
-            
-            {/* Bagliore magnetico della chat */}
             <div 
               className="absolute w-64 h-64 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" 
               style={{ animation: "centralPulse 5s ease-in-out infinite", willChange: "transform" }} 
             />
             
-            {/* Scocca del terminale di Chat */}
             <div className="relative w-full max-w-[420px] min-h-[380px] md:aspect-[10/11] z-10 border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex flex-col justify-end shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden pt-10 [contain:paint]">
-              
-              {/* Contenitore interno */}
               <div className={`space-y-3 w-full transition-all duration-400 ${isExiting ? "opacity-0 translate-y-[-4px] blur-sm" : "opacity-100 translate-y-0"}`}>
                 
-                {/* ================= SCENARIO CHAT 1: MARCO ================= */}
+                {/* SCENARIO CHAT 1: MARCO */}
                 {step <= 8 && (
                   <div className="space-y-3 flex flex-col justify-end h-full">
                     {step >= 1 && (
@@ -249,7 +234,7 @@ export default function HeroHome() {
                   </div>
                 )}
 
-                {/* ================= SCENARIO CHAT 2: SARA ================= */}
+                {/* SCENARIO CHAT 2: SARA */}
                 {step >= 9 && (
                   <div className="space-y-3 flex flex-col justify-end h-full">
                     <div className="flex items-start justify-end space-x-2 msg-pop">
