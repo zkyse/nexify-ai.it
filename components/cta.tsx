@@ -58,7 +58,7 @@ export default function Cta() {
               data-aos="fade-up"
               data-aos-delay={100}
             >
-              Costruisci i tuoi prossimi Flussi di Lavoro Intelligenti
+              Trasforma il tuo Modo di Lavorare
             </h2>
 
             {/* Sottotitolo descrittivo */}
