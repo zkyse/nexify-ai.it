@@ -210,7 +210,7 @@ export default function HeroHome() {
                 target="_blank" 
                 rel="noopener noreferrer"
               >
-                Prenota una Call <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
+                Scopri di più <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
               </a>
 
             </div>
