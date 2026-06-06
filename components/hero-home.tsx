@@ -5,20 +5,30 @@ import Image from "next/image";
 import TechGraphic from "@/public/images/hero-image-01.jpg"; 
 
 export default function HeroHome() {
-  // Stato per gestire la comparsa dei messaggi e dei pallini di digitazione
+  // Stato per gestire le fasi della chat (da 1 a 6)
   const [step, setStep] = useState(1);
 
   useEffect(() => {
-    // Dopo 1.5 secondi appare l'Agente IA che sta scrivendo (i tre pallini)
-    const timer1 = setTimeout(() => setStep(2), 1500); 
-    // Dopo 3.5 secondi i pallini spariscono e appare la risposta testuale definitiva
-    const timer2 = setTimeout(() => setStep(3), 3500); 
+    // Sequenza temporizzata delle conversazioni
+    const t1 = setTimeout(() => setStep(2), 1500); // IA scrive a Marco
+    const t2 = setTimeout(() => setStep(3), 3500); // IA risponde a Marco
+    
+    const t3 = setTimeout(() => setStep(4), 7000); // Cambia scena: entra il 2° utente
+    const t4 = setTimeout(() => setStep(5), 9000); // IA scrive al 2° utente
+    const t5 = setTimeout(() => setStep(6), 11000); // IA risponde al 2° utente
+
+    // Reset completo della chat dopo 15 secondi per far ricominciare l'animazione da capo
+    const loop = setTimeout(() => setStep(1), 15000); 
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+      clearTimeout(loop);
     };
-  }, []);
+  }, [step === 1]); // Si riattiva quando si resetta a 1
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12">
@@ -38,92 +48,104 @@ export default function HeroHome() {
               Soluzioni IA personalizzate per PMI e professionisti. Automatizziamo la tua operatività quotidiana per eliminare i tempi morti, abbattere i colli di bottiglia e aumentare la produttività.
             </p>
 
-            {/* Pulsanti di interazione */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <div>
-                <a
-                  className="btn group w-full bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%] sm:w-auto"
-                  href="#contatti"
-                >
+                <a className="btn group w-full bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%] sm:w-auto" href="#contatti">
                   <span className="relative inline-flex items-center justify-center">
-                    Automatizza Ora
-                    <span className="ml-1 tracking-normal text-white/50 transition-transform group-hover:translate-x-0.5">
-                      -&gt;
-                    </span>
+                    Automatizza Ora <span className="ml-1 tracking-normal text-white/50 transition-transform group-hover:translate-x-0.5">-&gt;</span>
                   </span>
                 </a>
               </div>
               <div>
-                <a
-                  className="btn relative w-full bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] text-gray-300 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,var(--color-gray-800),var(--color-gray-700),var(--color-gray-800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-[length:100%_150%] sm:w-auto"
-                  href="#consulenza"
-                >
+                <a className="btn relative w-full bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] text-gray-300 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,var(--color-gray-800),var(--color-gray-700),var(--color-gray-800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-[length:100%_150%] sm:w-auto" href="#consulenza">
                   Fissa una Chiamata
                 </a>
               </div>
             </div>
           </div>
 
-          {/* COLONNA DESTRA: Mockup Chat interattiva */}
+          {/* COLONNA DESTRA: Mockup Chat con Switch di conversazione */}
           <div className="relative flex justify-center w-full" data-aos="fade-left" data-aos-delay={200}>
-            {/* Alone luminoso soffuso viola/indaco sullo sfondo */}
             <div className="absolute w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
             
-            {/* Box contenitore stile "interfaccia" */}
-            <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col justify-center space-y-4 shadow-2xl">
+            <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col justify-center space-y-4 shadow-2xl overflow-hidden">
               
-              {/* 1. Messaggio inviato dall'utente (Marco) */}
-              <div className="flex items-start justify-end space-x-3">
-                <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3.5 max-w-[80%] border border-gray-700/50 shadow-sm">
-                  <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
-                  <p className="text-sm leading-relaxed">
-                    Vorrei spostare il mio appuntamento alla prossima settimana.
-                  </p>
-                </div>
-                {/* Avatar Utente */}
-                <div className="w-8 h-8 rounded-full bg-gradient-to-b from-amber-400 to-orange-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-md">
-                  M
-                </div>
-              </div>
-
-              {/* 2. Messaggio di risposta dell'Agente IA */}
-              {step >= 2 && (
-                <div className="flex items-start space-x-3 transition-all duration-300">
-                  {/* Icona viola dell'Agente */}
-                  <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
-                    {/* Icona Sparkles (Stelle/AI) */}
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
-                    </svg>
+              {/* ================= BLOCCO CHAT 1 (Fase 1, 2, 3) ================= */}
+              {step <= 3 && (
+                <div className="space-y-4 animate-[fadeIn_0.4s_ease-out]">
+                  {/* Messaggio Marco */}
+                  <div className="flex items-start justify-end space-x-3">
+                    <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3.5 max-w-[80%] border border-gray-700/50">
+                      <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
+                      <p className="text-sm leading-relaxed">Vorrei spostare il mio appuntamento alla prossima settimana.</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-amber-400 to-orange-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">M</div>
                   </div>
 
-                  <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px] shadow-sm">
-                    <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
-                    
-                    {step === 2 && (
-                      /* Animazione di tre puntini che saltano mentre l'IA "pensa" */
-                      <div className="flex items-center space-x-1 py-2">
-                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                  {/* Risposta IA a Marco */}
+                  {step >= 2 && (
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg>
                       </div>
-                    )}
-
-                    {step === 3 && (
-                      /* Risposta testuale finale */
-                      <p className="text-sm leading-relaxed animate-[fadeIn_0.3s_ease-out]">
-                        Certamente! Ho verificato le disponibilità. Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?
-                      </p>
-                    )}
-                  </div>
+                      <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px]">
+                        <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
+                        {step === 2 && (
+                          <div className="flex items-center space-x-1 py-2">
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                          </div>
+                        )}
+                        {step === 3 && (
+                          <p className="text-sm leading-relaxed animate-[fadeIn_0.3s_ease-out]">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
-            </div>
-          </div>
+              {/* ================= BLOCCO CHAT 2 (Fase 4, 5, 6) ================= */}
+              {step >= 4 && (
+                <div className="space-y-4 animate-[fadeIn_0.4s_ease-out]">
+                  {/* Messaggio Secondo Utente */}
+                  <div className="flex items-start justify-end space-x-3">
+                    <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3.5 max-w-[80%] border border-gray-700/50">
+                      <span className="block text-xs font-semibold text-gray-400 mb-0.5">Sara</span>
+                      <p className="text-sm leading-relaxed">Ciao! Vorrei saperne di più sui vostri servizi di automazione.</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-teal-400 to-emerald-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">S</div>
+                  </div>
 
+{/* Risposta IA a Sara */}
+{step >= 5 && (
+  <div className="flex items-start space-x-3">
+    <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
+      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+        <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
+      </svg>
+    </div>
+    
+    {/* Fumetto di risposta mancante aggiunto qui */}
+    <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px]">
+      <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
+      
+      {step === 5 && (
+        /* Animazione dei pallini mentre scrive */
+        <div className="flex items-center space-x-1 py-2">
+          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
         </div>
-      </div>
-    </section>
-  );
-}
+      )}
+      
+      {step === 6 && (
+        /* Messaggio finale per Sara */
+        <p className="text-sm leading-relaxed text-white">
+          Ciao Sara! Sviluppiamo agenti IA su misura per eliminare compiti ripetitivi. Che tipo di business gestisci?
+        </p>
+      )}
+    </div>
+  </div>
+)}
