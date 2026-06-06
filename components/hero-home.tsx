@@ -5,55 +5,66 @@ import Image from "next/image";
 import TechGraphic from "@/public/images/hero-image-01.jpg"; 
 
 export default function HeroHome() {
-  // Stato per gestire le fasi della chat (da 1 a 8)
+  // Stato per gestire le fasi della chat (da 1 a 10)
   const [step, setStep] = useState(1);
   // Stato per la dissolvenza fluida durante il cambio di utente
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
     // ================= FLUSSO MARCO =================
-    // Step 1: Messaggio iniziale di Marco (già visibile)
+    // Step 1: Marco sta scrivendo il primo messaggio (pallini)
     
-    // Step 2: L'IA mostra i pallini di digitazione
+    // Step 2: Compare il primo messaggio di Marco
     const t1 = setTimeout(() => setStep(2), 2000); 
     
-    // Step 3: L'IA risponde con le opzioni (Martedì o Giovedì)
-    const t2 = setTimeout(() => setStep(3), 5000); 
+    // Step 3: L'IA mostra i pallini di digitazione
+    const t2 = setTimeout(() => setStep(3), 4500); 
     
-    // Step 4 (NUOVO): Marco risponde scegliendo l'orario
-    const t3 = setTimeout(() => setStep(4), 9000); 
+    // Step 4: L'IA risponde con le opzioni (Martedì o Giovedì)
+    const t3 = setTimeout(() => setStep(4), 7500); 
     
-    // Step 5 (NUOVO): L'IA mostra i pallini per l'ultima conferma
-    const t4 = setTimeout(() => setStep(5), 12000); 
+    // Step 5: Marco sta digitando la risposta (pallini)
+    const t4 = setTimeout(() => setStep(5), 11000); 
+
+    // Step 6: Compare la risposta di Marco (sceglie l'orario)
+    const t5 = setTimeout(() => setStep(6), 13000); 
     
-    // Step 6 (NUOVO): L'IA conferma l'appuntamento
-    const t5 = setTimeout(() => setStep(6), 14500); 
+    // Step 7: L'IA mostra i pallini per l'ultima conferma
+    const t6 = setTimeout(() => setStep(7), 15500); 
+    
+    // Step 8: L'IA conferma l'appuntamento
+    const t7 = setTimeout(() => setStep(8), 18000); 
 
     // ================= TRANSIZIONE SMOOTH =================
-    // Avvia la sfumatura in uscita (fade-out) dopo aver letto la conferma
-    const t6 = setTimeout(() => setIsExiting(true), 19500);
+    // Avvia la sfumatura in uscita (fade-out)
+    const t8 = setTimeout(() => setIsExiting(true), 23000);
     
-    // Switch sullo Step 7 (entra Sara) e resetta l'opacità
-    const t7 = setTimeout(() => {
-      setStep(7);
+    // Switch sullo Step 9 (entra Sara che scrive) e resetta l'opacità
+    const t9 = setTimeout(() => {
+      setStep(9);
       setIsExiting(false);
-    }, 20000);
+    }, 23500);
 
     // ================= FLUSSO SARA =================
-    // Step 7: Sara entra con la sua domanda (già visibile all'entrata)
+    // Step 9: Sara sta digitando (pallini)
     
-    // Step 8: L'IA mostra i pallini e poi risponde direttamente
-    const t8 = setTimeout(() => setStep(8), 22500);
-    const t9 = setTimeout(() => setStep(9), 25500);
+    // Step 10: Compare il messaggio di Sara
+    const t10 = setTimeout(() => setStep(10), 25500);
+
+    // Step 11: L'IA mostra i pallini per Sara
+    const t11 = setTimeout(() => setStep(11), 28000);
+
+    // Step 12: L'IA risponde a Sara
+    const t12 = setTimeout(() => setStep(12), 31000);
 
     // Fine ciclo: avvia fade-out finale
-    const t10 = setTimeout(() => setIsExiting(true), 31500);
+    const t13 = setTimeout(() => setIsExiting(true), 37000);
 
     // Loop completo: resetta allo Step 1
     const loop = setTimeout(() => {
       setStep(1);
       setIsExiting(false);
-    }, 32000); 
+    }, 37500); 
 
     return () => {
       clearTimeout(t1);
@@ -66,6 +77,9 @@ export default function HeroHome() {
       clearTimeout(t8);
       clearTimeout(t9);
       clearTimeout(t10);
+      clearTimeout(t11);
+      clearTimeout(t12);
+      clearTimeout(t13);
       clearTimeout(loop);
     };
   }, [step === 1]);
@@ -104,7 +118,7 @@ export default function HeroHome() {
             </div>
           </div>
 
-          {/* COLONNA DESTRA: Mockup Chat Estesa */}
+          {/* COLONNA DESTRA: Mockup Chat Realistica */}
           <div className="relative flex justify-center w-full" data-aos="fade-left" data-aos-delay={200}>
             <div className="absolute w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
             
@@ -112,67 +126,84 @@ export default function HeroHome() {
               
               <div className={`space-y-3.5 transition-all duration-500 ease-in-out ${isExiting ? "opacity-0 scale-95 blur-xs" : "opacity-100 scale-100 blur-none"}`}>
                 
-                {/* ================= CHAT 1: MARCO (Step 1-6) ================= */}
-                {step <= 6 && (
+                {/* ================= CHAT 1: MARCO (Step 1-8) ================= */}
+                {step <= 8 && (
                   <div className="space-y-3.5">
-                    {/* 1. Primo messaggio Marco */}
+                    
+                    {/* 1. Marco scrive / Messaggio 1 */}
                     <div className="flex items-start justify-end space-x-3 animate-[fadeIn_0.4s_ease-out]">
-                      <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] border border-gray-700/50">
+                      <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] min-w-[60px] border border-gray-700/50">
                         <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
-                        <p className="text-xs sm:text-sm leading-relaxed">Vorrei spostare il mio appuntamento alla prossima settimana.</p>
+                        {step === 1 ? (
+                          <div className="flex items-center space-x-1 py-1.5 justify-end">
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                          </div>
+                        ) : (
+                          <p className="text-xs sm:text-sm leading-relaxed">Vorrei spostare il mio appuntamento alla prossima settimana.</p>
+                        )}
                       </div>
                       <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_15px_rgba(99,102,241,0.2)]">M</div>
                     </div>
 
-                    {/* 2. Prima Risposta IA (Pallini o Scelta opzioni) */}
-                    {step >= 2 && (
+                    {/* 2. Prima Risposta IA */}
+                    {step >= 3 && (
                       <div className="flex items-start space-x-3 animate-[fadeIn_0.4s_ease-out]">
                         <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
                           <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg>
                         </div>
                         <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[80%] min-w-[90px]">
                           <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
-                          {step === 2 && (
+                          {step === 3 && (
                             <div className="flex items-center space-x-1 py-1.5">
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
                             </div>
                           )}
-                          {step >= 3 && (
+                          {step >= 4 && (
                             <p className="text-xs sm:text-sm leading-relaxed text-white">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?</p>
                           )}
                         </div>
                       </div>
                     )}
 
-                    {/* 3. Secondo messaggio Marco (Scelta orario) */}
-                    {step >= 4 && (
+                    {/* 3. Marco risponde / Messaggio 2 */}
+                    {step >= 5 && (
                       <div className="flex items-start justify-end space-x-3 animate-[fadeIn_0.4s_ease-out]">
-                        <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] border border-gray-700/50">
+                        <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] min-w-[60px] border border-gray-700/50">
                           <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
-                          <p className="text-xs sm:text-sm leading-relaxed">Ottimo, vada per Martedì alle 15:00. Grazie!</p>
+                          {step === 5 ? (
+                            <div className="flex items-center space-x-1 py-1.5 justify-end">
+                              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                              <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                            </div>
+                          ) : (
+                            <p className="text-xs sm:text-sm leading-relaxed">Ottimo, vada per Martedì alle 15:00. Grazie!</p>
+                          )}
                         </div>
                         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_15px_rgba(99,102,241,0.2)]">M</div>
                       </div>
                     )}
 
                     {/* 4. Seconda Risposta IA (Conferma finale) */}
-                    {step >= 5 && (
+                    {step >= 7 && (
                       <div className="flex items-start space-x-3 animate-[fadeIn_0.4s_ease-out]">
                         <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
                           <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg>
                         </div>
                         <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[80%] min-w-[90px]">
                           <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
-                          {step === 5 && (
+                          {step === 7 && (
                             <div className="flex items-center space-x-1 py-1.5">
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
                             </div>
                           )}
-                          {step === 6 && (
+                          {step === 8 && (
                             <p className="text-xs sm:text-sm leading-relaxed text-white">Perfetto Marco, appuntamento spostato e confermato per Martedì prossimo alle 15:00. Riceverai un promemoria via email!</p>
                           )}
                         </div>
@@ -181,34 +212,42 @@ export default function HeroHome() {
                   </div>
                 )}
 
-                {/* ================= CHAT 2: SARA (Step 7-9) ================= */}
-                {step >= 7 && (
+                {/* ================= CHAT 2: SARA (Step 9-12) ================= */}
+                {step >= 9 && (
                   <div className="space-y-3.5">
-                    {/* Messaggio Sara */}
+                    {/* Sara scrive / Messaggio */}
                     <div className="flex items-start justify-end space-x-3 animate-[fadeIn_0.4s_ease-out]">
-                      <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] border border-gray-700/50">
+                      <div className="bg-gray-800/90 text-gray-200 rounded-2xl rounded-tr-none p-3 max-w-[80%] min-w-[60px] border border-gray-700/50">
                         <span className="block text-xs font-semibold text-gray-400 mb-0.5">Sara</span>
-                        <p className="text-xs sm:text-sm leading-relaxed">Ciao! Vorrei saperne di più sui vostri servizi di automazione.</p>
+                        {step === 9 ? (
+                          <div className="flex items-center space-x-1 py-1.5 justify-end">
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                          </div>
+                        ) : (
+                          <p className="text-xs sm:text-sm leading-relaxed">Ciao! Vorrei saperne di più sui vostri servizi di automazione.</p>
+                        )}
                       </div>
                       <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_15px_rgba(99,102,241,0.2)]">S</div>
                     </div>
 
                     {/* Risposta IA a Sara */}
-                    {step >= 8 && (
+                    {step >= 11 && (
                       <div className="flex items-start space-x-3 animate-[fadeIn_0.4s_ease-out]">
                         <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
                           <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg>
                         </div>
                         <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[80%] min-w-[90px]">
                           <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
-                          {step === 8 && (
+                          {step === 11 && (
                             <div className="flex items-center space-x-1 py-1.5">
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
                             </div>
                           )}
-                          {step === 9 && (
+                          {step === 12 && (
                             <p className="text-xs sm:text-sm leading-relaxed text-white">Ciao Sara! Sviluppiamo agenti IA su misura per eliminare compiti ripetitivi. Che tipo di business gestisci?</p>
                           )}
                         </div>
