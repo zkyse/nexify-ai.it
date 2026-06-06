@@ -15,7 +15,7 @@ const chatSteps = [
   
   // Scenario 2: Sara (Id da 9 a 14)
   { id: 9, type: "user", sender: "Sara", avatar: "S", text: "...", isTyping: true },
-  { id: 10, type: "user", sender: "Sara", avatar: "S", text: "Ciao! Vorrei saperne di più sulle vostre automazioni.", isTyping: false },
+  { id: 10, type: "user", sender: "Sara", avatar: "S", text: "Ciao! Vorrei saberne di più sulle vostre automazioni.", isTyping: false },
   { id: 11, type: "ai", sender: "Agente IA", avatar: "AI", text: "...", isTyping: true },
   { id: 12, type: "ai", sender: "Agente IA", avatar: "AI", text: "Ciao Sara! Automatizziamo flussi ripetitivi. Di cosa si occupa il tuo business?", isTyping: false },
   { id: 13, type: "user", sender: "Sara", avatar: "S", text: "...", isTyping: true },
@@ -105,7 +105,7 @@ export default function HeroHome() {
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes cosmicNebulaMobile {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          50% { transform: translate3d(5%, 8%, 0) rotate(180deg); }
+          50% { transform: translate3d(3%, 5%, 0) rotate(180deg); }
           100% { transform: translate3d(0, 0, 0) rotate(360deg); }
         }
         @keyframes gridPanPerfect {
@@ -120,12 +120,9 @@ export default function HeroHome() {
           0%, 100% { opacity: 0.3; transform: scale(0.8); }
           50% { opacity: 1; transform: scale(1.1); }
         }
-        
         @keyframes techRainLuminous {
-          0% { transform: translateY(-100%); opacity: 0; }
-          5% { opacity: 1; }
-          90% { opacity: 0.8; }
-          100% { transform: translateY(100vh); opacity: 0; }
+          0% { transform: translate3d(0, -100%, 0); }
+          100% { transform: translate3d(0, 105vh, 0); }
         }
 
         .msg-pop { 
@@ -135,45 +132,54 @@ export default function HeroHome() {
           animation: pulseDots 0.8s ease-in-out infinite; 
         }
         
+        /* Strato pioggia ottimizzato per GPU ed effetto di profondità esteso */
         .rain-stream {
           position: absolute;
           top: 0;
           font-family: monospace;
-          font-size: 12px;
-          font-weight: 700;
           writing-mode: vertical-rl;
           text-orientation: uppercase;
           white-space: nowrap;
           user-select: none;
           animation: techRainLuminous linear infinite;
-          opacity: 0;
-          letter-spacing: 0.15em;
+          transform: translateZ(0); /* Attiva accelerazione hardware nativa */
+          backface-visibility: hidden;
+          letter-spacing: 0.2em;
         }
       `}} />
 
-      {/* STRATO PIOGGIA TECH IPER-LUMINOSA */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.65]">
-        <div className="rain-stream left-[5%] text-[#818cf8]" style={{ animationDuration: '7s', animationDelay: '0s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>1010011011001</div>
-        <div className="rain-stream left-[12%] text-[#c084fc]" style={{ animationDuration: '9s', animationDelay: '2s', fontSize: '14px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>0110101</div>
-        <div className="rain-stream left-[22%] text-[#22d3ee]" style={{ animationDuration: '6s', animationDelay: '0.5s', textShadow: '0 0 8px rgba(34,211,238,0.6)' }}>0011001110</div>
-        <div className="rain-stream left-[35%] text-[#a855f7]" style={{ animationDuration: '11s', animationDelay: '4s', textShadow: '0 0 8px rgba(168,85,247,0.6)' }}>1101001011</div>
-        <div className="rain-stream left-[48%] text-[#6366f1]" style={{ animationDuration: '8s', animationDelay: '1s', fontSize: '11px', textShadow: '0 0 8px rgba(99,102,241,0.6)' }}>01011100</div>
-        <div className="rain-stream left-[58%] text-[#38bdf8]" style={{ animationDuration: '7s', animationDelay: '3s', textShadow: '0 0 8px rgba(56,189,248,0.6)' }}>100101101</div>
-        <div className="rain-stream left-[68%] text-[#818cf8]" style={{ animationDuration: '10s', animationDelay: '0.2s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>11100101</div>
-        <div className="rain-stream left-[78%] text-[#c084fc]" style={{ animationDuration: '6s', animationDelay: '2.5s', fontSize: '13px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>001011011</div>
-        <div className="rain-stream left-[88%] text-[#22d3ee]" style={{ animationDuration: '9s', animationDelay: '1.5s', textShadow: '0 0 8px rgba(34,211,238,0.6)' }}>110010101</div>
-        <div className="rain-stream left-[95%] text-[#6366f1]" style={{ animationDuration: '12s', animationDelay: '5s', textShadow: '0 0 8px rgba(99,102,241,0.6)' }}>011010</div>
+      {/* STRATO PIOGGIA TECH IPER-LUMINOSA STRATIFICATA */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Sfondo lontano (Piccoli, lenti, opachi, leggermente sfocati) */}
+        <div className="rain-stream left-[3%] text-[#818cf8]/20 text-[9px] blur-[1px]" style={{ animationDuration: '14s', animationDelay: '0s' }}>1010011011</div>
+        <div className="rain-stream left-[28%] text-[#a855f7]/15 text-[10px] blur-[1px]" style={{ animationDuration: '16s', animationDelay: '3s' }}>110100101101</div>
+        <div className="rain-stream left-[52%] text-[#6366f1]/20 text-[9px]" style={{ animationDuration: '13s', animationDelay: '1s' }}>010111001</div>
+        <div className="rain-stream left-[73%] text-[#22d3ee]/15 text-[10px] blur-[1px]" style={{ animationDuration: '17s', animationDelay: '5s' }}>001011011</div>
+        <div className="rain-stream left-[91%] text-[#c084fc]/20 text-[9px]" style={{ animationDuration: '15s', animationDelay: '2s' }}>11001010</div>
+
+        {/* Livello Medio (Standard, bilanciati) */}
+        <div className="rain-stream left-[12%] text-[#c084fc]/50 text-[13px]" style={{ animationDuration: '9s', animationDelay: '1.5s', textShadow: '0 0 6px rgba(192,132,252,0.3)' }}>0110101</div>
+        <div className="rain-stream left-[39%] text-[#38bdf8]/40 text-[12px]" style={{ animationDuration: '10s', animationDelay: '0.5s', textShadow: '0 0 6px rgba(56,189,248,0.3)' }}>100101101</div>
+        <div className="rain-stream left-[65%] text-[#818cf8]/40 text-[13px]" style={{ animationDuration: '11s', animationDelay: '2.5s', textShadow: '0 0 6px rgba(129,140,248,0.3)' }}>11100101</div>
+        <div className="rain-stream left-[84%] text-[#22d3ee]/45 text-[11px]" style={{ animationDuration: '8s', animationDelay: '4s', textShadow: '0 0 6px rgba(34,211,238,0.3)' }}>110010101</div>
+
+        {/* Primo piano (Grandi, veloci, molto luminosi) */}
+        <div className="rain-stream left-[7%] text-[#818cf8]/75 text-[16px]" style={{ animationDuration: '5.5s', animationDelay: '0.2s', textShadow: '0 0 10px rgba(129,140,248,0.6)' }}>10110</div>
+        <div className="rain-stream left-[21%] text-[#22d3ee]/70 text-[15px]" style={{ animationDuration: '4.8s', animationDelay: '1.2s', textShadow: '0 0 10px rgba(34,211,238,0.5)' }}>001101</div>
+        <div className="rain-stream left-[47%] text-[#6366f1]/80 text-[18px]" style={{ animationDuration: '6s', animationDelay: '2.2s', textShadow: '0 0 12px rgba(99,102,241,0.6)' }}>1101</div>
+        <div className="rain-stream left-[79%] text-[#c084fc]/75 text-[14px]" style={{ animationDuration: '5.2s', animationDelay: '0.7s', textShadow: '0 0 10px rgba(192,132,252,0.5)' }}>010111</div>
+        <div className="rain-stream left-[96%] text-[#38bdf8]/70 text-[16px]" style={{ animationDuration: '4.5s', animationDelay: '3.1s', textShadow: '0 0 10px rgba(56,189,248,0.5)' }}>1001</div>
       </div>
 
       {/* STRATO GRIGLIA PROSPETTICA */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.35] overflow-hidden" style={{ WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 90%)", maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)" }}>
-        <div className="absolute inset-[-80px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:40px_40px]" style={{ animation: "gridPanPerfect 12s linear infinite", willChange: "transform" }} />
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.25] overflow-hidden" style={{ WebkitMaskImage: "radial-gradient(circle at center, black 40%, transparent 90%)", maskImage: "radial-gradient(circle at center, black 40%, transparent 90%)" }}>
+        <div className="absolute inset-[-80px] bg-[linear-gradient(to_right,#6366f1_1px,transparent_1px),linear-gradient(to_bottom,#6366f1_1px,transparent_1px)] bg-[size:40px_40px]" style={{ animation: "gridPanPerfect 16s linear infinite", transform: "translateZ(0)" }} />
       </div>
 
       {/* STRATO NEBULOSE / NEON BLOB */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-20%] w-[320px] sm:w-[600px] md:w-[900px] h-[320px] sm:h-[600px] md:h-[900px] rounded-full bg-indigo-600/10 md:bg-indigo-600/15 blur-[80px] sm:blur-[120px]" style={{ animation: "cosmicNebulaMobile 20s linear infinite", willChange: "transform" }} />
-        <div className="absolute bottom-[-10%] right-[-20%] w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] rounded-full bg-purple-600/10 blur-[90px] sm:blur-[130px]" style={{ animation: "cosmicNebulaMobile 16s linear infinite reverse", willChange: "transform" }} />
+        <div className="absolute top-[-10%] left-[-20%] w-[320px] sm:w-[600px] md:w-[900px] h-[320px] sm:h-[600px] md:h-[900px] rounded-full bg-indigo-600/10 blur-[80px] sm:blur-[120px]" style={{ animation: "cosmicNebulaMobile 25s linear infinite", transform: "translateZ(0)" }} />
+        <div className="absolute bottom-[-10%] right-[-20%] w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] rounded-full bg-purple-600/8 blur-[90px] sm:blur-[130px]" style={{ animation: "cosmicNebulaMobile 22s linear infinite reverse", transform: "translateZ(0)" }} />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
@@ -202,8 +208,7 @@ export default function HeroHome() {
 
           {/* CHAT MOCKUP COLUMN */}
           <div className="relative flex justify-center w-full mt-4 lg:mt-0">
-            {/* CORRETTO: w-64 -> w-80 per uniformità con md:w-80 */}
-            <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" style={{ animation: "centralPulse 5s ease-in-out infinite", willChange: "transform" }} />
+            <div className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" style={{ transform: "translateZ(0)" }} />
             
             <div className="relative w-full max-w-[420px] min-h-[380px] md:aspect-[10/11] z-10 border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-4 md:p-5 flex flex-col justify-end shadow-[0_20px_40px_rgba(0,0,0,0.6)] overflow-hidden pt-10 [contain:paint]">
               <div className={`space-y-3 w-full transition-all duration-400 ${isExiting ? "opacity-0 translate-y-[-4px] blur-sm" : "opacity-100 translate-y-0"}`}>
@@ -213,7 +218,6 @@ export default function HeroHome() {
                   return (
                     <div key={msg.id} className={`flex items-start space-x-2 msg-pop ${isUser ? "justify-end space-x-reverse" : ""}`}>
                       {!isUser && (
-                        /* CORRETTO: w-6.5 h-6.5 -> w-7 h-7 */
                         <div className="w-7 h-7 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-sm">
                           <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
                             <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
@@ -238,7 +242,6 @@ export default function HeroHome() {
                       </div>
 
                       {isUser && (
-                        /* CORRETTO: w-6.5 h-6.5 -> w-7 h-7 */
                         <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[9px] font-black bg-gradient-to-br ${msg.sender === "Sara" ? "from-purple-500 to-pink-500" : "from-indigo-500 to-purple-500"}`}>
                           {msg.avatar}
                         </div>
