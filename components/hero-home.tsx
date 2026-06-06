@@ -62,30 +62,30 @@ export default function HeroHome() {
         /* 1. Flusso particelle tech di sfondo */
         @keyframes floatUp {
           0% { transform: translateY(100vh) scale(0.4) rotate(0deg); opacity: 0; }
-          15% { opacity: 0.3; }
-          85% { opacity: 0.3; }
+          15% { opacity: 0.5; }
+          85% { opacity: 0.5; }
           100% { transform: translateY(-10vh) scale(1) rotate(360deg); opacity: 0; }
         }
 
         /* 2. Movimento fluido dei grandi bagliori (Aurora) */
         @keyframes auroraMotion {
           0%, 100% { transform: translate(0px, 0px) scale(1); filter: hue-rotate(0deg); }
-          33% { transform: translate(30px, -40px) scale(1.05); filter: hue-rotate(20deg); }
-          66% { transform: translate(-20px, 20px) scale(0.95); filter: hue-rotate(-15deg); }
+          33% { transform: translate(40px, -60px) scale(1.1); filter: hue-rotate(30deg); }
+          66% { transform: translate(-30px, 30px) scale(0.95); filter: hue-rotate(-20deg); }
         }
 
         /* 3. Linee laser diagonali veloci */
         @keyframes laserBeam {
           0% { transform: translateX(-100%) translateY(-100%) rotate(-40deg); opacity: 0; }
-          5% { opacity: 0.6; }
+          5% { opacity: 0.8; }
           25% { transform: translateX(120%) translateY(120%) rotate(-40deg); opacity: 0; }
           100% { transform: translateX(120%) translateY(120%) rotate(-40deg); opacity: 0; }
         }
 
         /* 4. Pulsazione magnetica dinamica potenziata quando l'IA "pensa" */
         @keyframes chatPulse {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.12; filter: blur(65px); }
-          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.22; filter: blur(85px); }
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.25; filter: blur(65px); }
+          50% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.45; filter: blur(85px); }
         }
 
         /* 5. NUOVA ANIMAZIONE AUTOMATICA PER INGRESSO MESSAGGI (Effetto iOS Molla) */
@@ -108,33 +108,39 @@ export default function HeroHome() {
         }
 
         /* Classi di utilità per l'esecuzione */
-        .animate-aurora-1 { animation: auroraMotion 20s ease-in-out infinite; }
-        .animate-aurora-2 { animation: auroraMotion 16s ease-in-out infinite reverse; }
+        .animate-aurora-1 { animation: auroraMotion 18s ease-in-out infinite; }
+        .animate-aurora-2 { animation: auroraMotion 14s ease-in-out infinite reverse; }
         .particella { animation: floatUp infinite linear; pointer-events: none; }
-        .laser-1 { animation: laserBeam 14s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-        .laser-2 { animation: laserBeam 18s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 5s; }
+        .laser-1 { animation: laserBeam 12s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .laser-2 { animation: laserBeam 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 4s; }
         .msg-pop { animation: msgPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
       `}</style>
 
-      {/* --- STRATO 1: EFFETTO AURORA CHROMATIC (Sfondi dinamici traslucidi) --- */}
+      {/* --- STRATO 1: EFFETTO AURORA CHROMATIC POTENZIATO (Sfondi dinamici traslucidi molto più luminosi) --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="animate-aurora-1 absolute top-[-15%] left-[10%] w-[750px] h-[750px] rounded-full bg-gradient-to-br from-indigo-600/15 via-purple-600/5 to-transparent blur-[130px]" />
-        <div className={`absolute bottom-[-10%] right-[5%] w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-purple-600/15 via-blue-500/10 to-transparent blur-[120px] transition-all duration-1000 ${isIaThinking ? "scale-125 opacity-40 bg-indigo-500/25" : "scale-100 opacity-10"}`} />
+        {/* Luce Top-Left aumentata di opacità (da 15/5 a 30/15) */}
+        <div className="animate-aurora-1 absolute top-[-10%] left-[5%] w-[800px] h-[800px] rounded-full bg-gradient-to-br from-indigo-500/30 via-purple-500/15 to-transparent blur-[110px]" />
+        
+        {/* Luce di spinta centrale aggiuntiva per dare massima brillantezza globale */}
+        <div className="absolute top-[20%] left-[35%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[140px]" />
+        
+        {/* Luce Bottom-Right reattiva potenziata */}
+        <div className={`absolute bottom-[-5%] right-[0%] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-purple-500/30 via-blue-500/20 to-transparent blur-[100px] transition-all duration-1000 ${isIaThinking ? "scale-130 opacity-70 bg-indigo-500/40" : "scale-100 opacity-30"}`} />
       </div>
 
-      {/* --- STRATO 2: LINEE LASER RETE DATI --- */}
+      {/* --- STRATO 2: LINEE LASER RETE DATI (Più visibili) --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="laser-1 absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/25 to-transparent shadow-[0_0_10px_rgba(99,102,241,0.3)]" />
-        <div className="laser-2 absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/15 to-transparent shadow-[0_0_8px_rgba(168,85,247,0.2)]" />
+        <div className="laser-1 absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
+        <div className="laser-2 absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/30 to-transparent shadow-[0_0_12px_rgba(168,85,247,0.4)]" />
       </div>
 
-      {/* --- STRATO 3: SATELLITI DIGITALI FLUTTUANTI --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40">
-        <div className="particella absolute bg-indigo-400/50 w-1.5 h-1.5 rounded-xs left-[8%]" style={{ animationDuration: "13s", animationDelay: "0s" }}></div>
-        <div className="particella absolute bg-purple-400/50 w-2 h-2 rounded-xs left-[22%]" style={{ animationDuration: "20s", animationDelay: "4s" }}></div>
-        <div className="particella absolute bg-blue-400/50 w-1 h-1 rounded-xs left-[48%]" style={{ animationDuration: "12s", animationDelay: "1.5s" }}></div>
-        <div className="particella absolute bg-indigo-300/40 w-2 h-2 rounded-xs left-[73%]" style={{ animationDuration: "24s", animationDelay: "6s" }}></div>
-        <div className="particella absolute bg-purple-500/40 w-1.5 h-1.5 rounded-xs left-[90%]" style={{ animationDuration: "15s", animationDelay: "2.5s" }}></div>
+      {/* --- STRATO 3: SATELLITI DIGITALI FLUTTUANTI (Opacità raddoppiata) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-80">
+        <div className="particella absolute bg-indigo-400/70 w-1.5 h-1.5 rounded-xs left-[8%]" style={{ animationDuration: "13s", animationDelay: "0s" }}></div>
+        <div className="particella absolute bg-purple-400/70 w-2 h-2 rounded-xs left-[22%]" style={{ animationDuration: "20s", animationDelay: "4s" }}></div>
+        <div className="particella absolute bg-blue-400/70 w-1 h-1 rounded-xs left-[48%]" style={{ animationDuration: "12s", animationDelay: "1.5s" }}></div>
+        <div className="particella absolute bg-indigo-300/60 w-2 h-2 rounded-xs left-[73%]" style={{ animationDuration: "24s", animationDelay: "6s" }}></div>
+        <div className="particella absolute bg-purple-500/70 w-1.5 h-1.5 rounded-xs left-[90%]" style={{ animationDuration: "15s", animationDelay: "2.5s" }}></div>
       </div>
 
       {/* --- CONTENUTO INCENTRATO SULLA UI --- */}
@@ -165,26 +171,15 @@ export default function HeroHome() {
           {/* COLONNA GRAFICA MOCKUP (DESTRA) */}
           <div className="relative flex justify-center w-full">
             
-            {/* Bagliore magnetico della chat reattivo in base allo stato dell'IA */}
+            {/* Bagliore magnetico della chat incrementato nella luminosità di picco */}
             <div 
-              className={`absolute w-80 h-80 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${isIaThinking ? "bg-indigo-500/25 scale-110 shadow-[0_0_50px_rgba(99,102,241,0.2)]" : "bg-indigo-600/10 scale-100"}`} 
+              className={`absolute w-85 h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${isIaThinking ? "bg-indigo-500/40 scale-115 shadow-[0_0_60px_rgba(99,102,241,0.4)]" : "bg-indigo-600/15 scale-100"}`} 
               style={{ animation: "chatPulse 4s ease-in-out infinite" }} 
             />
             
-            {/* Scocca del terminale di Chat */}
-            <div className="relative w-full max-w-[440px] aspect-[10/11] z-10 border border-gray-800/80 bg-gray-950/40 backdrop-blur-2xl rounded-2xl p-5 flex flex-col justify-end shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+            {/* Scocca del terminale di Chat - Rimosso l'h-12 della barra superiore per dare un design minimal */}
+            <div className="relative w-full max-w-[440px] aspect-[10/11] z-10 border border-gray-800/80 bg-gray-950/40 backdrop-blur-2xl rounded-2xl p-5 flex flex-col justify-end shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden pt-8">
               
-              {/* Topbar simulata del Widget */}
-              <div className="absolute top-0 inset-x-0 h-12 bg-gray-900/30 border-b border-gray-900/60 px-4 flex items-center justify-between opacity-80">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 rounded-full bg-red-500/60"></div>
-                  <div className="w-2 h-2 rounded-full bg-yellow-500/60"></div>
-                  <div className="w-2 h-2 rounded-full bg-green-500/60"></div>
-                </div>
-                <div className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">Live-Workflow Terminal</div>
-                <div className="w-4 h-1 bg-gray-800 rounded-sm"></div>
-              </div>
-
               {/* Contenitore interno con effetto di uscita della scena globale */}
               <div className={`space-y-3.5 w-full transition-all duration-500 ease-in-out ${isExiting ? "scene-exit-active" : "opacity-100 scale-100"}`}>
                 
@@ -211,7 +206,7 @@ export default function HeroHome() {
                     {step >= 3 && (
                       <div className="flex items-start space-x-2.5 msg-pop">
                         <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current animate-pulse" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 3 ? "bg-indigo-950/20 border-indigo-500/30" : "bg-gray-900/50 border-gray-800"}`}>
+                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 3 ? "bg-indigo-950/30 border-indigo-500/50" : "bg-gray-900/50 border-gray-800"}`}>
                           <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
                           {step === 3 ? (
                             <div className="flex space-x-1 py-1.5 px-1"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.3s]"></div></div>
@@ -241,7 +236,7 @@ export default function HeroHome() {
                     {step >= 7 && (
                       <div className="flex items-start space-x-2.5 msg-pop">
                         <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 7 ? "bg-indigo-950/20 border-indigo-500/30" : "bg-gray-900/50 border-gray-800 shadow-[0_0_20px_rgba(99,102,241,0.08)]"}`}>
+                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 7 ? "bg-indigo-950/30 border-indigo-500/50" : "bg-gray-900/50 border-gray-800 shadow-[0_0_20px_rgba(99,102,241,0.08)]"}`}>
                           <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
                           {step === 7 ? (
                             <div className="flex space-x-1 py-1.5 px-1"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.3s]"></div></div>
@@ -275,7 +270,7 @@ export default function HeroHome() {
                     {step >= 11 && (
                       <div className="flex items-start space-x-2.5 msg-pop">
                         <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 11 ? "bg-indigo-950/20 border-indigo-500/30" : "bg-gray-900/50 border-gray-800"}`}>
+                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 11 ? "bg-indigo-950/30 border-indigo-500/50" : "bg-gray-900/50 border-gray-800"}`}>
                           <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
                           {step === 11 ? (
                             <div className="flex space-x-1 py-1.5 px-1"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.3s]"></div></div>
@@ -293,19 +288,19 @@ export default function HeroHome() {
                           <span className="block text-[9px] font-bold tracking-wider text-gray-500 mb-1 uppercase">Sara</span>
                           {step === 13 ? (
                             <div className="flex space-x-1 py-1.5 px-1"><div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:0.3s]"></div></div>
-                          ) : (
-                            <p className="text-xs leading-relaxed text-gray-200">Gestisco un'agenzia e vorrei generare e inviare report settimanali in automatico.</p>
-                          )}
-                        </div>
-                        <div className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">S</div>
+                        ) : (
+                          <p className="text-xs leading-relaxed text-gray-200">Gestisco un'agenzia e vorrei generare e inviare report settimanali in automatico.</p>
+                        )}
                       </div>
+                      <div className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-pink-500 flex-shrink-0 flex items-center justify-center text-white text-[10px] font-black shadow-inner">S</div>
+                    </div>
                     )}
 
                     {/* Risposta finale Call dell'Agente IA */}
                     {step >= 15 && (
                       <div className="flex items-start space-x-2.5 msg-pop">
                         <div className="w-7 h-7 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_4px_12px_rgba(79,70,229,0.3)]"><svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" /></svg></div>
-                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 15 ? "bg-indigo-950/20 border-indigo-500/30" : "bg-gray-900/50 border-gray-800 shadow-[0_0_20px_rgba(168,85,247,0.08)]"}`}>
+                        <div className={`text-gray-200 rounded-2xl rounded-tl-none px-3.5 py-2.5 border transition-all duration-300 max-w-[85%] ${step === 15 ? "bg-indigo-950/30 border-indigo-500/50" : "bg-gray-900/50 border-gray-800 shadow-[0_0_20px_rgba(168,85,247,0.08)]"}`}>
                           <span className="block text-[9px] font-bold tracking-wider text-indigo-400 mb-1 uppercase">Agente IA</span>
                           {step === 15 ? (
                             <div className="flex space-x-1 py-1.5 px-1"><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.15s]"></div><div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.3s]"></div></div>
