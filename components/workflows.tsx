@@ -13,18 +13,15 @@ export default function Workflows() {
     const x = e.clientX - box.left - box.width / 2;
     const y = e.clientY - box.top - box.height / 2;
     
-    // Calcola la rotazione basata sulla posizione del mouse (max 8 gradi)
     const rotateX = -(y / (box.height / 2)) * 8;
     const rotateY = (x / (box.width / 2)) * 8;
     
-    // Disabilitiamo temporaneamente l'animazione CSS inline per non farla "combattere" con il mouse
     card.style.animationPlayState = "paused";
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
-    // Rimuoviamo il transform inline e riattiviamo l'animazione CSS nativa senza sovrascriverla
     card.style.transform = "";
     card.style.animationPlayState = "running";
   };
@@ -62,7 +59,7 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-20 md:py-28">
       
-      {/* ================= CORE DI ANIMAZIONE INIETTATO IN MODO COMPATIBILE CON NEXT.JS ================= */}
+      {/* ================= CORE DI ANIMAZIONE POTENZIATO CON RETE NEURALE FLOATING ================= */}
       <style dangerouslySetInnerHTML={{__html: `
         /* Rotazione e deformazione fluida delle nebulose cosmiche di fondo */
         @keyframes liquidNebula {
@@ -77,14 +74,6 @@ export default function Workflows() {
           5% { opacity: 0.7; }
           45% { opacity: 0.7; }
           50%, 100% { transform: translateX(250%) skewX(-45deg); opacity: 0; }
-        }
-
-        /* Animazione verticale per la pioggia di codice tech ad ALTA LUMINOSITÀ */
-        @keyframes techRainFallLuminous {
-          0% { transform: translateY(-100%); opacity: 0; }
-          5% { opacity: 1; }
-          90% { opacity: 0.8; }
-          100% { transform: translateY(100vh); opacity: 0; }
         }
 
         /* Effetto respirazione radar per i nodi interni */
@@ -114,34 +103,24 @@ export default function Workflows() {
           50% { transform: translateY(-7px) rotate(-0.3deg); }
         }
 
+        /* NUOVA ANIMAZIONE: Fluttuazione orbitale per i nodi della rete neurale */
+        @keyframes neuralFloat {
+          0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.2; }
+          50% { transform: translate(15px, -25px) scale(1.2); opacity: 0.5; filter: drop-shadow(0 0 8px currentColor); }
+        }
+
         /* Classi operative di base */
         .animate-liquid-1 { animation: liquidNebula 26s ease-in-out infinite; }
         .animate-liquid-2 { animation: liquidNebula 20s ease-in-out infinite reverse; }
         .cyber-flow { animation: cyberStream 8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         .float-icon { animation: floatCardElement 4.5s ease-in-out infinite; }
 
-        /* Struttura potenziata per i flussi di pioggia digitale luminosa */
-        .wf-rain-stream {
-          position: absolute;
-          top: 0;
-          font-family: monospace;
-          font-size: 12px;
-          font-weight: 700;
-          writing-mode: vertical-rl;
-          text-orientation: uppercase;
-          white-space: nowrap;
-          user-select: none;
-          animation: techRainFallLuminous linear infinite;
-          opacity: 0;
-          letter-spacing: 0.15em;
-        }
-
         /* Applicazione del floating continuo nativo (di base attivo su desktop) */
         .desktop-float-1 { animation: floatingCard1 7s ease-in-out infinite; }
         .desktop-float-2 { animation: floatingCard2 8s ease-in-out infinite; animation-delay: 0.5s; }
         .desktop-float-3 { animation: floatingCard3 7.5s ease-in-out infinite; animation-delay: 1s; }
 
-        /* Gestione stato iniziale e reveal su dispositivi mobile in armonia con il floating */
+        /* Gestione stato iniziale e reveal su dispositivi mobile */
         @media (max-width: 1023px) {
           .mobile-reveal-card { 
             opacity: 0; 
@@ -156,19 +135,63 @@ export default function Workflows() {
         }
       `}} />
 
-      {/* --- STRATO 1: SOTTILISSIMA RETE GEOMETRICA DI LOGICA --- */}
+      {/* --- STRATO 1: RETE GEOMETRICA DI LOGICA (GRID FIX) --- */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
 
-      {/* --- STRATO 1.5: CASCATA DI CODICE TECH IPER-LUMINOSA (Neon Matrix-style) --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.65]">
-        <div className="wf-rain-stream left-[4%] text-[#818cf8]" style={{ animationDuration: '8s', animationDelay: '0s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>1100101101</div>
-        <div className="wf-rain-stream left-[15%] text-[#c084fc]" style={{ animationDuration: '11s', animationDelay: '3s', fontSize: '14px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>01011010</div>
-        <div className="wf-rain-stream left-[28%] text-[#22d3ee]" style={{ animationDuration: '7s', animationDelay: '0.8s', textShadow: '0 0 8px rgba(34,211,238,0.6)' }}>10110011</div>
-        <div className="wf-rain-stream left-[42%] text-[#818cf8]" style={{ animationDuration: '13s', animationDelay: '5s', textShadow: '0 0 8px rgba(129,140,248,0.6)' }}>0011010110</div>
-        <div className="wf-rain-stream left-[55%] text-[#a855f7]" style={{ animationDuration: '9s', animationDelay: '1.5s', fontSize: '11px', textShadow: '0 0 8px rgba(168,85,247,0.6)' }}>111001</div>
-        <div className="wf-rain-stream left-[68%] text-[#38bdf8]" style={{ animationDuration: '8s', animationDelay: '4.2s', textShadow: '0 0 8px rgba(56,189,248,0.6)' }}>100110101</div>
-        <div className="wf-rain-stream left-[82%] text-[#a5b4fc]" style={{ animationDuration: '12s', animationDelay: '2s', textShadow: '0 0 8px rgba(165,180,252,0.5)' }}>011011001</div>
-        <div className="wf-rain-stream left-[93%] text-[#c084fc]" style={{ animationDuration: '7s', animationDelay: '0.3s', fontSize: '13px', textShadow: '0 0 8px rgba(192,132,252,0.6)' }}>1010011</div>
+      {/* --- NUOVO STRATO 1.5: RETE NEURALE DI NODI CONNESSI E FLUTTUANTI (Sostituisce la pioggia) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Nodo 1 - Indigo */}
+        <div 
+          className="absolute text-indigo-500/40" 
+          style={{ top: '18%', left: '12%', animation: 'neuralFloat 9s ease-in-out infinite' }}
+        >
+          <div className="w-2 h-2 rounded-full bg-current" />
+          <div className="absolute top-1 left-2 h-[1px] w-32 bg-gradient-to-r from-indigo-500/20 to-transparent rotate-[30deg] origin-left" />
+        </div>
+
+        {/* Nodo 2 - Cyan */}
+        <div 
+          className="absolute text-cyan-500/30" 
+          style={{ top: '45%', left: '7%', animation: 'neuralFloat 12s ease-in-out infinite 1s' }}
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-current" />
+          <div className="absolute top-1 left-1 h-[1px] w-24 bg-gradient-to-r from-cyan-500/20 to-transparent rotate-[-45deg] origin-left" />
+        </div>
+
+        {/* Nodo 3 - Purple */}
+        <div 
+          className="absolute text-purple-500/40" 
+          style={{ top: '75%', left: '20%', animation: 'neuralFloat 10s ease-in-out infinite 2s' }}
+        >
+          <div className="w-2 h-2 rounded-full bg-current" />
+          <div className="absolute top-1 left-1 h-[1px] w-40 bg-gradient-to-r from-purple-500/20 to-transparent rotate-[15deg] origin-left" />
+        </div>
+
+        {/* Nodo 4 - Blue (Destra) */}
+        <div 
+          className="absolute text-blue-500/30" 
+          style={{ top: '25%', right: '15%', animation: 'neuralFloat 11s ease-in-out infinite 0.5s' }}
+        >
+          <div className="w-3 h-3 rounded-full bg-current opacity-60 blur-[1px]" />
+          <div className="absolute top-1 right-1 h-[1px] w-36 bg-gradient-to-l from-blue-500/20 to-transparent rotate-[60deg] origin-right" />
+        </div>
+
+        {/* Nodo 5 - Violet */}
+        <div 
+          className="absolute text-violet-500/40" 
+          style={{ top: '60%', right: '8%', animation: 'neuralFloat 8s ease-in-out infinite 1.5s' }}
+        >
+          <div className="w-2 h-2 rounded-full bg-current" />
+          <div className="absolute top-1 right-1 h-[1px] w-28 bg-gradient-to-l from-violet-500/20 to-transparent rotate-[-20deg] origin-right" />
+        </div>
+
+        {/* Nodo 6 - Indigo Centro Basso */}
+        <div 
+          className="absolute text-indigo-400/20 hidden md:block" 
+          style={{ top: '85%', left: '48%', animation: 'neuralFloat 14s ease-in-out infinite 3s' }}
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-current" />
+        </div>
       </div>
 
       {/* --- STRATO 2: NEBULOSE DINAMICHE AD ALTA FLUIDITÀ --- */}
