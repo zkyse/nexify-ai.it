@@ -47,47 +47,70 @@ export default function HeroHome() {
   }, [step === 1]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12 bg-[#030712]">
       
-      {/* ================= INIEZIONE STILI CSS DELLE ANIMAZIONI ================= */}
+      {/* ================= SUPER ANIMAZIONI DI SFONDO (CSS PURO) ================= */}
       <style jsx global>{`
-        @keyframes mainGlowMotion {
-          0% {
-            transform: translate(-30%, -40%) scale(1);
-            opacity: 0.15;
-          }
-          33% {
-            transform: translate(-60%, -20%) scale(1.2);
-            opacity: 0.25;
-          }
-          66% {
-            transform: translate(-20%, -60%) scale(0.9);
-            opacity: 0.2;
-          }
-          100% {
-            transform: translate(-30%, -40%) scale(1);
-            opacity: 0.15;
-          }
+        /* 1. Flusso particelle tech */
+        @keyframes floatUp {
+          0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+          10% { opacity: 0.4; }
+          90% { opacity: 0.4; }
+          100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        @keyframes chatGlowPulse {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.12; filter: blur(64px); }
-          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.22; filter: blur(80px); }
+        /* 2. Movimento fluido dei grandi bagliori (Aurora) */
+        @keyframes auroraMotion {
+          0%, 100% { transform: translate(0px, 0px) scale(1); filter: hue-rotate(0deg); }
+          33% { transform: translate(40px, -60px) scale(1.1); filter: hue-rotate(30deg); }
+          66% { transform: translate(-30px, 30px) scale(0.9); filter: hue-rotate(-20deg); }
         }
 
-        .animate-main-glow {
-          animation: mainGlowMotion 15s ease-in-out infinite;
+        /* 3. Linee laser diagonali */
+        @keyframes laserBeam {
+          0% { transform: translateX(-100%) translateY(-100%) rotate(-45deg); opacity: 0; }
+          10% { opacity: 0.7; }
+          30% { transform: translateX(100%) translateY(100%) rotate(-45deg); opacity: 0; }
+          100% { transform: translateX(100%) translateY(100%) rotate(-45deg); opacity: 0; }
         }
 
-        .animate-chat-glow {
-          animation: chatGlowPulse 6s ease-in-out infinite;
+        @keyframes chatPulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; filter: blur(60px); }
+          50% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.25; filter: blur(80px); }
         }
+
+        /* Classi di utilità per i timer differenziati */
+        .animate-aurora-1 { animation: auroraMotion 18s ease-in-out infinite; }
+        .animate-aurora-2 { animation: auroraMotion 14s ease-in-out infinite reverse; }
+        
+        .particella { animation: floatUp infinite linear; pointer-events: none; }
+        
+        .laser-1 { animation: laserBeam 12s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .laser-2 { animation: laserBeam 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; animation-delay: 4s; }
       `}</style>
 
-      {/* 1. BAGLIORE DI SFONDO PRINCIPALE (Grande effetto Aurora che fluttua nella sezione) */}
-      <div className="animate-main-glow absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-transparent blur-[130px] pointer-events-none z-0" />
-      <div className="animate-main-glow absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-indigo-600/15 blur-[100px] pointer-events-none z-0 [animation-delay:-5s]" />
+      {/* --- STRATO 1: EFFETTO AURORA CHROMATIC (I grandi bagliori che cambiano colore) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="animate-aurora-1 absolute top-[-10%] left-[15%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-indigo-600/20 via-purple-600/10 to-transparent blur-[140px]" />
+        <div className="animate-aurora-2 absolute bottom-[-10%] right-[10%] w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-purple-600/15 via-blue-600/10 to-transparent blur-[120px]" />
+      </div>
 
+      {/* --- STRATO 2: LINEE LASER SCI-FI (Scorrono invisibili nello sfondo) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="laser-1 absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
+        <div className="laser-2 absolute top-1/3 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent shadow-[0_0_10px_rgba(168,85,247,0.4)]" />
+      </div>
+
+      {/* --- STRATO 3: PARTICELLE SATELLITARI (Quadratini fluttuanti a velocità diverse) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-70">
+        <div className="particella absolute bg-indigo-400 w-1.5 h-1.5 rounded-sm left-[10%]" style={{ animationDuration: "14s", animationDelay: "0s" }}></div>
+        <div className="particella absolute bg-purple-400 w-2 h-2 rounded-sm left-[25%]" style={{ animationDuration: "19s", animationDelay: "3s" }}></div>
+        <div className="particella absolute bg-blue-400 w-1 h-1 rounded-sm left-[45%]" style={{ animationDuration: "11s", animationDelay: "1s" }}></div>
+        <div className="particella absolute bg-indigo-300 w-2 h-2 rounded-sm left-[70%]" style={{ animationDuration: "22s", animationDelay: "5s" }}></div>
+        <div className="particella absolute bg-purple-500 w-1.5 h-1.5 rounded-sm left-[85%]" style={{ animationDuration: "16s", animationDelay: "2s" }}></div>
+      </div>
+
+      {/* --- CONTENUTO PRINCIPALE --- */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
         <div className="pt-2 pb-12 md:pt-4 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
@@ -115,8 +138,8 @@ export default function HeroHome() {
           {/* COLONNA DESTRA: Mockup Chat */}
           <div className="relative flex justify-center w-full" data-aos="fade-left" data-aos-delay={200}>
             
-            {/* 2. BAGLIORE DIETRO LA CHAT ANIMATO (Pulsante e magnetico) */}
-            <div className="animate-chat-glow absolute w-80 h-80 bg-indigo-500 rounded-full pointer-events-none top-1/2 left-1/2" />
+            {/* Bagliore pulsante magnetico dietro la chat */}
+            <div className="absolute w-80 h-80 bg-indigo-500 rounded-full pointer-events-none top-1/2 left-1/2" style={{ animation: "chatPulse 5s ease-in-out infinite" }} />
             
             <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col justify-center shadow-2xl overflow-hidden">
               <div className={`space-y-3 transition-all duration-500 ease-in-out ${isExiting ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-none"}`}>
