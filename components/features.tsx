@@ -26,12 +26,29 @@ export default function Features() {
           0%, 100% { transform: translate3d(-5%, 0, 0); opacity: 0.8; }
           50% { transform: translate3d(5%, 0, 0); opacity: 1; }
         }
+        
+        /* NUOVA ANIMAZIONE: Fluttuazione fluida e morbida delle Card */
+        @keyframes floatCard {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -8px, 0); }
+        }
 
         /* Classi di utilità per micro-interazioni */
         .card-radar-effect {
           position: relative;
           overflow: hidden;
+          /* Applica la fluttuazione di base a tutte le card */
+          animation: floatCard 6s ease-in-out infinite;
+          will-change: transform;
         }
+        
+        /* Manteniamo l'effetto hover scalando dolcemente sopra l'animazione di fluttuazione */
+        .card-radar-effect:hover {
+          animation-play-state: paused; /* Opzionale: ferma la fluttuazione quando l'utente ci passa sopra */
+          transform: translate3d(0, -12px, 0) !important;
+          box-shadow: 0 20px 40px rgba(99, 102, 241, 0.12) !important;
+        }
+
         .card-radar-effect::before {
           content: '';
           position: absolute;
@@ -59,7 +76,7 @@ export default function Features() {
         }
       `}} />
 
-      {/* Sfondi Sfumati Ambientali di serie */}
+      {/* Sfondi Sfumati Ambientali */}
       <div
         className="pointer-events-none absolute left-1/2 top-0 -z-10 -mt-20 -translate-x-1/2"
         aria-hidden="true"
@@ -103,7 +120,7 @@ export default function Features() {
             </p>
           </div>
 
-          {/* MOCKUP CENTRALE COMPLETAMENTE RESPONSIVO */}
+          {/* MOCKUP CENTRALE */}
           <div className="flex justify-center pb-12 md:pb-16" data-aos="fade-up">
             <div className="w-full max-w-[900px] h-auto md:h-64 rounded-2xl border border-gray-800/60 bg-gray-950/40 backdrop-blur-xs relative flex flex-col md:flex-row items-center justify-between p-6 md:p-8 overflow-hidden group gap-6 md:gap-0 shadow-[0_0_50px_rgba(99,102,241,0.05)]">
               <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 via-transparent to-transparent pointer-events-none"></div>
@@ -171,11 +188,11 @@ export default function Features() {
             </div>
           </div>
 
-          {/* GRIGLIA CARATTERISTICHE (6 Articoli) */}
+          {/* GRIGLIA CARATTERISTICHE (6 Articoli Fluttuanti con Desincronizzazione) */}
           <div className="mx-auto grid max-w-sm gap-6 sm:max-w-none sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             
             {/* CARATTERISTICA 1 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "0s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path d="M0 0h14v17H0V0Zm2 2v13h10V2H2Z" />
@@ -191,7 +208,7 @@ export default function Features() {
             </article>
 
             {/* CARATTERISTICA 2 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "1s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-500 group-hover:scale-110" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path fillOpacity=".48" d="M7 8V0H5v8h2Zm12 16v-4h-2v4h2Z" />
@@ -207,7 +224,7 @@ export default function Features() {
             </article>
 
             {/* CARATTERISTICA 3 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "2s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-500 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path d="M23.414 6 18 .586 16.586 2l3 3H7a6 6 0 0 0-6 6h2a4 4 0 0 1 4-4h12.586l-3 3L18 11.414 23.414 6Z" />
@@ -223,7 +240,7 @@ export default function Features() {
             </article>
 
             {/* CARATTERISTICA 4 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "1.5s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-500 group-hover:skew-x-3" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path fillOpacity=".48" d="m3.031 9.05-.593-.805 1.609-1.187.594.804a6.966 6.966 0 0 1 0 8.276l-.594.805-1.61-1.188.594-.805a4.966 4.966 0 0 0 0-5.9Z" />
@@ -241,7 +258,7 @@ export default function Features() {
             </article>
 
             {/* CARATTERISTICA 5 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "0.5s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-500 group-hover:rotate-45" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path fillOpacity=".48" d="M12 8.8a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" />
@@ -257,7 +274,7 @@ export default function Features() {
             </article>
 
             {/* CARATTERISTICA 6 */}
-            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_10px_30px_rgba(99,102,241,0.08)] group">
+            <article className="card-radar-effect p-[1px] rounded-xl border border-gray-800/60 bg-gray-950/30 transition-all duration-300 group" style={{ animationDelay: "2.5s" }}>
               <div className="card-content-layer p-6 rounded-xl flex flex-col h-full">
                 <svg className="mb-3 fill-indigo-500 transition-transform duration-700 group-hover:[transform:rotateY(180deg)]" xmlns="http://www.w3.org/2000/svg" width={24} height={24}>
                   <path fillOpacity=".48" d="M19 8h5v2h-5V8Zm-4 5h9v2h-9v-2Zm9 5H11v2h13v-2Z" />
