@@ -42,10 +42,35 @@ export default function Workflows() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-black overflow-hidden py-16 md:py-24">
+    <section ref={sectionRef} className="relative bg-[#02040a] overflow-hidden py-16 md:py-24">
       
-      {/* ANIMAZIONI AVANZATE MOBILE */}
+      {/* ================= ANIMAZIONI AVANZATE E SFONDI VIVI ================= */}
       <style jsx global>{`
+        /* Movimento continuo e fluido dei flussi e delle nebulose globali */
+        @keyframes globalNebulaOne {
+          0%, 100% { transform: translate(-30%, -40%) scale(1) rotate(0deg); filter: hue-rotate(0deg); opacity: 0.25; }
+          50% { transform: translate(-20%, -45%) scale(1.15) rotate(180deg); filter: hue-rotate(40deg); opacity: 0.35; }
+        }
+
+        @keyframes globalNebulaTwo {
+          0%, 100% { transform: translate(-60%, -50%) scale(1.1) rotate(0deg); filter: hue-rotate(0deg); opacity: 0.2; }
+          50% { transform: translate(-50%, -55%) scale(0.9) rotate(-180deg); filter: hue-rotate(-30deg); opacity: 0.3; }
+        }
+
+        /* Micro flussi di dati (linee laser e scintille interne) */
+        @keyframes dataStreamHorizontal {
+          0% { transform: translateX(-100%); opacity: 0; }
+          10% { opacity: 0.5; }
+          40% { opacity: 0.5; }
+          50%, 100% { transform: translateX(200%); opacity: 0; }
+        }
+
+        @keyframes sparkPulse {
+          0%, 100% { opacity: 0; transform: scale(0.5); }
+          50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        /* Animazioni Mobile mantenute coerenti */
         @keyframes nebulosaFloatOne {
           0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
           20% { opacity: 0.25; }
@@ -62,18 +87,16 @@ export default function Workflows() {
         }
 
         @keyframes cardRevealMobile {
-          0% {
-            opacity: 0;
-            transform: translateY(24px) scale(0.96);
-          }
-          40% {
-            border-color: rgba(99, 102, 241, 0.4);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
+          0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+          40% { border-color: rgba(99, 102, 241, 0.4); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
         }
+
+        /* Classi di esecuzione utility */
+        .animate-nebula-desktop-1 { animation: globalNebulaOne 22s ease-in-out infinite; }
+        .animate-nebula-desktop-2 { animation: globalNebulaTwo 18s ease-in-out infinite; }
+        .stream-line { animation: dataStreamHorizontal 10s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite; }
+        .tech-spark { animation: sparkPulse 4s ease-in-out infinite; }
 
         @media (max-width: 1023px) {
           .mobile-reveal-card {
@@ -97,7 +120,31 @@ export default function Workflows() {
         }
       `}</style>
 
-      {/* NEBULOSA DI SFONDO SU MOBILE */}
+      {/* --- STRATO 1: GRIGLIA TECH DI UNIONE (Sottilissima texture geometrica) --- */}
+      <div className="absolute inset-0 bg-[radial-gradient(#ffffff03_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none z-0 opacity-80" />
+
+      {/* --- STRATO 2: NEBULOSE AD AMPIO RAGGIO (Sempre attive su Desktop, fluide) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden hidden lg:block">
+        <div className="animate-nebula-desktop-1 absolute top-[10%] left-1/4 w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-indigo-500/15 via-purple-500/5 to-transparent blur-[130px]" />
+        <div className="animate-nebula-desktop-2 absolute bottom-[5%] right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-transparent blur-[120px]" />
+      </div>
+
+      {/* --- STRATO 3: FLUSSI DI MICRODATI ORIZZONTALI (Passano dietro le card) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40">
+        <div className="stream-line absolute top-1/4 left-0 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" style={{ animationDelay: "0s", animationDuration: "9s" }} />
+        <div className="stream-line absolute top-2/3 left-0 w-1/4 h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" style={{ animationDelay: "3.5s", animationDuration: "12s" }} />
+        <div className="stream-line absolute top-1/2 left-0 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-500/25 to-transparent" style={{ animationDelay: "6s", animationDuration: "15s" }} />
+      </div>
+
+      {/* --- STRATO 4: NODI DI RETE LUMINOSI FISSI (Punti pixel isolati che brillano) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-60">
+        <div className="tech-spark absolute w-1 h-1 bg-indigo-400 rounded-full top-[20%] left-[15%]" style={{ animationDelay: "0.5s" }} />
+        <div className="tech-spark absolute w-1 h-1 bg-purple-400 rounded-full top-[75%] left-[80%]" style={{ animationDelay: "2.1s" }} />
+        <div className="tech-spark absolute w-1.5 h-1.5 bg-indigo-300 rounded-full top-[40%] right-[12%]" style={{ animationDelay: "1.2s" }} />
+        <div className="tech-spark absolute w-1 h-1 bg-blue-400 rounded-full bottom-[15%] left-[25%]" style={{ animationDelay: "3.4s" }} />
+      </div>
+
+      {/* NEBULOSA DI SFONDO SU MOBILE (Mantenuta intatta per Observer) */}
       <div className="mobile-bg-glow glow-1 absolute pointer-events-none opacity-0 top-1/2 left-1/2 w-[450px] h-[450px] rounded-full bg-indigo-500/40 blur-[110px] lg:hidden z-0"></div>
       <div className="mobile-bg-glow glow-2 absolute pointer-events-none opacity-0 top-1/3 left-1/3 w-[350px] h-[350px] rounded-full bg-purple-500/30 blur-[90px] lg:hidden z-0"></div>
 
@@ -115,26 +162,22 @@ export default function Workflows() {
               Automazioni e Agenti IA su misura
             </h2>
             <p className="text-lg text-indigo-200/65">
-              Non crediamo nelle soluzioni copia-incolla. Analizziamo i tuoi processi quotidiani per cucirti addosso l'infrastruttura IA perfetta per le tue reali necessità.
+              Non crediamo nelle soluzioni copia-incolla. Analizziamo i tuoi processi quotidiani per cucirti addosso l'infrastruttura IA perfetta per le...
             </p>
           </div>
 
           {/* GRIGLIA CARD */}
           <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             
-            {/* CARD 1: MODELLATO SULLE TUE ESIGENZE */}
+            {/* CARD 1 */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
-                
-                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 1 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 to-transparent pointer-events-none"></div>
-                  
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10 transition-transform duration-500 group-hover/card:scale-105">
-                    {/* Input */}
                     <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950/80 p-2 flex flex-col justify-between shadow-lg relative group-hover/card:border-gray-700 transition-colors">
                       <span className="text-xs">📥</span>
                       <div className="space-y-1">
@@ -143,8 +186,6 @@ export default function Workflows() {
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-gray-500 uppercase tracking-wider">Process</div>
                     </div>
-
-                    {/* Connettore Linee */}
                     <div className="flex-1 px-2 relative flex items-center justify-center">
                       <svg className="w-full h-8 text-gray-800 group-hover/card:text-indigo-500/30 transition-colors" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
@@ -154,8 +195,6 @@ export default function Workflows() {
                       </svg>
                       <div className="absolute w-1 h-1 bg-indigo-400 rounded-full left-1/4 animate-pulse group-hover/card:bg-purple-400"></div>
                     </div>
-
-                    {/* Output Custom */}
                     <div className="w-20 h-24 rounded-xl border border-indigo-500/30 bg-gradient-to-b from-indigo-950/30 to-purple-950/10 p-2 flex flex-col justify-between shadow-[0_0_20px_rgba(99,102,241,0.05)] relative overflow-hidden group-hover/card:border-indigo-500/60 group-hover/card:shadow-[0_0_25px_rgba(99,102,241,0.15)] transition-all">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4px_4px]"></div>
                       <div className="flex items-center justify-between relative z-10">
@@ -176,9 +215,7 @@ export default function Workflows() {
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-indigo-400/70 uppercase tracking-wider whitespace-nowrap">Tailored</div>
                     </div>
                   </div>
-
                 </div>
-
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
@@ -194,19 +231,15 @@ export default function Workflows() {
               </div>
             </a>
 
-            {/* CARD 2: AGENTI AUTONOMI 24/7 */}
+            {/* CARD 2 */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
-                
-                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 2 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                  
                   <div className="relative z-10 flex flex-col items-center space-y-3 transition-transform duration-500 group-hover/card:scale-105 w-full max-w-[240px]">
-                    {/* Messaggio Agente */}
                     <div className="w-full bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 flex items-center space-x-3 shadow-xl transform -translate-x-4 group-hover/card:-translate-x-2 transition-transform duration-500">
                       <div className="w-6 h-6 rounded-full bg-linear-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-xs shadow-md">🤖</div>
                       <div className="space-y-1.5 flex-1">
@@ -215,8 +248,6 @@ export default function Workflows() {
                       </div>
                       <span className="text-[9px] font-mono text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded border border-indigo-900/30">LIVE</span>
                     </div>
-
-                    {/* Risposta Utente */}
                     <div className="w-full bg-gray-800/40 border border-gray-800/60 rounded-xl p-2.5 flex items-center space-x-3 shadow-lg transform translate-x-4 group-hover/card:translate-x-2 transition-transform duration-500">
                       <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center text-xs">👤</div>
                       <div className="space-y-1.5 flex-1">
@@ -226,7 +257,6 @@ export default function Workflows() {
                     </div>
                   </div>
                 </div>
-
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
@@ -242,40 +272,29 @@ export default function Workflows() {
               </div>
             </a>
 
-            {/* CARD 3: CONNESSIONE ECOSISTEMA */}
+            {/* CARD 3 */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
-                
-                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 3 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover/card:scale-105">
-                    
                     <div className="relative w-44 h-20 flex items-center justify-between">
                       <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
-                      
-                      {/* App 1 */}
                       <div className="w-11 h-11 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 group-hover/card:border-indigo-500/40 transition-colors">
                         <span className="text-base">📧</span>
                       </div>
-
-                      {/* Hub Centrale */}
                       <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.4)] relative z-20 animate-[pulse_2s_infinite]">
                         <div className="w-3 h-3 bg-white rounded-full animate-ping absolute opacity-70"></div>
                         <span className="text-white text-xs font-bold relative z-10">⚡</span>
                       </div>
-
-                      {/* App 2 */}
                       <div className="w-11 h-11 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 group-hover/card:border-purple-500/40 transition-colors">
                         <span className="text-base">💬</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
-
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
