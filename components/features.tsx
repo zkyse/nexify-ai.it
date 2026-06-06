@@ -49,41 +49,41 @@ export default function Features() {
             </p>
           </div>
 
-          {/* MOCKUP CENTRALE IN CODICE TAILWIND (Sostituisce FeaturesImage) */}
+          {/* MOCKUP CENTRALE COMPLETAMENTE RESPONSIVO */}
           <div className="flex justify-center pb-12 md:pb-16" data-aos="fade-up">
-            <div className="w-full max-w-[900px] h-64 rounded-2xl border border-gray-800/60 bg-gray-950/40 backdrop-blur-xs relative flex items-center justify-between p-8 overflow-hidden group">
+            <div className="w-full max-w-[900px] h-auto md:h-64 rounded-2xl border border-gray-800/60 bg-gray-950/40 backdrop-blur-xs relative flex flex-col md:flex-row items-center justify-between p-6 md:p-8 overflow-hidden group gap-6 md:gap-0">
               <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 via-transparent to-transparent pointer-events-none"></div>
               
               {/* Box 1 Interno: Monitoraggio Canali */}
-              <div className="w-1/3 h-full bg-gray-900/40 border border-gray-800/50 rounded-xl p-4 flex flex-col justify-between transition-all duration-500 group-hover:border-indigo-500/20">
+              <div className="w-full md:w-1/3 h-auto md:h-full bg-gray-900/40 border border-gray-800/50 rounded-xl p-4 flex flex-col justify-between gap-4 md:gap-0 transition-all duration-500 group-hover:border-indigo-500/20">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Canali Attivi</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-gray-900">
-                    <span className="text-xs">💬 WhatsApp Custom Agent</span>
-                    <span className="text-[9px] text-indigo-400 font-mono">LIVE</span>
+                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-gray-900 gap-2">
+                    <span className="text-xs truncate">💬 WhatsApp Custom Agent</span>
+                    <span className="text-[9px] text-indigo-400 font-mono shrink-0">LIVE</span>
                   </div>
-                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-gray-900">
-                    <span className="text-xs">📩 Mail Automation HUB</span>
-                    <span className="text-[9px] text-indigo-400 font-mono">IDLE</span>
+                  <div className="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-gray-900 gap-2">
+                    <span className="text-xs truncate">📩 Mail Automation HUB</span>
+                    <span className="text-[9px] text-indigo-400 font-mono shrink-0">IDLE</span>
                   </div>
                 </div>
               </div>
 
-              {/* Connettore Centrale */}
-              <div className="flex-1 flex items-center justify-center relative h-full">
-                <div className="w-full h-px bg-gradient-to-r from-indigo-500/10 via-indigo-500/60 to-purple-500/10 relative">
-                  <div className="absolute w-2 h-2 bg-indigo-400 rounded-full top-1/2 -translate-y-1/2 left-0 animate-[ping_2s_linear_infinite]"></div>
+              {/* Connettore Centrale (Orizzontale su Desktop, Verticale su Mobile) */}
+              <div className="flex-1 flex md:flex-row flex-col items-center justify-center relative h-12 md:h-full w-px md:w-full">
+                <div className="w-px md:w-full h-full md:h-px bg-gradient-to-b md:bg-gradient-to-r from-indigo-500/10 via-indigo-500/60 to-purple-500/10 relative">
+                  <div className="absolute w-2 h-2 bg-indigo-400 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[ping_2s_linear_infinite]"></div>
                 </div>
-                <div className="absolute w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.2)]">
-                  <span className="text-white text-base animate-pulse">⚡</span>
+                <div className="absolute w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.2)] z-10">
+                  <span className="text-white text-sm animate-pulse">⚡</span>
                 </div>
               </div>
 
               {/* Box 2 Interno: Risultati CRM */}
-              <div className="w-1/3 h-full bg-gray-900/40 border border-gray-800/50 rounded-xl p-4 flex flex-col justify-between transition-all duration-500 group-hover:border-purple-500/20">
+              <div className="w-full md:w-1/3 h-auto md:h-full bg-gray-900/40 border border-gray-800/50 rounded-xl p-4 flex flex-col justify-between gap-4 md:gap-0 transition-all duration-500 group-hover:border-purple-500/20">
                 <div className="text-[10px] uppercase font-bold tracking-widest text-gray-500">Sincronizzazione</div>
                 <div className="space-y-1.5">
                   <div className="w-full h-2 bg-indigo-500/20 rounded-xs overflow-hidden">
