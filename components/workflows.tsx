@@ -23,7 +23,6 @@ export default function Workflows() {
                 card.classList.add("active");
               });
 
-              // Smettiamo di osservare per congelare l'animazione ed evitare calcoli inutili
               observer.unobserve(entry.target);
             }
           });
@@ -45,9 +44,8 @@ export default function Workflows() {
   return (
     <section ref={sectionRef} className="relative bg-black overflow-hidden py-16 md:py-24">
       
-      {/* CORE ANIMAZIONI AVANZATE MOBILE */}
+      {/* ANIMAZIONI AVANZATE MOBILE */}
       <style jsx global>{`
-        /* Movimento fluido della nebulosa sullo sfondo */
         @keyframes nebulosaFloatOne {
           0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
           20% { opacity: 0.25; }
@@ -63,28 +61,21 @@ export default function Workflows() {
           100% { transform: translate(-40%, -60%) scale(0.8); opacity: 0; }
         }
 
-        /* Effetto di comparsa a cascata per le card */
         @keyframes cardRevealMobile {
           0% {
             opacity: 0;
             transform: translateY(24px) scale(0.96);
-            border-color: rgba(31, 41, 55, 0.4);
-            box-shadow: 0 0 0px rgba(99, 102, 241, 0);
           }
           40% {
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.4);
           }
           100% {
             opacity: 1;
             transform: translateY(0) scale(1);
-            border-color: rgba(31, 41, 55, 1);
-            box-shadow: 0 0 0px rgba(99, 102, 241, 0);
           }
         }
 
         @media (max-width: 1023px) {
-          /* Gestione della comparsa delle card */
           .mobile-reveal-card {
             opacity: 0;
             transform: translateY(24px) scale(0.96);
@@ -96,7 +87,6 @@ export default function Workflows() {
             animation-delay: var(--delay);
           }
 
-          /* Attivazione dei flussi di luce sullo sfondo */
           .mobile-bg-glow.glow-1.animate-nebulosa {
             animation: nebulosaFloatOne 6s ease-in-out forwards;
           }
@@ -107,14 +97,14 @@ export default function Workflows() {
         }
       `}</style>
 
-      {/* DOPPIO GRADIENTE INCROCIATO PER EFFETTO "NEBULOSA IA" */}
+      {/* NEBULOSA DI SFONDO SU MOBILE */}
       <div className="mobile-bg-glow glow-1 absolute pointer-events-none opacity-0 top-1/2 left-1/2 w-[450px] h-[450px] rounded-full bg-indigo-500/40 blur-[110px] lg:hidden z-0"></div>
       <div className="mobile-bg-glow glow-2 absolute pointer-events-none opacity-0 top-1/3 left-1/3 w-[350px] h-[350px] rounded-full bg-purple-500/30 blur-[90px] lg:hidden z-0"></div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
         <div className="pb-12 md:pb-20">
           
-          {/* TESTATA DELLA SEZIONE */}
+          {/* TESTATA SEZIONE */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium tracking-wide text-xs uppercase animate-pulse">
@@ -129,88 +119,174 @@ export default function Workflows() {
             </p>
           </div>
 
-          {/* GRIGLIA SPOTLIGHT CARD */}
+          {/* GRIGLIA CARD */}
           <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             
-            {/* CARD 1 */}
+            {/* CARD 1: MODELLATO SULLE TUE ESIGENZE */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
+                
+                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 1 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 to-transparent pointer-events-none"></div>
-                  {/* Mockup SVG inserito precedentemente */}
+                  
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10 transition-transform duration-500 group-hover/card:scale-105">
-                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950/80 p-2 flex flex-col justify-between shadow-lg relative">
+                    {/* Input */}
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950/80 p-2 flex flex-col justify-between shadow-lg relative group-hover/card:border-gray-700 transition-colors">
                       <span className="text-xs">📥</span>
-                      <div className="space-y-1"><div className="w-full h-1 bg-gray-800 rounded-xs"></div><div className="w-2/3 h-1 bg-gray-800 rounded-xs"></div></div>
+                      <div className="space-y-1">
+                        <div className="w-full h-1 bg-gray-800 rounded-xs"></div>
+                        <div className="w-2/3 h-1 bg-gray-800 rounded-xs"></div>
+                      </div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-gray-500 uppercase tracking-wider">Process</div>
                     </div>
+
+                    {/* Connettore Linee */}
                     <div className="flex-1 px-2 relative flex items-center justify-center">
-                      <svg className="w-full h-8 text-gray-800" viewBox="0 0 60 32" fill="none"><path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1" /><path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1" /></svg>
+                      <svg className="w-full h-8 text-gray-800 group-hover/card:text-indigo-500/30 transition-colors" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+                        <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1" />
+                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+                        <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1" />
+                      </svg>
+                      <div className="absolute w-1 h-1 bg-indigo-400 rounded-full left-1/4 animate-pulse group-hover/card:bg-purple-400"></div>
                     </div>
-                    <div className="w-20 h-24 rounded-xl border border-indigo-500/30 bg-gradient-to-b from-indigo-950/30 to-purple-950/10 p-2 flex flex-col justify-between shadow-[0_0_20px_rgba(99,102,241,0.05)] relative overflow-hidden">
-                      <span className="text-[10px] font-black font-mono text-indigo-400">SPEC-01</span>
-                      <div className="space-y-1.5"><div className="w-full h-1.5 bg-indigo-500/20 rounded-2xs"></div></div>
+
+                    {/* Output Custom */}
+                    <div className="w-20 h-24 rounded-xl border border-indigo-500/30 bg-gradient-to-b from-indigo-950/30 to-purple-950/10 p-2 flex flex-col justify-between shadow-[0_0_20px_rgba(99,102,241,0.05)] relative overflow-hidden group-hover/card:border-indigo-500/60 group-hover/card:shadow-[0_0_25px_rgba(99,102,241,0.15)] transition-all">
+                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4px_4px]"></div>
+                      <div className="flex items-center justify-between relative z-10">
+                        <span className="text-[10px] font-black font-mono text-indigo-400 tracking-tighter">SPEC-01</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+                      </div>
+                      <div className="space-y-1.5 relative z-10">
+                        <div className="w-full h-3 bg-indigo-500/20 border border-indigo-500/30 rounded-xs flex items-center px-1">
+                          <div className="w-full h-1 bg-indigo-400 rounded-2xs animate-[pulse_2s_infinite]"></div>
+                        </div>
+                        <div className="w-full h-3 bg-purple-500/20 border border-purple-500/30 rounded-xs flex items-center px-1">
+                          <div className="w-4/5 h-1 bg-purple-400 rounded-2xs"></div>
+                        </div>
+                        <div className="w-3/4 h-3 bg-gray-900 border border-gray-800 rounded-xs flex items-center px-1">
+                          <div className="w-1/2 h-1 bg-gray-600 rounded-2xs"></div>
+                        </div>
+                      </div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-indigo-400/70 uppercase tracking-wider whitespace-nowrap">Tailored</div>
                     </div>
                   </div>
+
                 </div>
+
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
-                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">Modellato sulle tue Esigenze</span>
+                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
+                        Modellato sulle tue Esigenze
+                      </span>
                     </span>
                   </div>
-                  <p className="text-sm text-indigo-200/65 leading-relaxed">Sia che tu sia un professionista privato, una PMI o una grande azienda, progettiamo logiche di automazione specifiche basate sul tuo reale volume di lavoro.</p>
+                  <p className="text-sm text-indigo-200/65 leading-relaxed">
+                    Sia che tu sia un professionista privato, una PMI o una grande azienda, progettiamo logiche di automazione specifiche basate sul tuo reale volume di lavoro.
+                  </p>
                 </div>
               </div>
             </a>
 
-            {/* CARD 2 */}
+            {/* CARD 2: AGENTI AUTONOMI 24/7 */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
+                
+                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 2 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
-                  <div className="relative z-10 flex flex-col items-center space-y-3 w-full max-w-[240px]">
-                    <div className="w-full bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 flex items-center space-x-3 shadow-xl transform -translate-x-2">
-                      <div className="w-5 h-5 rounded-full bg-indigo-600 flex items-center justify-center text-[10px]">🤖</div>
-                      <div className="w-2/3 h-1.5 bg-indigo-400/40 rounded-sm"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                  
+                  <div className="relative z-10 flex flex-col items-center space-y-3 transition-transform duration-500 group-hover/card:scale-105 w-full max-w-[240px]">
+                    {/* Messaggio Agente */}
+                    <div className="w-full bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 flex items-center space-x-3 shadow-xl transform -translate-x-4 group-hover/card:-translate-x-2 transition-transform duration-500">
+                      <div className="w-6 h-6 rounded-full bg-linear-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-xs shadow-md">🤖</div>
+                      <div className="space-y-1.5 flex-1">
+                        <div className="w-2/3 h-1.5 bg-indigo-400/40 rounded-sm"></div>
+                        <div className="w-1/2 h-1 bg-gray-700 rounded-sm"></div>
+                      </div>
+                      <span className="text-[9px] font-mono text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded border border-indigo-900/30">LIVE</span>
+                    </div>
+
+                    {/* Risposta Utente */}
+                    <div className="w-full bg-gray-800/40 border border-gray-800/60 rounded-xl p-2.5 flex items-center space-x-3 shadow-lg transform translate-x-4 group-hover/card:translate-x-2 transition-transform duration-500">
+                      <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center text-xs">👤</div>
+                      <div className="space-y-1.5 flex-1">
+                        <div className="w-3/4 h-1.5 bg-gray-500 rounded-sm"></div>
+                        <div className="w-2/5 h-1 bg-gray-700 rounded-sm"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
-                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">Agenti Autonomi 24/7</span>
+                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
+                        Agenti Autonomi 24/7
+                      </span>
                     </span>
                   </div>
-                  <p className="text-sm text-indigo-200/65 leading-relaxed">Sviluppiamo veri e propri assistenti virtuali capaci di dialogare con i clienti, qualificare i contatti commerciali e aggiornare i tuoi database in totale autonomia.</p>
+                  <p className="text-sm text-indigo-200/65 leading-relaxed">
+                    Sviluppiamo veri e propri assistenti virtuali capaci di dialogare con i clienti, qualificare i contatti commerciali e aggiornare i tuoi database in totale autonomia.
+                  </p>
                 </div>
               </div>
             </a>
 
-            {/* CARD 3 */}
+            {/* CARD 3: CONNESSIONE ECOSISTEMA */}
             <a
               className="mobile-reveal-card group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-indigo-500/30 before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity before:duration-500 hover:after:opacity-20 group-hover:before:opacity-100"
               href="#contatti"
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
+                
+                {/* RICONOSCIMENTO GRAFICA DETTAGLIATA CARD 3 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
-                  <div className="relative w-40 h-20 flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg"><span className="text-sm">📧</span></div>
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg"><span className="text-white text-xs">⚡</span></div>
-                    <div className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg"><span className="text-sm">💬</span></div>
+                  <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover/card:scale-105">
+                    
+                    <div className="relative w-44 h-20 flex items-center justify-between">
+                      <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                      
+                      {/* App 1 */}
+                      <div className="w-11 h-11 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 group-hover/card:border-indigo-500/40 transition-colors">
+                        <span className="text-base">📧</span>
+                      </div>
+
+                      {/* Hub Centrale */}
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.4)] relative z-20 animate-[pulse_2s_infinite]">
+                        <div className="w-3 h-3 bg-white rounded-full animate-ping absolute opacity-70"></div>
+                        <span className="text-white text-xs font-bold relative z-10">⚡</span>
+                      </div>
+
+                      {/* App 2 */}
+                      <div className="w-11 h-11 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 group-hover/card:border-purple-500/40 transition-colors">
+                        <span className="text-base">💬</span>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
+
                 <div className="p-6">
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal border border-gray-800">
-                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">Connessione Ecosistema</span>
+                      <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent font-medium">
+                        Connessione Ecosistema
+                      </span>
                     </span>
                   </div>
-                  <p className="text-sm text-indigo-200/65 leading-relaxed">Mettiamo in comunicazione i tuoi software preferiti. Creiamo flussi automatici tra gestionali, email, fogli di calcolo e piattaforme di messaggistica senza attriti.</p>
+                  <p className="text-sm text-indigo-200/65 leading-relaxed">
+                    Mettiamo in comunicazione i tuoi software preferiti. Creiamo flussi automatici tra gestionali, email, fogli di calcolo e piattaforme di messaggistica senza attriti.
+                  </p>
                 </div>
               </div>
             </a>
