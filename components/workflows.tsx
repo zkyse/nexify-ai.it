@@ -17,14 +17,12 @@ export default function Workflows() {
     const rotateX = -(y / (box.height / 2)) * 8;
     const rotateY = (x / (box.width / 2)) * 8;
     
-    // Sovrascrive temporaneamente l'animazione di float per permettere il tilt perfetto
     card.style.animation = "none";
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const card = e.currentTarget;
-    // Ripristina l'animazione nativa della card quando il mouse esce
     const cardIndex = card.getAttribute("data-card-index") || "1";
     card.style.transform = "";
     card.style.animation = `floatingCard${cardIndex} 7s ease-in-out infinite`;
@@ -98,7 +96,7 @@ export default function Workflows() {
           100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
-        /* ================= TRE ANIMAZIONI DI FLOAT ASINCRONE PER LE CARD ================= */
+        /* Animazioni di float asincrone per evitare rigidità di blocco */
         @keyframes floatingCard1 {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-8px) rotate(-0.5deg); }
@@ -128,6 +126,7 @@ export default function Workflows() {
         @media (max-width: 1023px) {
           .mobile-reveal-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
           .mobile-reveal-card.active {
+            /* Mantiene l'effetto di entrata all'intersezione dello scroll */
             animation: cardRevealMobile 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-delay: var(--delay);
           }
@@ -164,11 +163,11 @@ export default function Workflows() {
               Automazioni e Agenti IA su Misura
             </h2>
             <p className="text-lg text-indigo-200/60 max-w-2xl mx-auto">
-              Abbandona i sistemi rigidi e precostituiti. Analizziamo i colli di bottiglia dei tuoi flussi di lavoro per creare ecosistemi intelligenti cuciti sulle deine reali necessità operative.
+              Abbandona i sistemi rigidi e precostituiti. Analizziamo i colli di bottiglia dei tuoi flussi di lavoro per creare ecosistemi intelligenti cuciti sulle tue reali necessità operative.
             </p>
           </div>
 
-          {/* GRIGLIA CARD CON EFFETTI CORRETTI */}
+          {/* GRIGLIA CARD CON EFFETTI UNIFORMATI (ATTIVI ANCHE SU MOBILE) */}
           <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             
             {/* CARD 1: MODELLATO SULLE TUE ESIGENZE */}
@@ -180,14 +179,12 @@ export default function Workflows() {
               onMouseLeave={handleMouseLeave}
               href="#contatti"
             >
-              {/* Effetto luce che segue il mouse sul bordo interno della card */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
               
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
                 <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_70%)] pointer-events-none" />
                   
-                  {/* Animazione interna della pipeline dati */}
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10">
                     <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
                       <span className="text-sm animate-pulse">📥</span>
@@ -199,17 +196,17 @@ export default function Workflows() {
                     </div>
                     
                     <div className="flex-1 px-3 relative flex items-center justify-center">
-                      <svg className="w-full h-8 text-gray-800/80 group-hover/card:text-indigo-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-full h-8 text-indigo-500/40 md:text-gray-800/80 md:group-hover/card:text-indigo-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
                         <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
                         <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
-                      {/* Impulso luminoso che scorre lungo la linea di connessione */}
-                      <div className="absolute w-2 h-2 bg-indigo-400 rounded-full left-0 group-hover/card:animate-[cyberStream_2s_linear_infinite]" style={{ boxShadow: "0 0 8px #6366f1" }} />
+                      {/* Animazione dell'impulso sempre attiva su mobile, nativa su desktop in hover */}
+                      <div className="absolute w-2 h-2 bg-indigo-400 rounded-full left-0 animate-[cyberStream_2s_linear_infinite]" style={{ boxShadow: "0 0 8px #6366f1" }} />
                     </div>
                     
-                    <div className="w-20 h-24 rounded-xl border border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/50 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.12)] transition-all duration-500 float-icon">
+                    <div className="w-20 h-24 rounded-xl border border-indigo-500/30 md:border-indigo-500/20 bg-gradient-to-b from-indigo-950/20 to-purple-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-indigo-500/50 group-hover/card:shadow-[0_0_30px_rgba(99,102,241,0.12)] transition-all duration-500 float-icon">
                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
                       <div className="flex items-center justify-between relative z-10">
                         <span className="text-[9px] font-black font-mono text-indigo-400">CORE-A1</span>
@@ -255,25 +252,37 @@ export default function Workflows() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
               
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
-                <div className="relative h-52 w-full bg-gray-900/40 border-b border-gray-900/80 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.08)_0%,transparent_70%)] pointer-events-none" />
                   
-                  <div className="relative z-10 flex flex-col items-center space-y-3 w-full max-w-[240px]">
-                    <div className="w-full bg-gray-900/90 border border-gray-800 rounded-xl p-3 flex items-center space-x-3 shadow-xl transition-all duration-500 transform group-hover/card:-translate-y-1 group-hover/card:border-purple-500/30">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-xs shadow-md animate-bounce" style={{ animationDuration: "3s" }}>🤖</div>
-                      <div className="space-y-1.5 flex-1">
-                        <div className="w-2/3 h-1.5 bg-indigo-400/40 rounded-sm" />
-                        <div className="w-1/2 h-1 bg-gray-700 rounded-sm" />
+                  <div className="flex items-center justify-between w-full max-w-[260px] z-10">
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-2 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
+                      <span className="text-sm animate-pulse">👤</span>
+                      <div className="space-y-1">
+                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
+                        <div className="w-4/5 h-1 bg-gray-800 rounded-xs" />
                       </div>
-                      <span className="text-[8px] font-mono font-bold text-purple-400 bg-purple-950/40 px-1.5 py-0.5 rounded border border-purple-900/40 tracking-wider">THINKING</span>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest">PROMPT</div>
                     </div>
                     
-                    <div className="w-full bg-gray-950/60 border border-gray-900/80 rounded-xl p-3 flex items-center space-x-3 shadow-md transition-all duration-500 transform group-hover/card:translate-y-1">
-                      <div className="w-7 h-7 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-xs">👤</div>
-                      <div className="space-y-1.5 flex-1">
-                        <div className="w-3/4 h-1.5 bg-gray-600 rounded-sm" />
-                        <div className="w-2/5 h-1 bg-gray-800 rounded-sm" />
+                    <div className="flex-1 px-3 relative flex items-center justify-center">
+                      <svg className="w-full h-8 text-purple-500/40 md:text-gray-800/80 md:group-hover/card:text-purple-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                      <div className="absolute w-2 h-2 bg-purple-400 rounded-full left-0 animate-[cyberStream_2s_linear_infinite]" style={{ boxShadow: "0 0 8px #a855f7" }} />
+                    </div>
+                    
+                    <div className="w-20 h-24 rounded-xl border border-purple-500/30 md:border-purple-500/20 bg-gradient-to-b from-purple-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-purple-500/50 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.12)] transition-all duration-500 float-icon">
+                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
+                      <div className="flex items-center justify-between relative z-10">
+                        <span className="text-[9px] font-black font-mono text-purple-400">AGENT-IA</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400" style={{ animation: "pulseRadar 2s infinite" }} />
                       </div>
+                      <div className="text-center text-base py-0.5 animate-bounce" style={{ animationDuration: "2.5s" }}>🤖</div>
+                      <span className="text-[7px] font-mono text-purple-400 bg-purple-950/60 px-1 py-0.5 rounded border border-purple-900/40 text-center tracking-tighter uppercase">THINKING</span>
                     </div>
                   </div>
                 </div>
@@ -305,26 +314,43 @@ export default function Workflows() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
               
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 flex flex-col justify-between" style={{ transform: "translateZ(20px)" }}>
-                <div className="relative h-52 w-full bg-gray-900/40 border-b border-gray-900/80 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.06)_0%,transparent_60%)] pointer-events-none" />
+                <div className="relative h-52 w-full bg-gray-900/20 border-b border-gray-900/80 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/10 transition-colors">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0%,transparent_70%)] pointer-events-none" />
                   
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative w-48 h-20 flex items-center justify-between">
-                      <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-0" />
-                      
-                      {/* Icone con micro-rimbalzi indipendenti in hover */}
-                      <div className="w-12 h-12 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 transition-all duration-500 group-hover/card:border-blue-500/40 group-hover/card:-translate-x-1">
-                        <span className="text-lg">📧</span>
+                  <div className="flex items-center justify-between w-full max-w-[260px] z-10">
+                    <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950 p-1.5 flex flex-col justify-between shadow-xl relative group-hover/card:border-gray-700/80 transition-colors">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs">📧</span>
+                        <span className="text-xs">💬</span>
                       </div>
-                      
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-[0_0_25px_rgba(59,130,246,0.4)] relative z-20 transition-transform duration-500 group-hover/card:scale-110">
-                        <div className="w-4 h-4 bg-white/20 rounded-full animate-ping absolute opacity-40" />
-                        <span className="text-white text-sm font-black relative z-10">⚡</span>
+                      <div className="space-y-1">
+                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
+                        <div className="w-full h-1 bg-gray-800 rounded-xs" />
                       </div>
-                      
-                      <div className="w-12 h-12 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center shadow-lg relative z-10 transition-all duration-500 group-hover/card:border-indigo-500/40 group-hover/card:translate-x-1">
-                        <span className="text-lg">💬</span>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono font-medium text-gray-500 uppercase tracking-widest">APPS</div>
+                    </div>
+                    
+                    <div className="flex-1 px-3 relative flex items-center justify-center">
+                      <svg className="w-full h-8 text-blue-500/40 md:text-gray-800/80 md:group-hover/card:text-blue-500/40 transition-colors duration-500" viewBox="0 0 60 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 4 C20 4, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path d="M0 16 C20 16, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M0 28 C20 28, 10 16, 30 16" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                        <path d="M30 16 C45 16, 40 16, 60 16" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                      <div className="absolute w-2 h-2 bg-blue-400 rounded-full left-0 animate-[cyberStream_2s_linear_infinite]" style={{ boxShadow: "0 0 8px #3b82f6" }} />
+                    </div>
+                    
+                    <div className="w-20 h-24 rounded-xl border border-blue-500/30 md:border-blue-500/20 bg-gradient-to-b from-blue-950/20 to-indigo-950/5 p-2.5 flex flex-col justify-between shadow-2xl relative overflow-hidden group-hover/card:border-blue-500/50 group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.12)] transition-all duration-500 float-icon">
+                      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px)] bg-[size:4px_4px]" />
+                      <div className="flex items-center justify-between relative z-10">
+                        <span className="text-[9px] font-black font-mono text-blue-400">HUB-API</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400" style={{ animation: "pulseRadar 2s infinite" }} />
                       </div>
+                      <div className="relative flex justify-center py-1">
+                        <div className="w-4 h-4 bg-blue-500/20 rounded-full animate-ping absolute opacity-40" />
+                        <span className="text-blue-400 text-sm font-black relative z-10">⚡</span>
+                      </div>
+                      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-blue-400/60 uppercase tracking-widest whitespace-nowrap">SYNC-ON</div>
                     </div>
                   </div>
                 </div>
