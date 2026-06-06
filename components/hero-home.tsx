@@ -26,7 +26,6 @@ export default function HeroHome() {
     }, 22500);
 
     // ================= FLUSSO SARA (Step 9-16) =================
-    // Step 9: Sara typing 1 (già attivo al cambio)
     const t10 = setTimeout(() => setStep(10), 24500); // Sara msg 1
     const t11 = setTimeout(() => setStep(11), 27000); // IA typing 3
     const t12 = setTimeout(() => setStep(12), 30000); // IA msg 3 (Che business?)
@@ -49,7 +48,47 @@ export default function HeroHome() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full">
+      
+      {/* ================= INIEZIONE STILI CSS DELLE ANIMAZIONI ================= */}
+      <style jsx global>{`
+        @keyframes mainGlowMotion {
+          0% {
+            transform: translate(-30%, -40%) scale(1);
+            opacity: 0.15;
+          }
+          33% {
+            transform: translate(-60%, -20%) scale(1.2);
+            opacity: 0.25;
+          }
+          66% {
+            transform: translate(-20%, -60%) scale(0.9);
+            opacity: 0.2;
+          }
+          100% {
+            transform: translate(-30%, -40%) scale(1);
+            opacity: 0.15;
+          }
+        }
+
+        @keyframes chatGlowPulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.12; filter: blur(64px); }
+          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.22; filter: blur(80px); }
+        }
+
+        .animate-main-glow {
+          animation: mainGlowMotion 15s ease-in-out infinite;
+        }
+
+        .animate-chat-glow {
+          animation: chatGlowPulse 6s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* 1. BAGLIORE DI SFONDO PRINCIPALE (Grande effetto Aurora che fluttua nella sezione) */}
+      <div className="animate-main-glow absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-transparent blur-[130px] pointer-events-none z-0" />
+      <div className="animate-main-glow absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-indigo-600/15 blur-[100px] pointer-events-none z-0 [animation-delay:-5s]" />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
         <div className="pt-2 pb-12 md:pt-4 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
           {/* COLONNA SINISTRA */}
@@ -75,7 +114,9 @@ export default function HeroHome() {
 
           {/* COLONNA DESTRA: Mockup Chat */}
           <div className="relative flex justify-center w-full" data-aos="fade-left" data-aos-delay={200}>
-            <div className="absolute w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+            
+            {/* 2. BAGLIORE DIETRO LA CHAT ANIMATO (Pulsante e magnetico) */}
+            <div className="animate-chat-glow absolute w-80 h-80 bg-indigo-500 rounded-full pointer-events-none top-1/2 left-1/2" />
             
             <div className="relative z-10 border border-gray-800 bg-gray-900/40 backdrop-blur-xl rounded-2xl p-6 w-full max-w-[440px] aspect-square flex flex-col justify-center shadow-2xl overflow-hidden">
               <div className={`space-y-3 transition-all duration-500 ease-in-out ${isExiting ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-none"}`}>
