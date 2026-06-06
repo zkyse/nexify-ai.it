@@ -7,16 +7,13 @@ export default function Workflows() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Applichiamo l'effetto triggerato dallo scroll solo sui dispositivi mobile/tablet
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Quando la sezione è visibile, aggiunge la classe di animazione alle card
               const cards = entry.target.querySelectorAll(".mobile-glow-card");
               cards.forEach((card, index) => {
-                // l'effetto viene sfalsato (delay) per ogni card per creare un'onda elegante
                 (card as HTMLElement).style.animationDelay = `${index * 0.4}s`;
                 card.classList.add("animate-mobile-glow");
               });
@@ -24,7 +21,7 @@ export default function Workflows() {
           });
         },
         { 
-          threshold: 0.2, // Si attiva quando il 20% della sezione è visibile sullo schermo
+          threshold: 0.2,
           rootMargin: "0px 0px -10% 0px" 
         }
       );
@@ -35,11 +32,10 @@ export default function Workflows() {
 
       return () => observer.disconnect();
     }
-   animate-mobile-glow}, []);
+  }, []);
 
   return (
     <section ref={sectionRef} className="relative bg-black overflow-hidden">
-      {/* Stile CSS Inline temporaneo per gestire l'animazione di emergenza su mobile */}
       <style jsx global>{`
         @keyframes mobileGlow {
           0% {
@@ -94,18 +90,16 @@ export default function Workflows() {
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* GRAFICA TAILWIND 1: IL WORKFLOW SARTORIALE */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-4 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 bg-radial-gradient from-indigo-500/5 to-transparent pointer-events-none"></div>
                   
                   <div className="flex items-center justify-between w-full max-w-[260px] z-10 transition-transform duration-500 group-hover/card:scale-105">
-                    
                     {/* Input */}
                     <div className="w-16 h-16 rounded-xl border border-gray-800 bg-gray-950/80 p-2 flex flex-col justify-between shadow-lg relative group-hover/card:border-gray-700 transition-colors">
                       <span className="text-xs">📥</span>
                       <div className="space-y-1">
-                        <div className="w-full h-1 bg-gray-800 rounded-xs"></div>
-                        <div className="w-2/3 h-1 bg-gray-800 rounded-xs"></div>
+                        <div className="w-full h-1 bg-gray-880 rounded-xs"></div>
+                        <div className="w-2/3 h-1 bg-gray-880 rounded-xs"></div>
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-gray-500 uppercase tracking-wider">Process</div>
                     </div>
@@ -143,7 +137,6 @@ export default function Workflows() {
                       </div>
                       <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[8px] font-mono text-indigo-400/70 uppercase tracking-wider whitespace-nowrap">Tailored</div>
                     </div>
-
                   </div>
                 </div>
 
@@ -169,7 +162,6 @@ export default function Workflows() {
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* GRAFICA TAILWIND 2 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
                   
@@ -212,7 +204,6 @@ export default function Workflows() {
             >
               <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50 flex flex-col justify-between">
                 
-                {/* GRAFICA TAILWIND 3 */}
                 <div className="relative h-48 w-full bg-gray-900/40 border-b border-gray-800/60 flex items-center justify-center p-6 overflow-hidden group-hover/card:bg-gray-900/20 transition-colors">
                   <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover/card:scale-105">
                     
@@ -232,7 +223,6 @@ export default function Workflows() {
                         <span className="text-sm">💬</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
 
