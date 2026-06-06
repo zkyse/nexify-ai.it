@@ -79,6 +79,14 @@ export default function Workflows() {
           50%, 100% { transform: translateX(250%) skewX(-45deg); opacity: 0; }
         }
 
+        /* Animazione verticale per la pioggia di codice tech */
+        @keyframes techRainFall {
+          0% { transform: translateY(-100%); opacity: 0; }
+          10% { opacity: 0.5; }
+          90% { opacity: 0.4; }
+          100% { transform: translateY(100vh); opacity: 0; }
+        }
+
         /* Effetto respirazione radar per i nodi interni */
         @keyframes pulseRadar {
           0% { transform: scale(0.95); opacity: 0.2; box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
@@ -112,6 +120,21 @@ export default function Workflows() {
         .cyber-flow { animation: cyberStream 8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
         .float-icon { animation: floatCardElement 4.5s ease-in-out infinite; }
 
+        /* Struttura della pioggia digitale */
+        .wf-rain-stream {
+          position: absolute;
+          top: 0;
+          color: #6366f1;
+          font-family: monospace;
+          font-size: 11px;
+          writing-mode: vertical-rl;
+          text-orientation: uppercase;
+          white-space: nowrap;
+          user-select: none;
+          animation: techRainFall linear infinite;
+          opacity: 0;
+        }
+
         /* Applicazione del floating continuo nativo (di base attivo su desktop) */
         .desktop-float-1 { animation: floatingCard1 7s ease-in-out infinite; }
         .desktop-float-2 { animation: floatingCard2 8s ease-in-out infinite; animation-delay: 0.5s; }
@@ -125,7 +148,6 @@ export default function Workflows() {
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             transition-delay: var(--delay);
           }
-          /* Invece di una seconda animazione che rompe il float, usiamo le transizioni CSS per l'opacità */
           .mobile-reveal-card.active {
             opacity: 1;
             filter: blur(0);
@@ -136,13 +158,25 @@ export default function Workflows() {
       {/* --- STRATO 1: SOTTILISSIMA RETE GEOMETRICA DI LOGICA --- */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none z-0" />
 
+      {/* --- STRATO 1.5: CASCATA DI CODICE TECH (PIOGGIA DIGITALE) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.22]">
+        <div className="wf-rain-stream left-[4%]" style={{ animationDuration: '8s', animationDelay: '0s' }}>1100101101</div>
+        <div className="wf-rain-stream left-[15%] text-purple-400" style={{ animationDuration: '11s', animationDelay: '3s', fontSize: '13px' }}>01011010</div>
+        <div className="wf-rain-stream left-[28%]" style={{ animationDuration: '7s', animationDelay: '0.8s' }}>10110011</div>
+        <div className="wf-rain-stream left-[42%] text-indigo-400" style={{ animationDuration: '13s', animationDelay: '5s' }}>0011010110</div>
+        <div className="wf-rain-stream left-[55%] text-purple-500" style={{ animationDuration: '9s', animationDelay: '1.5s', fontSize: '10px' }}>111001</div>
+        <div className="wf-rain-stream left-[68%]" style={{ animationDuration: '8s', animationDelay: '4.2s' }}>100110101</div>
+        <div className="wf-rain-stream left-[82%] text-indigo-300" style={{ animationDuration: '12s', animationDelay: '2s' }}>011011001</div>
+        <div className="wf-rain-stream left-[93%] text-purple-400" style={{ animationDuration: '7s', animationDelay: '0.3s', fontSize: '12px' }}>1010011</div>
+      </div>
+
       {/* --- STRATO 2: NEBULOSE DINAMICHE AD ALTA FLUIDITÀ --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="animate-liquid-1 absolute top-[5%] left-[15%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-indigo-600/10 via-purple-500/5 to-transparent" />
         <div className="animate-liquid-2 absolute bottom-[-5%] right-[10%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-purple-600/10 via-blue-600/5 to-transparent" />
       </div>
 
-      {/* --- STRATO 3: SCORRIMENTO FLUSSI CYBER --- */}
+      {/* --- STRATO 3: SCORRIMENTO FLUSSI CYBER OREZZONTALI --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-50">
         <div className="cyber-flow absolute top-[35%] left-0 w-1/2 h-[1.5px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent shadow-[0_0_10px_rgba(99,102,241,0.4)]" style={{ animationDelay: "0s", animationDuration: "7s" }} />
         <div className="cyber-flow absolute top-[75%] left-0 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent shadow-[0_0_8px_rgba(168,85,247,0.3)]" style={{ animationDelay: "2.5s", animationDuration: "10s" }} />
@@ -231,7 +265,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
             {/* CARD 2 */}
             <a
@@ -287,7 +321,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
             {/* CARD 3 */}
             <a
@@ -349,7 +383,7 @@ export default function Workflows() {
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
 
           </Spotlight>
         </div>
