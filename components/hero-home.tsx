@@ -1,13 +1,17 @@
+"use client";
+
 import Image from "next/image";
 // Sostituisci questo import con il percorso del tuo logo 200x200 o dell'immagine tech che preferisci
 import TechGraphic from "@/public/images/hero-image-01.jpg"; 
 
 export default function HeroHome() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
+    /* 1. Ridotto pt-24 a pt-8 per avvicinare la sezione all'header superiore */
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 pb-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full">
-        {/* Layout a due colonne: si affiancano su schermi grandi (md) */}
-        <div className="py-12 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        
+        {/* 2. Ridotto il padding top (py-12 md:py-20 -> pt-2 pb-12 md:pt-4 md:pb-20) per stringere lo spazio in mezzo */}
+        <div className="pt-2 pb-12 md:pt-4 md:pb-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
           {/* COLONNA SINISTRA: Testi e Pulsanti di Azione */}
           <div className="text-left space-y-6" data-aos="fade-right">
