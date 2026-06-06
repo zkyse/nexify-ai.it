@@ -57,26 +57,26 @@ export default function HeroHome() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-4 pb-12 bg-[#02040a]">
       
-      {/* INIEZIONE DIRETTA DEI KEYFRAMES (Infallibile e cross-browser) */}
+      {/* INIEZIONE DIRETTA DEI KEYFRAMES (Infallibile, Fluida e Ottimizzata Mobile) */}
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes cosmicNebula {
-          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-          33% { transform: translate3d(4%, 6%, 0) scale(1.15); }
-          66% { transform: translate3d(-3%, -4%, 0) scale(0.9); }
+        @keyframes cosmicNebulaMobile {
+          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+          50% { transform: translate3d(5%, 8%, 0) rotate(180deg); }
+          100% { transform: translate3d(0, 0, 0) rotate(360deg); }
         }
-        @keyframes gridPan {
+        @keyframes gridPanMobile {
           0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(0, 40px, 0); }
+          100% { transform: translate3d(0, 20px, 0); }
         }
-        @keyframes dataStream {
-          0% { transform: translate3d(0, -100%, 0); opacity: 0; }
-          10% { opacity: 0.7; }
-          90% { opacity: 0.7; }
+        @keyframes dataStreamMobile {
+          0% { transform: translate3d(0, -150px, 0); opacity: 0; }
+          15% { opacity: 0.6; }
+          85% { opacity: 0.6; }
           100% { transform: translate3d(0, 100vh, 0); opacity: 0; }
         }
         @keyframes centralPulse {
-          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(0.95); opacity: 0.15; }
-          50% { transform: translate3d(-50%, -50%, 0) scale(1.1); opacity: 0.25; }
+          0%, 100% { transform: translate3d(-50%, -50%, 0) scale(0.92); opacity: 0.12; }
+          50% { transform: translate3d(-50%, -50%, 0) scale(1.08); opacity: 0.22; }
         }
         @keyframes msgPopIn {
           0% { opacity: 0; transform: translate3d(0, 12px, 0); }
@@ -94,33 +94,41 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* --- STRATO 1: RETICOLO CYBER TECNOLOGICO DI SFONDO --- */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.08] overflow-hidden">
+      {/* --- STRATO 1: RETICOLO CYBER DI SFONDO (Funziona ovunque) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.07] overflow-hidden">
         <div 
-          className="absolute inset-[-40px] bg-[linear-gradient(to_right,#312e81_1px,transparent_1px),linear-gradient(to_bottom,#312e81_1px,transparent_1px)] bg-[size:40px_40px]" 
-          style={{ animation: "gridPan 8s linear infinite", willChange: "transform" }}
+          className="absolute inset-[-20px] bg-[linear-gradient(to_right,#312e81_1px,transparent_1px),linear-gradient(to_bottom,#312e81_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:40px_40px]" 
+          style={{ animation: "gridPanMobile 6s linear infinite", willChange: "transform" }}
         />
       </div>
 
-      {/* --- STRATO 2: NEBULA CHROMATIC LIGHTS (Grandi cerchi sfumati in movimento GPU) --- */}
+      {/* --- STRATO 2: CHROMATIC NEBULA AMBIENT (Movimento rotatorio 3D super leggero) --- */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Cerchio Indigo Sinistro */}
+        {/* Sfera Indigo Top-Left */}
         <div 
-          className="absolute top-[-20%] left-[-10%] w-[500px] md:w-[900px] h-[500px] md:h-[900px] rounded-full bg-indigo-600/15 blur-[120px]" 
-          style={{ animation: "cosmicNebula 25s ease-in-out infinite", willChange: "transform" }}
+          className="absolute top-[-10%] left-[-20%] w-[320px] sm:w-[600px] md:w-[900px] h-[320px] sm:h-[600px] md:h-[900px] rounded-full bg-indigo-600/10 md:bg-indigo-600/15 blur-[80px] sm:blur-[120px]" 
+          style={{ animation: "cosmicNebulaMobile 20s linear infinite", willChange: "transform" }}
         />
-        {/* Cerchio Viola/Fucsia Destro */}
+        {/* Sfera Purple Bottom-Right */}
         <div 
-          className="absolute bottom-[-10%] right-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] rounded-full bg-purple-600/10 blur-[130px]" 
-          style={{ animation: "cosmicNebula 18s ease-in-out infinite reverse", willChange: "transform" }}
+          className="absolute bottom-[-10%] right-[-20%] w-[280px] sm:w-[500px] md:w-[800px] h-[280px] sm:h-[500px] md:h-[800px] rounded-full bg-purple-600/10 blur-[90px] sm:blur-[130px]" 
+          style={{ animation: "cosmicNebulaMobile 16s linear infinite reverse", willChange: "transform" }}
         />
       </div>
 
-      {/* --- STRATO 3: DATA STREAMERS (Linee verticali - Nascoste nativamente su mobile via Tailwind) --- */}
-      <div className="hidden md:block absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40">
-        <div className="absolute left-[15%] top-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-indigo-500/50 to-transparent" style={{ animation: "dataStream 7s cubic-bezier(0.4, 0, 0.2, 1) infinite", willChange: "transform" }} />
-        <div className="absolute left-[45%] top-0 w-[1px] h-24 bg-gradient-to-b from-transparent via-purple-500/40 to-transparent" style={{ animation: "dataStream 5s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "2s", willChange: "transform" }} />
-        <div className="absolute left-[80%] top-0 w-[1px] h-40 bg-gradient-to-b from-transparent via-blue-500/40 to-transparent" style={{ animation: "dataStream 9s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "4s", willChange: "transform" }} />
+      {/* --- STRATO 3: DATA STREAMERS (Attivi anche su mobile, bilanciati per performance) --- */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 md:opacity-40">
+        {/* Streamer 1: Visibile solo su mobile e tablet in posizione strategica */}
+        <div className="absolute left-[8%] lg:left-[15%] top-0 w-[1px] h-24 md:h-32 bg-gradient-to-b from-transparent via-indigo-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 5s cubic-bezier(0.4, 0, 0.2, 1) infinite", willChange: "transform" }} />
+        
+        {/* Streamer 2: Centrale */}
+        <div className="absolute left-[50%] lg:left-[45%] top-0 w-[1px] h-20 md:h-24 bg-gradient-to-b from-transparent via-purple-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 4s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "1.5s", willChange: "transform" }} />
+        
+        {/* Streamer 3: Destro (Nascosto su schermi piccolissimi per pulizia visiva) */}
+        <div className="hidden sm:block absolute left-[88%] lg:left-[80%] top-0 w-[1px] h-28 md:h-40 bg-gradient-to-b from-transparent via-blue-400 to-transparent" 
+             style={{ animation: "dataStreamMobile 6s cubic-bezier(0.4, 0, 0.2, 1) infinite", animationDelay: "3s", willChange: "transform" }} />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full relative z-10">
@@ -152,8 +160,8 @@ export default function HeroHome() {
             
             {/* Bagliore magnetico della chat */}
             <div 
-              className="absolute w-72 h-72 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[60px]" 
-              style={{ animation: "centralPulse 6s ease-in-out infinite", willChange: "transform" }} 
+              className="absolute w-64 h-64 md:w-85 md:h-85 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[50px] md:blur-[60px]" 
+              style={{ animation: "centralPulse 5s ease-in-out infinite", willChange: "transform" }} 
             />
             
             {/* Scocca del terminale di Chat */}
