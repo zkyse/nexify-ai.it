@@ -79,7 +79,10 @@ export default function HeroHome() {
                       <span className="block text-xs font-semibold text-gray-400 mb-0.5">Marco</span>
                       <p className="text-sm leading-relaxed">Vorrei spostare il mio appuntamento alla prossima settimana.</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-amber-400 to-orange-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">M</div>
+                    {/* MODIFICATO: Gradiente stile logo Nexify con ombra abbinata */}
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                      M
+                    </div>
                   </div>
 
                   {/* Risposta IA a Marco */}
@@ -98,7 +101,7 @@ export default function HeroHome() {
                           </div>
                         )}
                         {step === 3 && (
-                          <p className="text-sm leading-relaxed animate-[fadeIn_0.3s_ease-out]">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?</p>
+                          <p className="text-sm leading-relaxed text-white">Certamente! Ti va bene Martedì alle 15:00 o preferisci Giovedì mattina?</p>
                         )}
                       </div>
                     </div>
@@ -115,37 +118,48 @@ export default function HeroHome() {
                       <span className="block text-xs font-semibold text-gray-400 mb-0.5">Sara</span>
                       <p className="text-sm leading-relaxed">Ciao! Vorrei saperne di più sui vostri servizi di automazione.</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-teal-400 to-emerald-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">S</div>
+                    {/* MODIFICATO: Gradiente stile logo Nexify con ombra abbinata */}
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                      S
+                    </div>
                   </div>
 
-{/* Risposta IA a Sara */}
-{step >= 5 && (
-  <div className="flex items-start space-x-3">
-    <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
-      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-        <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
-      </svg>
-    </div>
-    
-    {/* Fumetto di risposta mancante aggiunto qui */}
-    <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px]">
-      <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
-      
-      {step === 5 && (
-        /* Animazione dei pallini mentre scrive */
-        <div className="flex items-center space-x-1 py-2">
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                  {/* Risposta IA a Sara */}
+                  {step >= 5 && (
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white shadow-[0_0_15px_rgba(79,70,229,0.4)]">
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8 1 5.4-4.9-2.5-4.9 2.5 1-5.4-3.9-3.8 5.4-.8z" />
+                        </svg>
+                      </div>
+                      
+                      <div className="bg-gray-800/60 border border-gray-700 text-gray-200 rounded-2xl rounded-tl-none p-3.5 max-w-[80%] min-w-[100px]">
+                        <span className="block text-xs font-semibold text-indigo-400 mb-0.5">Agente IA</span>
+                        
+                        {step === 5 && (
+                          <div className="flex items-center space-x-1 py-2">
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                          </div>
+                        )}
+                        
+                        {step === 6 && (
+                          <p className="text-sm leading-relaxed text-white">
+                            Ciao Sara! Sviluppiamo agenti IA su misura per eliminare compiti ripetitivi. Che tipo di business gestisci?
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+            </div>
+          </div>
+
         </div>
-      )}
-      
-      {step === 6 && (
-        /* Messaggio finale per Sara */
-        <p className="text-sm leading-relaxed text-white">
-          Ciao Sara! Sviluppiamo agenti IA su misura per eliminare compiti ripetitivi. Che tipo di business gestisci?
-        </p>
-      )}
-    </div>
-  </div>
-)}
+      </div>
+    </section>
+  );
+}
