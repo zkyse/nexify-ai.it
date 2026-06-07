@@ -73,12 +73,12 @@ export default function Cta() {
               <div data-aos="fade-up" data-aos-delay={300} className="w-full sm:w-auto">
                 <a
                   className="btn group w-full inline-flex justify-center items-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-medium rounded-xl px-7 py-3 transition-all duration-300 animate-auto-btn-primary active:scale-95 whitespace-nowrap"
-                  href="https://wa.me/message/Y7G7NANQK6ACA1"
+                  href="/contatti"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span className="relative inline-flex items-center">
-                    Prenota una Call
+                    Prenota una consulenza
                     <span className="ml-2 tracking-normal text-white/70 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1 inline-block">
                       -&gt;
                     </span>
