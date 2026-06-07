@@ -109,10 +109,10 @@ export default function ContattiPage() {
               <h3 className="text-sm font-semibold text-white mb-1">Via Email</h3>
               <p className="text-xs text-gray-400 mb-2">Per richieste commerciali, dettagliate o partnership.</p>
               <a 
-                href="mailto:info@nexify-ai.it" 
+                href="mailto:office@nexify-ai.it" 
                 className="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition break-all"
               >
-                info@nexify-ai.it
+                office@nexify-ai.it
               </a>
             </div>
           </div>
