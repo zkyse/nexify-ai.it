@@ -23,7 +23,7 @@ export default function Header() {
       { label: "Per Grandi Aziende", href: "/per-aziende" },
       { label: "Per Piccole e Medie Imprese", href: "/soluzioni-pmi" },
       { label: "Per Privati e Professionisti", href: "/soluzioni-professionisti" },
-      { label: "Casi di Successo", href: "/casi-successo" },
+      { label: "Casi di Successo", href: "/casi-studio" },
     ],
     agenzia: [
       { label: "Chi Siamo", href: "/chi-siamo" },
