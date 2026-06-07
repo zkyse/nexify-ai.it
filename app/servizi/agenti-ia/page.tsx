@@ -41,7 +41,7 @@ export default function AgentiIAPage() {
           100% { transform: translate3d(-40px, -40px, 0); }
         }
         @keyframes cardPopInUp {
-          0% { opacity: 0; transform: translate3d(0, 12px, 0); }
+          0% { opacity: 0; transform: translate3d(0, 15px, 0); }
           100% { opacity: 1; transform: translate3d(0, 0, 0); }
         }
         @keyframes techRainLuminous {
@@ -50,9 +50,12 @@ export default function AgentiIAPage() {
         }
         @keyframes pulseButtonHero { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 4px 20px rgba(99,102,241,0.4); } }
 
-        .animate-card {
+        .animate-hero-content {
+          animation: cardPopInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .animate-card-item {
           opacity: 0;
-          animation: cardPopInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+          animation: cardPopInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
         .animate-auto-hero-primary { animation: pulseButtonHero 3s ease-in-out infinite; }
         
@@ -72,16 +75,14 @@ export default function AgentiIAPage() {
         }
       `}} />
 
-      {/* STRATO PIOGGIA CONCEPTUALE (PERSONALIZZATA AGENTI IA) */}
+      {/* STRATO PIOGGIA CONCEPTUALE */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <div className="rain-stream left-[5%] text-[#818cf8]/15 text-[8px] blur-[1px]" style={{ animationDuration: '18s', animationDelay: '0s' }}>AI_AGENT_DEPLOY</div>
         <div className="rain-stream left-[28%] text-[#a855f7]/10 text-[9px] blur-[1px]" style={{ animationDuration: '22s', animationDelay: '4s' }}>NEURAL_NET_SYNC</div>
         <div className="rain-stream left-[52%] text-[#6366f1]/15 text-[8px]" style={{ animationDuration: '19s', animationDelay: '1s' }}>LLM_PROCESSING</div>
         <div className="rain-stream left-[73%] text-[#22d3ee]/10 text-[9px] blur-[2px]" style={{ animationDuration: '25s', animationDelay: '7s' }}>DECISION_MAKING</div>
-        
         <div className="rain-stream left-[12%] text-[#c084fc]/35 text-[11px]" style={{ animationDuration: '12s', animationDelay: '2s', textShadow: '0 0 4px rgba(192,132,252,0.2)' }}>AUTONOMOUS_OPS</div>
         <div className="rain-stream left-[42%] text-[#38bdf8]/30 text-[10px]" style={{ animationDuration: '14s', animationDelay: '0.8s', textShadow: '0 0 4px rgba(56,189,248,0.2)' }}>INTELLIGENT_BOT</div>
-        
         <div className="rain-stream left-[18%] text-[#22d3ee]/55 text-[12px]" style={{ animationDuration: '6.5s', animationDelay: '1.5s', textShadow: '0 0 8px rgba(34,211,238,0.4)' }}>SMART_AGENTS</div>
         <div className="rain-stream left-[65%] text-[#6366f1]/65 text-[14px]" style={{ animationDuration: '8s', animationDelay: '2.5s', textShadow: '0 0 10px rgba(99,102,241,0.5)' }}>CORE_INTELLIGENCE</div>
       </div>
@@ -97,7 +98,6 @@ export default function AgentiIAPage() {
         <div className="absolute bottom-[-10%] right-[-20%] w-[350px] md:w-[700px] h-[350px] md:h-[700px] rounded-full bg-purple-600/6 blur-[110px]" style={{ animation: "cosmicNebulaPerfect 35s linear infinite reverse", transform: "translateZ(0)" }} />
       </div>
 
-      {/* STRUTTURA CONTENUTI */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 w-full relative z-10">
         
         {/* Torna alla Home */}
@@ -106,7 +106,7 @@ export default function AgentiIAPage() {
         </Link>
 
         {/* HERO SECTION */}
-        <section className="space-y-4 mb-16 animate-card" style={{ animationDelay: '0.1s' }}>
+        <section className="space-y-4 mb-16 animate-hero-content">
           <span className="text-[10px] font-bold tracking-wider uppercase text-indigo-400 bg-gray-900/90 border border-gray-800/70 rounded-full px-3 py-1">
             Soluzioni Core
           </span>
@@ -118,15 +118,15 @@ export default function AgentiIAPage() {
           </p>
         </section>
 
-        {/* GRIGLIA BENEFICI (CONTENITORI CHAT COMPONENTE STYLE) */}
+        {/* GRIGLIA BENEFICI (ANIMATA CARD PER CARD) */}
         <section className="mb-16">
           <h2 className="text-sm font-bold text-gray-400 tracking-wider uppercase mb-6">Integrazione & Performance</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {benefici.map((b, idx) => (
               <div 
                 key={idx} 
-                className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 hover:border-indigo-500/30 group animate-card"
-                style={{ animationDelay: `${0.2 + idx * 0.1}s` }}
+                className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 hover:border-indigo-500/30 group animate-card-item"
+                style={{ animationDelay: `${0.2 + idx * 0.1s}` }}
               >
                 <div>
                   <div className="w-8 h-8 rounded-lg bg-gray-900/90 border border-gray-800 flex items-center justify-center text-sm mb-4">
@@ -144,8 +144,8 @@ export default function AgentiIAPage() {
           </div>
         </section>
 
-        {/* APPLICAZIONE PRATICA (STILE CONTENITORE MESSAGGI) */}
-        <section className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-6 mb-16 animate-card" style={{ animationDelay: '0.6s' }}>
+        {/* APPLICAZIONE PRATICA */}
+        <section className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-6 mb-16 animate-card-item" style={{ animationDelay: '0.6s' }}>
           <span className="block text-[8px] font-bold tracking-wider mb-2 uppercase text-indigo-400">
             Esempio Operativo
           </span>
@@ -156,7 +156,7 @@ export default function AgentiIAPage() {
         </section>
 
         {/* CALL TO ACTION ACCENTATA */}
-        <section className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-8 text-center relative overflow-hidden animate-card" style={{ animationDelay: '0.7s' }}>
+        <section className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-8 text-center relative overflow-hidden animate-card-item" style={{ animationDelay: '0.7s' }}>
           <div className="absolute w-48 h-48 rounded-full pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-indigo-600/10 blur-[40px]" />
           <h2 className="text-xl font-bold text-gray-100 mb-2">Pronto a delegare l'inefficienza?</h2>
           <p className="text-xs text-indigo-200/65 max-w-md mx-auto mb-6">
