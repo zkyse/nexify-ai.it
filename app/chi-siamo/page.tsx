@@ -1,17 +1,7 @@
 export default function ChiSiamoPage() {
   return (
     <main className="relative bg-[#02040a] text-gray-300 min-h-screen overflow-hidden">
-      {/* Definizione dell'animazione di fluttuazione leggera */}
-      <style jsx global>{`
-        @keyframes gentleFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
-        }
-        .animate-float-1 { animation: gentleFloat 4s ease-in-out infinite; }
-        .animate-float-2 { animation: gentleFloat 4.5s ease-in-out infinite; animation-delay: 0.3s; }
-        .animate-float-3 { animation: gentleFloat 5s ease-in-out infinite; animation-delay: 0.6s; }
-      `}</style>
-
+      
       {/* Sfondo decorativo per coerenza con il brand */}
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 opacity-25 [background:radial-gradient(circle_at_center,_#4f46e5_0%,_transparent_65%)]" />
 
@@ -33,7 +23,7 @@ export default function ChiSiamoPage() {
             <h2 className="text-2xl font-bold text-white tracking-tight">La Nostra Vision</h2>
             <p>
               In un panorama aziendale in continua e rapidissima evoluzione, il tempo è la risorsa più preziosa. 
-              <strong> Nexify</strong> nasce con un obiettivo chiaro e ambizioso: liberare le Piccole e Medie Imprese (PMI) e i professionisti dal peso delle attività manuali, ripetitive e frammentate, transforming la complessità operativa in flussi di lavoro fluidi, scalabili e intelligenti.
+              <strong> Nexify</strong> nasce con un obiettivo chiaro e ambizioso: liberare le Piccole e Medie Imprese (PMI) e i professionisti dal peso delle attività manuali, ripetitive e frammentate, trasformando la complessità operativa in flussi di lavoro fluidi, scalabili e intelligenti.
             </p>
           </section>
 
@@ -47,25 +37,25 @@ export default function ChiSiamoPage() {
             </p>
           </section>
 
-          {/* Sezione i Nostri Valori con Card Realmente Fluttuanti */}
+          {/* Sezione i Nostri Valori con Card Realmente Fluttuanti (Tailwind Puro) */}
           <section className="space-y-6 pt-4">
             <h2 className="text-2xl font-bold text-white tracking-tight">I Nostri Pilastri</h2>
             <div className="grid gap-6 sm:grid-cols-3 text-sm">
               
               {/* Card 1 - Fluttuazione fluida lenta */}
-              <div className="animate-float-1 rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
+              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)] [animation:gentleFloat_4s_ease-in-out_infinite]">
                 <h3 className="mb-2 font-semibold text-white">Ingegneria del Flusso</h3>
                 <p className="text-gray-400 text-xs">Ogni automazione è progettata per essere solida, pulita e scalabile nel tempo.</p>
               </div>
 
               {/* Card 2 - Fluttuazione fuori sincrono */}
-              <div className="animate-float-2 rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
+              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)] [animation:gentleFloat_4.5s_ease-in-out_infinite] [animation-delay:0.3s]">
                 <h3 className="mb-2 font-semibold text-white">IA Concreta</h3>
                 <p className="text-gray-400 text-xs">Utilizziamo l'intelligenza artificiale solo dove porta un reale e misurabile ritorno economico.</p>
               </div>
 
               {/* Card 3 - Fluttuazione più ampia */}
-              <div className="animate-float-3 rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
+              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)] [animation:gentleFloat_5s_ease-in-out_infinite] [animation-delay:0.6s]">
                 <h3 className="mb-2 font-semibold text-white">Trasparenza Totale</h3>
                 <p className="text-gray-400 text-xs">Costruiamo ecosistemi di cui il cliente mantiene sempre il pieno controllo e la proprietà.</p>
               </div>
