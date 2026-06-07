@@ -36,22 +36,29 @@ export default function ChiSiamoPage() {
             </p>
           </section>
 
-          {/* Sezione i Nostri Valori */}
+          {/* Sezione i Nostri Valori con Card Fluttuanti */}
           <section className="space-y-6 pt-4">
             <h2 className="text-2xl font-bold text-white tracking-tight">I Nostri Pilastri</h2>
             <div className="grid gap-6 sm:grid-cols-3 text-sm">
-              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm">
+              
+              {/* Card 1 - Fluttuazione base */}
+              <div className="animate-bounce [animation-duration:3s] rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
                 <h3 className="mb-2 font-semibold text-white">Ingegneria del Flusso</h3>
                 <p className="text-gray-400 text-xs">Ogni automazione è progettata per essere solida, pulita e scalabile nel tempo.</p>
               </div>
-              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm">
+
+              {/* Card 2 - Fluttuazione con ritardo (delay) */}
+              <div className="animate-bounce [animation-duration:3.3s] [animation-delay:0.2s] rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
                 <h3 className="mb-2 font-semibold text-white">IA Concreta</h3>
                 <p className="text-gray-400 text-xs">Utilizziamo l'intelligenza artificiale solo dove porta un reale e misurabile ritorno economico.</p>
               </div>
-              <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm">
+
+              {/* Card 3 - Fluttuazione con ritardo maggiore */}
+              <div className="animate-bounce [animation-duration:3.6s] [animation-delay:0.4s] rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)]">
                 <h3 className="mb-2 font-semibold text-white">Trasparenza Totale</h3>
                 <p className="text-gray-400 text-xs">Costruiamo ecosistemi di cui il cliente mantiene sempre il pieno controllo e la proprietà.</p>
               </div>
+
             </div>
           </section>
 
