@@ -75,7 +75,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#casi-studio">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/casi-studio">
                   Casi di Successo
                 </a>
               </li>
