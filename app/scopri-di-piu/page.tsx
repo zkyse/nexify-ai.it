@@ -112,10 +112,10 @@ export default function ScopriDiPiuPage() {
               Avvia il Test di Efficienza
             </Link>
             <Link 
-              href="/servizi"
+              href="/contatti"
               className="inline-flex items-center justify-center rounded-xl border border-gray-700 bg-transparent px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-gray-900 active:scale-95"
             >
-              Esplora i Servizi
+              Prenota una Call
             </Link>
           </div>
         </div>
