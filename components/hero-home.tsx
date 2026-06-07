@@ -206,7 +206,7 @@ export default function HeroHome() {
               {/* Pulsante Unico - Prenota una Call */}
               <a 
                 className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-6 text-sm font-medium transition-all transform animate-auto-hero-primary active:scale-95 inline-flex items-center justify-center sm:w-auto" 
-                href="https://wa.me/message/Y7G7NANQK6ACA1" 
+                href="/servizi"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
