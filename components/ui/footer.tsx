@@ -65,7 +65,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-pmi">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/soluzioni-pmi">
                   Per Piccole e Medie Imprese
                 </a>
               </li>
