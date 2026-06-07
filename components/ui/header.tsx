@@ -16,18 +16,18 @@ export default function Header() {
     servizi: [
       { label: "Agenti IA su Misura", href: "/servizi/agenti-ia" },
       { label: "Ricerca Lead & Data Mining Automatico", href: "/servizi/data-mining" },
-      { label: "Qualificazione Lead & Follow-Up H24", href: "/servizi/follow-up" },
-      { label: "Sincronizzazione CRM & Assistenti Chat", href: "/servizi/crm-chat" },
+      { label: "Qualificazione Lead & Follow-Up H24", href: "/servizi/qualificazione-lead" },
+      { label: "Sincronizzazione CRM & Assistenti Chat", href: "/servizi/sincronizzazione-crm" },
     ],
     soluzioni: [
-      { label: "Per Grandi Aziende", href: "/soluzioni/grandi-aziende" },
-      { label: "Per Piccole e Medie Imprese", href: "/soluzioni/pmi" },
-      { label: "Per Privati e Professionisti", href: "/soluzioni/professionisti" },
+      { label: "Per Grandi Aziende", href: "/per-aziende" },
+      { label: "Per Piccole e Medie Imprese", href: "/soluzioni-pmi" },
+      { label: "Per Privati e Professionisti", href: "/soluzioni-professionisti" },
       { label: "Casi di Successo", href: "/casi-successo" },
     ],
     agenzia: [
       { label: "Chi Siamo", href: "/chi-siamo" },
-      { label: "Il Nostro Metodo", href: "/metodo" },
+      { label: "Il Nostro Metodo", href: "/il-nostro-metodo" },
       { label: "Contatti", href: "/contatti" },
     ],
   };
