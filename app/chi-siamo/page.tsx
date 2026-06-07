@@ -2,6 +2,14 @@ export default function ChiSiamoPage() {
   return (
     <main className="relative bg-[#02040a] text-gray-300 min-h-screen overflow-hidden">
       
+      {/* Iniettiamo l'animazione con tag style standard compatibile con i Server Components */}
+      <style>{`
+        @keyframes gentleFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
+
       {/* Sfondo decorativo per coerenza con il brand */}
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 opacity-25 [background:radial-gradient(circle_at_center,_#4f46e5_0%,_transparent_65%)]" />
 
@@ -23,7 +31,7 @@ export default function ChiSiamoPage() {
             <h2 className="text-2xl font-bold text-white tracking-tight">La Nostra Vision</h2>
             <p>
               In un panorama aziendale in continua e rapidissima evoluzione, il tempo è la risorsa più preziosa. 
-              <strong> Nexify</strong> nasce con un obiettivo chiaro e ambizioso: liberare le Piccole e Medie Imprese (PMI) e i professionisti dal peso delle attività manuali, ripetitive e frammentate, trasformando la complessità operativa in flussi di lavoro fluidi, scalabili e intelligenti.
+              <strong> Nexify</strong> nasce con un obiettivo chiaro e ambizioso: liberare le Piccole e Medie Imprese (PMI) e i professionisti dal peso delle attività manuali, ripetitive e frammentate, trasformando la complità operativa in flussi di lavoro fluidi, scalabili e intelligenti.
             </p>
           </section>
 
@@ -54,7 +62,7 @@ export default function ChiSiamoPage() {
                 <p className="text-gray-400 text-xs">Utilizziamo l'intelligenza artificiale solo dove porta un reale e misurabile ritorno economico.</p>
               </div>
 
-              {/* Card 3 - Fluttuazione più ampia */}
+              {/* Card 3 - Fluttuazione con tempismo differenziato */}
               <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_20px_rgba(79,70,229,0.15)] [animation:gentleFloat_5s_ease-in-out_infinite] [animation-delay:0.6s]">
                 <h3 className="mb-2 font-semibold text-white">Trasparenza Totale</h3>
                 <p className="text-gray-400 text-xs">Costruiamo ecosistemi di cui il cliente mantiene sempre il pieno controllo e la proprietà.</p>
