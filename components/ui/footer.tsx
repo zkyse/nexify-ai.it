@@ -124,7 +124,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#termini">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/termini">
                   Termini e Condizioni
                 </a>
               </li>
