@@ -161,7 +161,9 @@ export default function Footer() {
                 <li>
                   <a
                     className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400 hover:scale-110 transform duration-200"
-                    href="#0"
+                    href="https://www.linkedin.com/company/nexify-it-ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label="LinkedIn"
                   >
                     <svg className="h-7 w-7 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
