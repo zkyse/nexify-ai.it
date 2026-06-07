@@ -118,7 +118,7 @@ export default function AgentiIAPage() {
           </p>
         </section>
 
-        {/* GRIGLIA BENEFICI (ANIMATA CARD PER CARD) */}
+        {/* GRIGLIA BENEFICI */}
         <section className="mb-16">
           <h2 className="text-sm font-bold text-gray-400 tracking-wider uppercase mb-6">Integrazione & Performance</h2>
           <div className="grid sm:grid-cols-2 gap-5">
@@ -126,7 +126,7 @@ export default function AgentiIAPage() {
               <div 
                 key={idx} 
                 className="border border-gray-800/60 bg-gray-950/50 backdrop-blur-xl rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 hover:border-indigo-500/30 group animate-card-item"
-                style={{ animationDelay: `${0.2 + idx * 0.1s}` }}
+                style={{ animationDelay: `${0.2 + idx * 0.1}s` }}
               >
                 <div>
                   <div className="w-8 h-8 rounded-lg bg-gray-900/90 border border-gray-800 flex items-center justify-center text-sm mb-4">
