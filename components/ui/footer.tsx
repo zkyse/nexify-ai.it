@@ -1,182 +1,126 @@
-import Logo from "./logo";
-import Image from "next/image";
-import FooterIllustration from "@/public/images/footer-illustration.svg";
-
-export default function Footer() {
+export default function IlNostroMetodoPage() {
   return (
-    <footer className="border-t border-gray-900 bg-[#02040a]">
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        
-        {/* Footer illustration */}
-        <div
-          className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -translate-x-1/2"
-          aria-hidden="true"
-        >
-          <Image
-            className="max-w-none opacity-60 mix-blend-screen"
-            src={FooterIllustration}
-            width={1076}
-            height={378}
-            alt="Footer illustration"
-          />
+    <main className="relative bg-[#02040a] text-gray-300 min-h-screen overflow-hidden">
+      
+      {/* Animazione combinata di fluttuazione e rotazione lieve */}
+      <style>{`
+        @keyframes advancedFloat {
+          0%, 100% { 
+            transform: translateY(0) rotate(0deg); 
+          }
+          50% { 
+            transform: translateY(-8px) rotate(0.5deg); 
+          }
+        }
+        @keyframes advancedFloatReverse {
+          0%, 100% { 
+            transform: translateY(0) rotate(0deg); 
+          }
+          50% { 
+            transform: translateY(-6px) rotate(-0.5deg); 
+          }
+        }
+      `}</style>
+
+      {/* Sfondo decorativo */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 opacity-25 [background:radial-gradient(circle_at_center,_#4f46e5_0%,_transparent_65%)]" />
+
+      <div className="mx-auto max-w-4xl px-6 py-24 lg:py-32">
+        {/* Intestazione Pagina */}
+        <div className="mb-16 border-b border-gray-800 pb-10 text-center lg:text-left">
+          <h1 className="mb-4 bg-gradient-to-r from-white via-indigo-200 to-indigo-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
+            Il Nostro Metodo
+          </h1>
+          <p className="text-sm font-medium uppercase tracking-widest text-indigo-400/80">
+            Dall'analisi dei flussi all'ecosistema automatizzato
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 justify-between gap-12 py-8 sm:grid-rows-[auto_auto] md:grid-cols-4 md:grid-rows-[auto_auto] md:py-12 lg:grid-cols-[repeat(4,minmax(0,180px))_1fr] lg:grid-rows-1 xl:gap-20">
+        {/* Introduzione */}
+        <div className="mb-16 text-base leading-relaxed text-indigo-100/70">
+          <p>
+            In Nexify non crediamo nelle soluzioni standardizzate. Ogni azienda ha i suoi colli di bottiglia, i suoi software e le sei abitudini. Il nostro metodo scientifico è progettato per mappare l'esistente, eliminare il lavoro superfluo e integrare sistemi intelligenti senza stravolgere la tua operatività.
+          </p>
+        </div>
+
+        {/* I 4 Step con Fluttuazione e Rotazione */}
+        <div className="space-y-8">
           
-          {/* 1st block - Servizi Principali */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-200">Servizi</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Agenti IA su Misura
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Ottimizzazione Workflow
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Assistenti WhatsApp H24
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Automazione Email & CRM
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Qualificazione Lead IA
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 2nd block - Soluzioni per Target */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-200">Soluzioni</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-aziende">
-                  Per Grandi Aziende
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-pmi">
-                  Per Piccole e Medie Imprese
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-professionisti">
-                  Per Privati e Professionisti
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#casi-studio">
-                  Casi di Successo
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 3rd block - L'Agenzia */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-200">L'Agenzia</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/chi-siamo">
-                  Chi Siamo
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/il-nostro-metodo">
-                  Il Nostro Metodo
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#contatti">
-                  Contatti
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="https://wa.me/message/Y7G7NANQK6ACA1" target="_blank" rel="noopener noreferrer">
-                  Prenota una Consulenza
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 4th block - Note Legali e Privacy */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-200">Note Legali</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/privacy">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/cookie">
-                  Cookie Policy
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/termini">
-                  Termini e Condizioni
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 5th block - Branding, Copyright & Social */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-1 lg:text-right flex flex-col lg:items-end justify-between space-y-4 lg:space-y-0">
-            <div>
-              <div className="mb-3 inline-block lg:block">
-                <Logo />
+          {/* Step 1 - Fluttuazione + Rotazione Oraria */}
+          <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-indigo-500/50 hover:shadow-[0_0_25px_rgba(79,70,229,0.15)] [animation:advancedFloat_5s_ease-in-out_infinite]">
+            <div className="flex items-start gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-bold text-indigo-400 border border-indigo-500/20">
+                01
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Discovery & Mappatura dei Processi</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Analizziamo i flussi di lavoro attuali del tuo team. Identifichiamo le azioni ripetitive (inserimento dati manuale, email di follow-up, passaggi tra CRM e fogli di calcolo) che sottraggono tempo prezioso.
+                </p>
               </div>
-              <p className="text-xs text-indigo-200/50 leading-relaxed max-w-xs lg:max-w-none">
-                Sviluppiamo ecosistemi intelligenti e automazioni su misura per liberare il potenziale del tuo business.
-              </p>
-            </div>
-            
-            <div className="text-sm pt-2">
-              <p className="mb-3 text-indigo-200/65">
-                © {new Date().getFullYear()} nexify-ai.it
-              </p>
-              <ul className="inline-flex gap-2">
-                <li>
-                  <a
-                    className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400 hover:scale-110 transform duration-200"
-                    href="#0"
-                    aria-label="Twitter / X"
-                  >
-                    <svg className="h-7 w-7 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                      <path d="m13.063 9 3.495 4.475L20.601 9h2.454l-5.359 5.931L24 23h-4.938l-3.866-4.893L10.771 23H8.316l5.735-6.342L8 9h5.063Zm-.74 1.347h-1.457l8.875 11.232h1.36l-8.778-11.232Z" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="flex items-center justify-center text-indigo-500 transition hover:text-indigo-400 hover:scale-110 transform duration-200"
-                    href="https://www.linkedin.com/company/nexify-it-ai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <svg className="h-7 w-7 fill-current" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M23 8H9a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1Zm-11.64 12.72H9.13v-6.95h2.23v6.95ZM10.25 12.8a1.16 1.16 0 1 1 1.15-1.16 1.16 1.16 0 0 1-1.15 1.16Zm10.39 7.92h-2.23v-3.72c0-.94-.34-1.58-1.17-1.58a1.27 1.27 0 0 0-1.2 1c-.08.26-.1.61-.1.95v3.35h-2.23v-6.95h2.23v1a2.2 2.2 0 0 1 2-1.21c1.47 0 2.57 1 2.57 3.06v4.1Z" />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
             </div>
           </div>
 
+          {/* Step 2 - Fluttuazione + Rotazione Antioraria (Fuori sincrono) */}
+          <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-indigo-500/50 hover:shadow-[0_0_25px_rgba(79,70,229,0.15)] [animation:advancedFloatReverse_5.5s_ease-in-out_infinite] [animation-delay:0.4s]">
+            <div className="flex items-start gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-bold text-indigo-400 border border-indigo-500/20">
+                02
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Ingegnerizzazione dell'Architettura</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Progettiamo la logica dell'automazione. Scegliamo i connettori ideali, definiamo le regole di routing delle informazioni e strutturiamo i prompt per gli agenti IA affinché rispondano esattamente secondo le tue linee guida aziendali.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3 - Fluttuazione + Rotazione Oraria Lenta */}
+          <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-indigo-500/50 hover:shadow-[0_0_25px_rgba(79,70,229,0.15)] [animation:advancedFloat_6s_ease-in-out_infinite] [animation-delay:0.8s]">
+            <div className="flex items-start gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-bold text-indigo-400 border border-indigo-500/20">
+                03
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Integrazione & Sviluppo (Make, OpenAI, API)</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Sviluppiamo materialmente gli scenari e i flussi. Colleghiamo i tuoi software (WhatsApp, CRM, Email, Gestionali interni) assicurando transiti stabili, sicuri, crittografati e veloci.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 4 - Fluttuazione + Rotazione Antioraria Lenta */}
+          <div className="rounded-xl border border-gray-800 bg-gray-950/40 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:border-indigo-500/50 hover:shadow-[0_0_25px_rgba(79,70,229,0.15)] [animation:advancedFloatReverse_6.5s_ease-in-out_infinite] [animation-delay:1.2s]">
+            <div className="flex items-start gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-bold text-indigo-400 border border-indigo-500/20">
+                04
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Testing, Monitoraggio e Ottimizzazione</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Prima del rilascio definitivo effettuiamo stress-test su tutti i flussi. Una volta online, monitoriamo i log per assicurarci che nessuna automazione fallisca e ottimizziamo le performance in base all'uso reale.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Pulsante Torna alla Home */}
+        <div className="mt-20">
+          <a 
+            href="/" 
+            className="inline-flex items-center text-sm font-semibold text-indigo-400 transition hover:text-indigo-300"
+          >
+            <svg className="mr-2 h-4 w-4 fill-current" viewBox="0 0 16 16">
+              <path d="M6.7 14.7l1.4-1.4L3.8 9H16V7H3.8l4.3-4.3-1.4-1.4L0 8z" />
+            </svg>
+            Torna alla Home
+          </a>
         </div>
       </div>
-    </footer>
+    </main>
   );
 }
