@@ -34,22 +34,17 @@ export default function Footer() {
               </li>
               <li>
                 <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Ottimizzazione Workflow
+                  Ricerca Lead & Data Mining Automatico
                 </a>
               </li>
               <li>
                 <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Assistenti WhatsApp H24
+                  Qualificazione Lead & Follow-Up H24
                 </a>
               </li>
               <li>
                 <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Automazione Email & CRM
-                </a>
-              </li>
-              <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#servizi">
-                  Qualificazione Lead IA
+                  Sincronizzazione CRM & Assistenti Chat
                 </a>
               </li>
             </ul>
