@@ -97,7 +97,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="https://wa.me/message/Y7G7NANQK6ACA1" target="_blank" rel="noopener noreferrer">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/contatti" target="_blank" rel="noopener noreferrer">
                   Prenota una Consulenza
                 </a>
               </li>
