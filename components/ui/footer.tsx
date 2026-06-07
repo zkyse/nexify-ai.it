@@ -70,7 +70,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-professionisti">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/soluzioni-professionisti">
                   Per Privati e Professionisti
                 </a>
               </li>
