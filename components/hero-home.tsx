@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 // Struttura dati lineare per i messaggi della chat simulata
 const chatSteps = [
@@ -125,8 +126,8 @@ export default function HeroHome() {
           100% { transform: translate3d(0, 110vh, 0); }
         }
 
-        /* Animazione automatica in loop per il bottone dell'Hero */
-        @keyframes pulseButtonHero { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 4px 20px rgba(99,102,241,0.4); } }
+        /* Animazione automatica in loop per il bottone del test nell'Hero */
+        @keyframes pulseButtonHero { 0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(99,102,241,0.2); } 50% { transform: scale(1.02); box-shadow: 0 4px 22px rgba(99,102,241,0.45); } }
 
         .msg-pop { 
           animation: msgPopIn 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
@@ -155,7 +156,6 @@ export default function HeroHome() {
 
       {/* STRATO PIOGGIA CONCEPTUALE (AUTOMATION & AI) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        {/* Sfondo Profondo */}
         <div className="rain-stream left-[4%] text-[#818cf8]/15 text-[8px] blur-[1px]" style={{ animationDuration: '18s', animationDelay: '0s' }}>AI_AGENT_DEPLOY</div>
         <div className="rain-stream left-[25%] text-[#a855f7]/10 text-[9px] blur-[1px]" style={{ animationDuration: '22s', animationDelay: '4s' }}>DATABASE_SYNC</div>
         <div className="rain-stream left-[55%] text-[#6366f1]/15 text-[8px]" style={{ animationDuration: '19s', animationDelay: '1s' }}>LLM_PROCESSING</div>
@@ -201,17 +201,25 @@ export default function HeroHome() {
             <p className="text-base md:text-lg text-indigo-200/65 max-w-xl mx-auto lg:mx-0">
               Soluzioni IA personalizzate per PMI e professionisti. Automatizziamo la tua operatività quotidiana per eliminare i tempi morti e aumentare la produttività.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 pt-1">
+            
+            {/* Blocco Doppi Pulsanti Bilanciato */}
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-1 max-w-md mx-auto lg:mx-0">
               
-              {/* Pulsante Unico - Prenota una Call */}
-              <a 
-                className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-md rounded-xl py-3 px-6 text-sm font-medium transition-all transform animate-auto-hero-primary active:scale-95 inline-flex items-center justify-center sm:w-auto" 
-                href="/servizi"
-                target="_blank" 
-                rel="noopener noreferrer"
+              {/* Pulsante Primario - Test di Efficienza (Con animazione automatica) */}
+              <Link 
+                className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-semibold rounded-xl py-3 px-6 text-sm transition-all transform animate-auto-hero-primary active:scale-95 whitespace-nowrap text-center shadow-lg"
+                href="/test"
+              >
+                Test di Efficienza <span className="ml-2 font-mono">📊</span>
+              </Link>
+
+              {/* Pulsante Secondario - Scopri di più (Stile Outline Minimalista) */}
+              <Link 
+                className="w-full sm:w-auto inline-flex items-center justify-center border border-gray-800 bg-gray-950/40 text-gray-300 hover:text-white hover:bg-gray-900/40 font-medium rounded-xl py-3 px-6 text-sm transition-all active:scale-95 whitespace-nowrap text-center backdrop-blur-xs group" 
+                href="/scopri-di-piu"
               >
                 Scopri di più <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
-              </a>
+              </Link>
 
             </div>
           </div>
