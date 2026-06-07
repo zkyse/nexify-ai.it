@@ -60,7 +60,7 @@ export default function Footer() {
             <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-200">Soluzioni</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="#soluzioni-aziende">
+                <a className="text-indigo-200/65 transition hover:text-indigo-400" href="/soluzioni-aziende">
                   Per Grandi Aziende
                 </a>
               </li>
