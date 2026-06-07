@@ -73,7 +73,7 @@ export default function Cta() {
               <div data-aos="fade-up" data-aos-delay={300} className="w-full sm:w-auto">
                 <a
                   className="btn group w-full inline-flex justify-center items-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-medium rounded-xl px-7 py-3 transition-all duration-300 animate-auto-btn-primary active:scale-95 whitespace-nowrap"
-                  href="/scopri-di-piu"
+                  href="/app/scopri-di-piu"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
