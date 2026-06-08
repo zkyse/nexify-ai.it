@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Importato per gestire il reindirizzamento
 
 export default function TestEfficienzaAvanzatoPage() {
+  const router = useRouter(); // Inizializzazione del router
+
   // Stati per i parametri del simulatore
   const [orePerse, setOrePerse] = useState<number>(12);
   const [costoOrario, setCostoOrario] = useState<number>(30);
@@ -27,6 +30,11 @@ export default function TestEfficienzaAvanzatoPage() {
   
   // Costo opportunità: quanto valore si produce riallocando le risorse
   const valoreRiallocatoAnno = orePerseAnnoTotali * (costoOrario * FATTORE_COSTO_OPPORTUNITA);
+
+  // Funzione che reindirizza direttamente alla pagina contatti al click
+  const handleEngineeringRequest = () => {
+    router.push("/contatti");
+  };
 
   return (
     <main className="relative bg-[#02040a] text-gray-300 min-h-screen overflow-hidden">
@@ -145,7 +153,7 @@ export default function TestEfficienzaAvanzatoPage() {
               )}
             </div>
 
-            {/* LIVE KPI MATRIX (Sotto-pannelli tecnici rapidi) */}
+            {/* LIVE KPI MATRIX */}
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-xl border border-gray-800 bg-gray-950/20 p-4">
                 <span className="block text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-1">Frenata dell'Efficienza</span>
@@ -166,7 +174,6 @@ export default function TestEfficienzaAvanzatoPage() {
             className="lg:col-span-5 rounded-xl border border-indigo-500/30 bg-gradient-to-b from-gray-950 to-[#05070f] p-6 backdrop-blur-sm shadow-[0_0_40px_rgba(79,70,229,0.12)] flex flex-col justify-between relative overflow-hidden"
             style={{ animation: "gentleFloat 5.2s ease-in-out infinite" }}
           >
-            {/* Elemento luminoso interno di rifinitura */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
 
             <div>
@@ -204,7 +211,7 @@ export default function TestEfficienzaAvanzatoPage() {
 
             <div className="mt-8">
               <button 
-                onClick={() => alert("Sistemi agganciati. Il report diagnostico è pronto per l'analisi con un nostro ingegnere dei processi.")}
+                onClick={handleEngineeringRequest}
                 className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 px-4 py-3.5 text-xs font-bold tracking-wider uppercase text-white shadow-lg transition-all hover:from-indigo-500 hover:to-indigo-400 active:scale-[0.98] block text-center"
               >
                 Richiedi Ingegnerizzazione del Flusso
