@@ -154,7 +154,7 @@ export default function HeroHome() {
         }
       `}} />
 
-      {/* STRATO PIOGGIA CONCEPTUALE (AUTOMATION & AI) */}
+      {/* STRATO PIOGGIA CONCEPTUALE */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <div className="rain-stream left-[4%] text-[#818cf8]/15 text-[8px] blur-[1px]" style={{ animationDuration: '18s', animationDelay: '0s' }}>AI_AGENT_DEPLOY</div>
         <div className="rain-stream left-[25%] text-[#a855f7]/10 text-[9px] blur-[1px]" style={{ animationDuration: '22s', animationDelay: '4s' }}>DATABASE_SYNC</div>
@@ -202,23 +202,23 @@ export default function HeroHome() {
               Soluzioni IA personalizzate per PMI e professionisti. Automatizziamo la tua operatività quotidiana per eliminare i tempi morti e aumentare la produttività.
             </p>
             
-            {/* Blocco Doppi Pulsanti Bilanciato */}
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-1 max-w-md mx-auto lg:mx-0">
+            {/* Contenitore Pulsanti in Verticale */}
+            <div className="flex flex-col justify-center lg:justify-start gap-3.5 pt-1 max-w-xs mx-auto lg:mx-0">
               
-              {/* Pulsante Primario - Test di Efficienza (Con animazione automatica) */}
+              {/* Pulsante 1 (Sopra) - Scopri di più */}
               <Link 
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-semibold rounded-xl py-3 px-6 text-sm transition-all transform animate-auto-hero-primary active:scale-95 whitespace-nowrap text-center shadow-lg"
-                href="/test"
-              >
-                Test di Efficienza <span className="ml-2 font-mono">📊</span>
-              </Link>
-
-              {/* Pulsante Secondario - Scopri di più (Stile Outline Minimalista) */}
-              <Link 
-                className="w-full sm:w-auto inline-flex items-center justify-center border border-gray-800 bg-gray-950/40 text-gray-300 hover:text-white hover:bg-gray-900/40 font-medium rounded-xl py-3 px-6 text-sm transition-all active:scale-95 whitespace-nowrap text-center backdrop-blur-xs group" 
+                className="w-full inline-flex items-center justify-center border border-gray-800 bg-gray-950/40 text-gray-300 hover:text-white hover:bg-gray-900/40 font-medium rounded-xl py-3 px-6 text-sm transition-all active:scale-95 whitespace-nowrap text-center backdrop-blur-xs group" 
                 href="/scopri-di-piu"
               >
                 Scopri di più <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">-&gt;</span>
+              </Link>
+
+              {/* Pulsante 2 (Sotto) - Test di Efficienza (Puro testo, animato) */}
+              <Link 
+                className="w-full inline-flex items-center justify-center bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-semibold rounded-xl py-3 px-6 text-sm transition-all transform animate-auto-hero-primary active:scale-95 whitespace-nowrap text-center shadow-lg"
+                href="/test"
+              >
+                Test di Efficienza
               </Link>
 
             </div>
