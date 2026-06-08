@@ -168,9 +168,10 @@ export default function HeroHome() {
         <div className="rain-stream left-[62%] text-[#818cf8]/30 text-[11px]" style={{ animationDuration: '13s', animationDelay: '3s', textShadow: '0 0 4px rgba(129,140,248,0.2)' }}>EFFICIENCY_UP</div>
         <div className="rain-stream left-[80%] text-[#22d3ee]/35 text-[10px]" style={{ animationDuration: '11s', animationDelay: '5s', textShadow: '0 0 4px rgba(34,211,238,0.2)' }}>ZERO_ERRORS</div>
 
-        {/* Primo piano */}
+        {/* Primo piano - Inclusa la nuova stringa ad alto impatto */}
         <div className="rain-stream left-[8%] text-[#818cf8]/60 text-[13px]" style={{ animationDuration: '7s', animationDelay: '0.3s', textShadow: '0 0 8px rgba(129,140,248,0.4)' }}>AI_WORKFLOW</div>
         <div className="rain-stream left-[20%] text-[#22d3ee]/55 text-[12px]" style={{ animationDuration: '6.5s', animationDelay: '1.5s', textShadow: '0 0 8px rgba(34,211,238,0.4)' }}>SMART_AGENTS</div>
+        <div className="rain-stream left-[32%] text-[#a855f7]/65 text-[13px]" style={{ animationDuration: '7.5s', animationDelay: '2s', textShadow: '0 0 10px rgba(168,85,247,0.5)' }}>INFRASTRUCTURE_EVOLVED</div>
         <div className="rain-stream left-[48%] text-[#6366f1]/65 text-[14px]" style={{ animationDuration: '8s', animationDelay: '2.5s', textShadow: '0 0 10px rgba(99,102,241,0.5)' }}>NO_CODE_OPS</div>
         <div className="rain-stream left-[75%] text-[#c084fc]/60 text-[12px]" style={{ animationDuration: '7.2s', animationDelay: '1s', textShadow: '0 0 8px rgba(192,132,252,0.4)' }}>PROD_MAX</div>
         <div className="rain-stream left-[94%] text-[#38bdf8]/55 text-[13px]" style={{ animationDuration: '6s', animationDelay: '3.5s', textShadow: '0 0 8px rgba(56,189,248,0.4)' }}>AUTO_REPORT</div>
