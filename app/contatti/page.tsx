@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function ContattiPage() {
   // Sostituisci questo URL con il link reale generato dal tuo modulo Custom Webhook su Make
-  const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/1j5py4jf8z37gumwy1ov8ftqqceyxisp";
+  const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/urmd3az17obfik08rrermaqacsxygho0";
 
   const [formData, setFormData] = useState({
     name: "",
