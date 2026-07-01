@@ -1,6 +1,3 @@
-Ecco il codice aggiornato. Ho modificato la funzione `handleSubmit` per strutturare il corpo della richiesta (`body`) esattamente come richiesto, assicurandomi che tutti i campi siano inclusi correttamente.
-
-```tsx
 "use client";
 
 import { useState } from "react";
@@ -23,6 +20,10 @@ export default function ContattiPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Blocco per evitare invii multipli (gestisce lo StrictMode e i click ripetuti)
+    if (status !== "idle") return;
+
     setStatus("sending");
 
     try {
@@ -125,7 +126,7 @@ export default function ContattiPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  disabled={status === "sending" || status === "success"}
+                  disabled={status !== "idle"}
                   className="w-full rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200 disabled:opacity-50"
                   placeholder="Mario Rossi"
                 />
@@ -140,7 +141,7 @@ export default function ContattiPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  disabled={status === "sending" || status === "success"}
+                  disabled={status !== "idle"}
                   className="w-full rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200 disabled:opacity-50"
                   placeholder="nome@azienda.it"
                 />
@@ -155,7 +156,7 @@ export default function ContattiPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  disabled={status === "sending" || status === "success"}
+                  disabled={status !== "idle"}
                   className="w-full rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200 disabled:opacity-50"
                   placeholder="+39 333 1234567"
                 />
@@ -169,7 +170,7 @@ export default function ContattiPage() {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  disabled={status === "sending" || status === "success"}
+                  disabled={status !== "idle"}
                   className="w-full rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200 disabled:opacity-50"
                   placeholder="Es. Nexify S.r.l."
                 />
@@ -184,7 +185,7 @@ export default function ContattiPage() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  disabled={status === "sending" || status === "success"}
+                  disabled={status !== "idle"}
                   className="w-full rounded-lg border border-gray-800 bg-gray-900/50 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all duration-200 resize-none disabled:opacity-50"
                   placeholder="Quali processi ti piacerebbe automatizzare?"
                 />
@@ -192,8 +193,8 @@ export default function ContattiPage() {
 
               <button 
                 type="submit"
-                disabled={status === "sending" || status === "success"}
-                className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-lg shadow-indigo-600/10 disabled:bg-gray-800 disabled:text-gray-500"
+                disabled={status !== "idle"}
+                className="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-lg shadow-indigo-600/10 disabled:bg-gray-800 disabled:text-gray-500 disabled:scale-100"
               >
                 {status === "idle" && "Invia Richiesta"}
                 {status === "sending" && "Invio in corso..."}
@@ -201,9 +202,30 @@ export default function ContattiPage() {
                 {status === "error" && "Errore, riprova"}
               </button>
 
-              {status === "success" && <p className="text-xs text-emerald-400 mt-2 text-center">Richiesta inoltrata correttamente.</p>}
+              {status === "success" && (
+                <p className="text-xs text-emerald-400 mt-2 text-center font-medium animate-pulse">
+                  ✓ Richiesta inoltrata con successo all'ecosistema Nexify.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-xs text-rose-400 mt-2 text-center font-medium">
+                  ✕ Si è verificato un errore temporaneo. Riprova o usa WhatsApp.
+                </p>
+              )}
             </form>
           </div>
+        </div>
+
+        <div className="mt-20">
+          <a 
+            href="/" 
+            className="inline-flex items-center text-sm font-semibold text-indigo-400 transition hover:text-indigo-300"
+          >
+            <svg className="mr-2 h-4 w-4 fill-current" viewBox="0 0 16 16">
+              <path d="M6.7 14.7l1.4-1.4L3.8 9H16V7H3.8l4.3-4.3-1.4-1.4L0 8z" />
+            </svg>
+            Torna alla Home
+          </a>
         </div>
       </div>
     </main>
